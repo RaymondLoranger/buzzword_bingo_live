@@ -104,9 +104,48 @@ defmodule Buzzword.Bingo.LiveWeb do
     end
   end
 
+  def imports do
+    quote do
+      import Phoenix.LiveView, only: [push_patch: 2, put_flash: 3]
+    end
+  end
+
+  def aliases do
+    quote do
+      alias Buzzword.Bingo.LiveWeb.{
+        Endpoint,
+        GameComponents,
+        GameField,
+        GameInfo,
+        GameParams,
+        GamePresence,
+        GameSizeForm,
+        GameTerminate,
+        MessageForm,
+        Presence,
+        UserForm
+      }
+
+      alias Buzzword.Bingo.Live.{User, GameSize}
+      alias Buzzword.Bingo.{Engine, Game, Player, Summary}
+      alias Ecto.UUID
+      alias Phoenix.{HTML, LiveView}
+      alias Phoenix.LiveView.{Rendered, Socket}
+      alias Phoenix.Socket.Broadcast
+    end
+  end
+
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """
+  defmacro __using__(whiches) when is_list(whiches) do
+    for which <- whiches do
+      quote do
+        unquote(apply(__MODULE__, which, []))
+      end
+    end
+  end
+
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
   end

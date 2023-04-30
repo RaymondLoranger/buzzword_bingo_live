@@ -1,0 +1,67 @@
+defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
+  use Buzzword.Bingo.LiveWeb, [:live_component, :aliases]
+
+  import GameComponents
+
+  @empty_changeset GameSize.changeset()
+
+  @spec mount(Socket.t()) :: {:ok, Socket.t()}
+  def mount(socket) do
+    {:ok, assign(socket, changeset: @empty_changeset)}
+  end
+
+  # passed assigns :
+  # initial assigns: changeset
+  # render assigns : changeset
+
+  @spec render(Socket.assigns()) :: Rendered.t()
+  def render(assigns) do
+    ~H"""
+    <div>
+      <.game_size_form
+        :let={f}
+        for={@changeset}
+        target={@myself}
+        change="validate"
+        submit="start"
+      >
+        <.game_size_field form={f} />
+        <.submit_button text="Start Game" />
+      </.game_size_form>
+    </div>
+    """
+  end
+
+  @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
+          {:noreply, Socket.t()}
+  def handle_event("validate", %{"game_size" => game_size}, socket) do
+    changeset = GameSize.validate(game_size)
+    {:noreply, assign(socket, changeset: changeset)}
+  end
+
+  def handle_event("start", %{"game_size" => game_size}, socket) do
+    case GameSize.create(game_size) do
+      {:ok, game_size} ->
+        game_name = Engine.haiku_name()
+
+        case Buzzword.Bingo.Engine.new_game(game_name, game_size.value) do
+          {:ok, _game_pid} ->
+            game_path = ~p"/games/#{game_name}"
+            {:noreply, push_patch(socket, to: game_path)}
+
+          {:error, {:already_started, _started_game_pid}} ->
+            # Extremely unlikely to happen...
+            send(self(), {:game_already_started, game_name})
+            {:noreply, socket}
+
+          {:error, reason} ->
+            # Even more unlikely to happen...
+            send(self(), {:game_not_started, game_name, reason})
+            {:noreply, socket}
+        end
+
+      {:error, changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
+    end
+  end
+end

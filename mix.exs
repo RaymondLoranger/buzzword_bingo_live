@@ -52,6 +52,7 @@ defmodule Buzzword.Bingo.Live.MixProject do
       # {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:logger_file_backend, "~> 0.0.11"},
       {:log_reset, "~> 0.1"},
+      {:persist_config, "~> 0.4", runtime: false},
       {:phx_formatter, "~> 0.1", only: :dev, runtime: false},
       {:clipboard, "~> 0.2"}
     ]
@@ -66,9 +67,16 @@ defmodule Buzzword.Bingo.Live.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "assets.setup", "assets.build"],
-      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
+      "assets.setup": [
+        "tailwind.install --if-missing",
+        "esbuild.install --if-missing"
+      ],
       "assets.build": ["tailwind default", "esbuild default"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": [
+        "tailwind default --minify",
+        "esbuild default --minify",
+        "phx.digest"
+      ]
     ]
   end
 end

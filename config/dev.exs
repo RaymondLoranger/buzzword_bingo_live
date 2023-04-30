@@ -13,9 +13,11 @@ config :buzzword_bingo_live, Buzzword.Bingo.LiveWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "6QQElZe6Rx6PVKzO4+yLO436ednT3D8P8lgt7WGdBC3e+qYgmwCL7jmo0jwkYOtk",
+  secret_key_base:
+    "6QQElZe6Rx6PVKzO4+yLO436ednT3D8P8lgt7WGdBC3e+qYgmwCL7jmo0jwkYOtk",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    esbuild:
+      {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 

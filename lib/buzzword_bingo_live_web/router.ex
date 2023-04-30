@@ -18,6 +18,11 @@ defmodule Buzzword.Bingo.LiveWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/login", GameLive, :login
+    live "/login/:to", GameLive, :login
+    live "/games/new", GameLive, :new
+    live "/games/:id", GameLive, :show
   end
 
   # Other scopes may use custom stacks.

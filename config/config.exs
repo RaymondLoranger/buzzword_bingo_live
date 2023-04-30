@@ -14,7 +14,10 @@ config :buzzword_bingo_live,
 config :buzzword_bingo_live, Buzzword.Bingo.LiveWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: Buzzword.Bingo.LiveWeb.ErrorHTML, json: Buzzword.Bingo.LiveWeb.ErrorJSON],
+    formats: [
+      html: Buzzword.Bingo.LiveWeb.ErrorHTML,
+      json: Buzzword.Bingo.LiveWeb.ErrorJSON
+    ],
     layout: false
   ],
   pubsub_server: Buzzword.Bingo.Live.PubSub,
@@ -41,6 +44,8 @@ config :tailwind,
     ),
     cd: Path.expand("../assets", __DIR__)
   ]
+
+import_config "config_logger.exs"
 
 # Configures Elixir's Logger
 config :logger, :console,
