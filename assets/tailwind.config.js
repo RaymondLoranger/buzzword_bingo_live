@@ -50,8 +50,123 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '320px'
+      },
+      letterSpacing: {
+        tightest: '-.075em'
+      },
+      fontSize: {
+        '2xs': ['0.625rem', '0.875rem'],
+        '3xs': ['0.5rem', '0.75rem']
+      },
+      backgroundImage: {
+        tapestry: "url('/images/tapestry.svg')"
+      },
       colors: {
-        brand: '#FD4F00'
+        brand: '#FD4F00',
+        'cool-gray': {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cfd8e3',
+          400: '#97a6ba',
+          500: '#64748b',
+          600: '#475569',
+          700: '#364152',
+          800: '#27303f',
+          900: '#1a202e'
+        },
+        papayawhip: {
+          light: '#fef4e4',
+          DEFAULT: '#ffefd5',
+          dark: '#fee5bc'
+        },
+        deluge: {
+          light: '#a48fbc',
+          DEFAULT: '#8064A2',
+          dark: '#634d80'
+        },
+        'carrot-orange': {
+          light: '#f3b359',
+          DEFAULT: '#ee961b',
+          dark: '#d58310'
+        },
+        'mine-shaft': {
+          light: '#808080',
+          DEFAULT: '#292929',
+          dark: '#1a1a1a'
+        },
+        silver: {
+          light: '#f2f2f2',
+          DEFAULT: '#cccccc',
+          dark: '#8c8c8c'
+        },
+        denim: {
+          light: '#129ded',
+          DEFAULT: '#0d72ad',
+          dark: '#094e77'
+        },
+        tundora: {
+          light: '#737373',
+          DEFAULT: '#414141',
+          dark: '#1a1a1a'
+        },
+        'half-baked': {
+          light: '#a3c7dc',
+          DEFAULT: '#7fb1ce',
+          dark: '#3f81a6'
+        },
+        wedgewood: {
+          light: '#77a3bb',
+          DEFAULT: '#4f819c',
+          dark: '#335466'
+        },
+        calypso: {
+          light: '#67aacb',
+          DEFAULT: '#31708f',
+          dark: '#214a5f'
+        },
+        'link-water': {
+          light: '#eaf5fb',
+          DEFAULT: '#d9edf7',
+          dark: '#c0e1f2'
+        },
+        'mint-tulip': {
+          light: '#d5f1f6',
+          DEFAULT: '#bce8f1',
+          dark: '#81d4e4'
+        },
+        'potters-clay': {
+          light: '#b38d4d',
+          DEFAULT: '#8a6d3b',
+          dark: '#594726'
+        },
+        'pearl-lusta': {
+          light: '#fdf9e8',
+          DEFAULT: '#fcf8e3',
+          dark: '#f5e8a3'
+        },
+        champagne: {
+          light: '#fdf6e8',
+          DEFAULT: '#faebcc',
+          dark: '#f4d18b'
+        },
+        'apple-blossom': {
+          light: '#c66e6c',
+          DEFAULT: '#a94442',
+          dark: '#813332'
+        },
+        bizarre: {
+          light: '#f8eded',
+          DEFAULT: '#f2dede',
+          dark: '#dba4a4'
+        },
+        'oyster-pink': {
+          light: '#f8edef',
+          DEFAULT: '#ebccd1',
+          dark: '#dba3ad'
+        }
       }
     }
   },

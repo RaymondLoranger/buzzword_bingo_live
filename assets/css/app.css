@@ -1,5 +1,79 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* This file is for your main application CSS */
+@layer base {
+  header nav a {
+    @apply block text-blue-800 hover:brightness-150 hover:scale-y-125;
+  }
+
+  footer a {
+    @apply no-underline text-blue-700 font-thin hover:brightness-150 whitespace-nowrap;
+  }
+}
+
+@layer utilities {
+  .field-button-pair {
+    @apply inline-flex h-10;
+  }
+
+  .field-button-pair > input[type='text'] {
+    @apply w-full border border-cool-gray-400 rounded-l-md rounded-r-none bg-white px-5 text-base focus:outline-none focus:border-indigo-500 focus:ring-0 hover:border-indigo-500 hover:ring-0;
+  }
+
+  .field-button-pair > button {
+    @apply aspect-square p-2 bg-carrot-orange border border-cool-gray-400 border-l-0 rounded-r-md transition ease-in-out duration-150 outline-none hover:bg-carrot-orange-light hover:disabled:bg-slate-400 disabled:bg-slate-300;
+  }
+
+  .field-button-pair > button > svg {
+    @apply invert;
+  }
+
+  .letter {
+    @apply text-3xs sm:text-sm md:text-3xl py-1.5 pl-1.5 pr-2 font-extrabold text-mine-shaft bg-white -mr-2 last:mr-0 border border-solid border-silver hover:text-white hover:bg-denim;
+  }
+
+  .optional {
+    @apply hidden xs:block;
+  }
+
+  .inverse {
+    @apply bg-tundora text-white hover:bg-half-baked;
+  }
+
+  form .invalid-feedback {
+    @apply block mt-0.5 -mb-0.5 text-sm font-medium italic text-red-600;
+  }
+
+  .alert {
+    @apply p-4 mb-5 border border-transparent rounded-md empty:hidden;
+  }
+
+  .alert p {
+    @apply mb-0;
+  }
+
+  .alert-info {
+    @apply text-calypso bg-link-water border-mint-tulip;
+  }
+
+  .alert-warning {
+    @apply text-potters-clay bg-pearl-lusta border-champagne;
+  }
+
+  .alert-danger {
+    @apply text-apple-blossom bg-bizarre border-oyster-pink;
+  }
+
+  #hero-body ul {
+    @apply mx-auto max-w-xs list-disc list-inside;
+  }
+
+  #hero-body ul li {
+    @apply mt-3 whitespace-nowrap;
+  }
+
+  #hero-body ul li a {
+    @apply no-underline text-blue-900 hover:brightness-150;
+  }
+}

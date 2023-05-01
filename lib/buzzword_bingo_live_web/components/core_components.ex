@@ -423,6 +423,30 @@ defmodule Buzzword.Bingo.LiveWeb.CoreComponents do
     """
   end
 
+  attr :field, Phoenix.HTML.FormField, doc: "form field struct: @form[:color]"
+  attr :value, :any, required: true
+  attr :checked, :boolean, default: false, doc: "checked flag"
+  attr :id, :any
+  attr :name, :any
+  attr :rest, :global
+  attr :class, :string, default: "border-zinc-300 text-zinc-900 focus:ring-0"
+
+  def radio_button(%{field: field, value: value} = assigns) do
+    assigns = assign(assigns, id: "#{field.id}_#{value}", name: field.name)
+
+    ~H"""
+    <input
+      type="radio"
+      id={@id}
+      name={@name}
+      value={@value}
+      checked={@checked}
+      class={@class}
+      {@rest}
+    />
+    """
+  end
+
   @doc """
   Renders a label.
   """

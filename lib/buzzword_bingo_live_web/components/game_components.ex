@@ -21,6 +21,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   end
 
   def game_size_field(assigns) do
+    assigns =
+      assign(assigns, field: assigns.form[:value], class: "ml-12 mt-2 mb-4")
+
     ~H"""
     <div class="w-full flex flex-col items-center h-full">
       <div
@@ -28,10 +31,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
         class="w-full md:w-5/6 flex justify-evenly items-start flex-wrap place-content-center gap-6"
       >
         <label>
-          <input
-            class="ml-12 mt-2 mb-4"
-            type="radio"
+          <.radio_button
+            field={@field}
             value={5}
+            class={@class}
             checked
             phx-mounted={JS.focus()}
           />
@@ -39,12 +42,12 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
           <.grid_glyph size={5} />
         </label>
         <label>
-          <input class="ml-12 mt-2 mb-4" type="radio" value={4} />
+          <.radio_button field={@field} value={4} class={@class} />
           <.grid_size text="4 x 4" />
           <.grid_glyph size={4} />
         </label>
         <label>
-          <input class="ml-12 mt-2 mb-4" type="radio" value={3} />
+          <.radio_button field={@field} value={3} class={@class} />
           <.grid_size text="3 x 3" />
           <.grid_glyph size={3} />
         </label>
@@ -66,19 +69,19 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def game_size_form(assigns) do
     ~H"""
-    <article id="game-size-form">
+    <article>
       <h4 class="text-xl text-center mb-6">
         Select the game size:
       </h4>
       <.form
-        :let={f}
+        id={@id}
         for={@for}
         phx-change={@change}
         phx-submit={@submit}
         phx-target={@target}
         class="mx-14 md:w-3/4 md:mx-auto flex flex-col items-center gap-2"
       >
-        <%= render_slot(@inner_block, f) %>
+        <%= render_slot(@inner_block) %>
       </.form>
     </article>
     """
@@ -94,22 +97,25 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def name_field(assigns) do
     ~H"""
-    <div class="flex flex-col h-auto mt-4">
-      <input
-        id="user-name"
-        type="text"
-        placeholder="Name"
-        phx-mounted={JS.focus()}
-        phx-debounce="500"
-        required
-        class="border-[#{@color}] h-6 px-2 py-3 border-2 rounded-sm focus:border-transparent"
-        error_class="pl-2"
-      />
-    </div>
+    <.input
+      field={@form[:name]}
+      placeholder="Name"
+      phx-mounted={JS.focus()}
+      phx-debounce="500"
+      required
+      wrapper_class="flex flex-col h-auto mt-4"
+      class={[
+        "border-[#{@color}] h-6 px-2 py-3 border-2 rounded-sm",
+        "focus:border-transparent"
+      ]}
+      error_class="pl-2"
+    />
     """
   end
 
   def color_field(assigns) do
+    IO.inspect(assigns.form[:color], label: "@form[:color]------------")
+
     ~H"""
     <div class="flex flex-col h-auto mt-4">
       <ul id="user-colors" class="flex gap-1.5">
@@ -120,13 +126,13 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
               "bg-[#{color}] flex w-6 m-0.5 aspect-square cursor-pointer border border-gray-500 hover:border-transparent hover:ring-gray-600 hover:ring-1"
             }
           >
-            <input
-              class="sr-only peer"
-              type="radio"
+            <.radio_button
+              field={@form[:color]}
               value={color}
+              checked={color == @color}
               phx-target={@target}
               phx-click={@click}
-              checked={color == @color}
+              class="sr-only peer"
             />
             <span class="absolute hidden peer-checked:block top-0.5 left-2">
               ✓
@@ -140,20 +146,20 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def user_form(assigns) do
     ~H"""
-    <article id="user-form" class="mx-auto flex flex-col items-center">
+    <article class="mx-auto flex flex-col items-center">
       <h1 class="mt-8 mb-2 text-4xl text-cool-gray-900">Welcome!</h1>
       <h4 class="m-2 text-xl font-thin text-cool-gray-900 text-center">
         First up, we need your name and favorite color:
       </h4>
       <.form
-        :let={f}
+        id={@id}
         for={@for}
         phx-change={@change}
         phx-submit={@submit}
         phx-target={@target}
         class="flex flex-col items-center gap-4"
       >
-        <%= render_slot(@inner_block, f) %>
+        <%= render_slot(@inner_block) %>
       </.form>
     </article>
     """

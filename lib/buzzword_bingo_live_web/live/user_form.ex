@@ -5,7 +5,9 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
   import GameComponents
 
   @colors get_env(:player_colors)
-  @empty_changeset User.changeset()
+  @empty_form User.changeset()
+              |> to_form()
+              |> IO.inspect(label: "EMPTY USER FORM")
 
   @spec mount(Socket.t()) :: {:ok, Socket.t()}
   def mount(socket) do
@@ -13,7 +15,7 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
      assign(socket,
        color: hd(@colors),
        colors: @colors,
-       changeset: @empty_changeset
+       form: @empty_form
      )}
   end
 
@@ -26,16 +28,16 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
     ~H"""
     <div>
       <.user_form
-        :let={f}
-        for={@changeset}
+        id="user-form"
+        for={@form}
         target={@myself}
         change="validate"
         submit="play"
       >
         <.user_fields>
-          <.name_field form={f} color={@color} />
+          <.name_field form={@form} color={@color} />
           <.color_field
-            form={f}
+            form={@form}
             colors={@colors}
             color={@color}
             click="color-click"
@@ -51,16 +53,19 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
   @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
           {:noreply, Socket.t()}
   def handle_event("color-click", %{"value" => color}, socket) do
+    IO.inspect(color, label: "*** color on color-click ***")
     {:noreply, assign(socket, color: color)}
   end
 
   def handle_event("validate", %{"user" => user}, socket) do
+    IO.inspect(user, label: "*** user on validate ***")
     players = GamePresence.list(socket.assigns.topic)
     changeset = User.validate(user, players)
-    {:noreply, assign(socket, changeset: changeset)}
+    {:noreply, assign(socket, form: to_form(changeset))}
   end
 
   def handle_event("play", %{"user" => user}, socket) do
+    IO.inspect(user, label: "*** user on play ***")
     players = GamePresence.list(socket.assigns.topic)
 
     case User.create(user, players) do
@@ -71,7 +76,7 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
         {:noreply, socket}
 
       {:error, changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
+        {:noreply, assign(socket, form: to_form(changeset))}
     end
   end
 end

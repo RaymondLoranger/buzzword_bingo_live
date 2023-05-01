@@ -3,11 +3,11 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
 
   import GameComponents
 
-  @empty_changeset GameSize.changeset()
+  @empty_form GameSize.changeset() |> to_form()
 
   @spec mount(Socket.t()) :: {:ok, Socket.t()}
   def mount(socket) do
-    {:ok, assign(socket, changeset: @empty_changeset)}
+    {:ok, assign(socket, form: @empty_form)}
   end
 
   # passed assigns :
@@ -19,13 +19,13 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
     ~H"""
     <div>
       <.game_size_form
-        :let={f}
-        for={@changeset}
+        id="game-size-form"
+        for={@form}
         target={@myself}
         change="validate"
         submit="start"
       >
-        <.game_size_field form={f} />
+        <.game_size_field form={@form} />
         <.submit_button text="Start Game" />
       </.game_size_form>
     </div>
@@ -35,11 +35,14 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
   @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
           {:noreply, Socket.t()}
   def handle_event("validate", %{"game_size" => game_size}, socket) do
+    IO.inspect(game_size, label: "*** game_size on validate ***")
     changeset = GameSize.validate(game_size)
     {:noreply, assign(socket, changeset: changeset)}
   end
 
   def handle_event("start", %{"game_size" => game_size}, socket) do
+    IO.inspect(game_size, label: "*** game_size on start ***")
+
     case GameSize.create(game_size) do
       {:ok, game_size} ->
         game_name = Engine.haiku_name()
