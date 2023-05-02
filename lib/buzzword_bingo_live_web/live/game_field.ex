@@ -71,6 +71,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameField do
         if winner, do: Endpoint.broadcast(topic, "winner_alert", winner)
         GamePresence.update(topic, player.name, scores)
         square = List.flatten(squares) |> Enum.find(&(&1.phrase == phrase))
+        IO.inspect(square, label: "++++++ square just marked ++++++")
         Endpoint.broadcast(topic, "new_square", square)
 
       {:error, _noproc} ->

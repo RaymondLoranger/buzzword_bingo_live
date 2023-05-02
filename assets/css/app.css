@@ -14,7 +14,7 @@
 
 @layer utilities {
   .field-button-pair {
-    @apply inline-flex h-10;
+    @apply inline-flex h-10 w-full;
   }
 
   .field-button-pair > input[type='text'] {

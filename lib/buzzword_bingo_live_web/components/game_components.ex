@@ -273,7 +273,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     ~H"""
     <div
       class={
-        "#{if @square.marked_by, do: "bg-[#{@square.marked_by.color}]"} bg-white shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-cool-gray-600 border border-cool-gray-300 hover:scale-95 hover:border-cool-gray-400"
+        "#{if @square.marked_by, do: "bg-[#{@square.marked_by.color}]", else: "bg-white"} shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-cool-gray-600 border border-cool-gray-300 hover:scale-95 hover:border-cool-gray-400"
       }
       id={@square.phrase}
       phx-target={@target}
@@ -318,7 +318,13 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def game_field(assigns) do
     ~H"""
     <article id="game-field">
-      <section id="game-url-pair">
+      <section
+        id="game-url-pair"
+        class="border border-red-600 flex justify-around gap-3"
+      >
+        <div class="border border-green-600 text-center">
+          WTF?
+        </div>
         <span class="field-button-pair mb-4">
           <%= render_slot(@game_url) %>
         </span>
