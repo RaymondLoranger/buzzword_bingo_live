@@ -51,27 +51,35 @@ defmodule Buzzword.Bingo.Live.User do
 
   defp out_of_range(min, max) do
     """
-    must be
-    <span class="font-bold">#{min}</span>
-    to
-    <span class="font-bold">#{max}</span>
-    chars
+    <span>
+      must be
+      <span class="font-bold">#{min}</span>
+      to
+      <span class="font-bold">#{max}</span>
+      chars
+    </span>
     """
   end
 
   defp name_taken_msg(name) do
     """
-    name
-    <span class="font-bold">#{name}</span>
-    already taken
+    <span>
+      name
+      <span class="font-bold">#{name}</span>
+      already taken
+    </span>
     """
   end
 
   defp color_taken_msg(color) do
     """
-    color
-    <span class="pl-1.5 pr-2 font-bold bg-[#{color}]" >#{color}</span>
-    already taken
+    <span>
+      color
+      <span class="font-bold bg-[#{color}]">
+        #{color}
+      </span>
+      already taken
+    </span>
     """
   end
 end

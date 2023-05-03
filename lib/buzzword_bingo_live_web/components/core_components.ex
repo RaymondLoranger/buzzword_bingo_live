@@ -327,10 +327,7 @@ defmodule Buzzword.Bingo.LiveWeb.CoreComponents do
   def input(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
     assigns
     |> assign(field: nil, id: assigns.id || field.id)
-    |> assign(
-      :errors,
-      Enum.map(field.errors, &Phoenix.HTML.raw(translate_error(&1)))
-    )
+    |> assign(:errors, Enum.map(field.errors, &translate_error/1))
     |> assign_new(:name, fn ->
       if assigns.multiple, do: field.name <> "[]", else: field.name
     end)
@@ -420,22 +417,27 @@ defmodule Buzzword.Bingo.LiveWeb.CoreComponents do
         {@rest}
       />
       <.error :for={msg <- @errors} error_class={@error_class}>
-        <%= msg %>
+        <%= Phoenix.HTML.raw(msg) %>
       </.error>
     </div>
     """
   end
 
-  attr :field, Phoenix.HTML.FormField, doc: "form field struct: @form[:color]"
-  attr :value, :any, required: true
-  attr :checked, :boolean, default: false, doc: "checked flag"
+  attr :field, Phoenix.HTML.FormField, required: true, doc: "e.g. @form[:color]"
   attr :id, :any
   attr :name, :any
-  attr :rest, :global
+  attr :value, :any, required: true
+  attr :checked, :boolean, default: false, doc: "checked flag"
   attr :class, :string, default: "border-zinc-300 text-zinc-900 focus:ring-0"
+  attr :rest, :global
 
   def radio_button(%{field: field, value: value} = assigns) do
-    assigns = assign(assigns, id: "#{field.id}_#{value}", name: field.name)
+    assigns =
+      assign(assigns,
+        id: "#{field.id}_#{value}",
+        name: field.name,
+        errors: Enum.map(field.errors, &translate_error/1)
+      )
 
     ~H"""
     <input
@@ -445,8 +447,24 @@ defmodule Buzzword.Bingo.LiveWeb.CoreComponents do
       value={@value}
       checked={@checked}
       class={@class}
+      phx-feedback-for={@name}
       {@rest}
     />
+    """
+  end
+
+  attr :field, Phoenix.HTML.FormField, required: true, doc: "e.g. @form[:color]"
+  attr :errors, :list, default: []
+  attr :error_class, :string, default: nil
+
+  def errors(%{field: field} = assigns) do
+    assigns =
+      assign(assigns, errors: Enum.map(field.errors, &translate_error/1))
+
+    ~H"""
+    <.error :for={msg <- @errors} error_class={@error_class}>
+      <%= Phoenix.HTML.raw(msg) %>
+    </.error>
     """
   end
 

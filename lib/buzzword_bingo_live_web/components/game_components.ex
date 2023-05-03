@@ -98,7 +98,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def name_field(assigns) do
     ~H"""
     <.input
-      field={@form[:name]}
+      field={@field}
       placeholder="Name"
       phx-mounted={JS.focus()}
       phx-debounce="500"
@@ -108,21 +108,51 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
         "border-[#{@color}] h-6 px-2 py-3 border-2 rounded-sm",
         "focus:border-transparent"
       ]}
-      error_class="pl-2"
+      error_class="!mt-1 !gap-1"
     />
     """
   end
 
+  # def color_field(assigns) do
+  #   ~H"""
+  #   <div class="flex flex-col h-auto mt-4">
+  #     <ul id="user-colors" class="flex gap-1.5">
+  #       <li :for={color <- @colors} class="relative">
+  #         <label
+  #           title={color}
+  #           class={
+  #             "bg-[#{color}] flex w-6 m-0.5 aspect-square cursor-pointer border border-gray-500 hover:border-transparent hover:ring-gray-600 hover:ring-1"
+  #           }
+  #         >
+  #           <.radio_button
+  #             field={@form[:color]}
+  #             value={color}
+  #             checked={color == @color}
+  #             phx-target={@target}
+  #             phx-click={@click}
+  #             class="sr-only peer"
+  #           />
+  #           <span class="absolute hidden peer-checked:block top-0.5 left-2">
+  #             ✓
+  #           </span>
+  #         </label>
+  #       </li>
+  #     </ul>
+  #     <.errors field={@form[:color]} />
+  #   </div>
+  #   """
+  # end
+
   def color_field(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
     assigns =
-      assign(
-        assigns,
-        :errors,
-        map(field.errors, &Phoenix.HTML.raw(translate_error(&1)))
+      assign(assigns,
+        id: field.id,
+        name: field.name,
+        errors: Enum.map(field.errors, &translate_error/1)
       )
 
     ~H"""
-    <div class="flex flex-col h-auto mt-4">
+    <div class="flex flex-col h-auto mt-4" phx-feedback-for={@name}>
       <ul id="user-colors" class="flex gap-1.5">
         <li :for={color <- @colors} class="relative">
           <label
@@ -131,8 +161,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
               "bg-[#{color}] flex w-6 m-0.5 aspect-square cursor-pointer border border-gray-500 hover:border-transparent hover:ring-gray-600 hover:ring-1"
             }
           >
-            <.radio_button
-              field={@field}
+            <input
+              type="radio"
+              id={"#{@id}_#{color}"}
+              name={@name}
               value={color}
               checked={color == @color}
               phx-target={@target}
@@ -145,7 +177,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
           </label>
         </li>
       </ul>
-      <.error :for={msg <- @errors} error_class="!mt-1"><%= msg %></.error>
+      <.error :for={msg <- @errors} error_class="!mt-1 !gap-1">
+        <%= Phoenix.HTML.raw(msg) %>
+      </.error>
     </div>
     """
   end

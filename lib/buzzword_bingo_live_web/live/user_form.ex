@@ -33,7 +33,7 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
         submit="play"
       >
         <.user_fields>
-          <.name_field form={@form} color={@color} />
+          <.name_field field={@form[:name]} color={@color} />
           <.color_field
             field={@form[:color]}
             colors={@colors}
