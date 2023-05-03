@@ -113,8 +113,13 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     """
   end
 
-  def color_field(assigns) do
-    IO.inspect(assigns.form[:color], label: "@form[:color]------------")
+  def color_field(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
+    assigns =
+      assign(
+        assigns,
+        :errors,
+        map(field.errors, &Phoenix.HTML.raw(translate_error(&1)))
+      )
 
     ~H"""
     <div class="flex flex-col h-auto mt-4">
@@ -127,7 +132,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
             }
           >
             <.radio_button
-              field={@form[:color]}
+              field={@field}
               value={color}
               checked={color == @color}
               phx-target={@target}
@@ -140,6 +145,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
           </label>
         </li>
       </ul>
+      <.error :for={msg <- @errors} error_class="!mt-1"><%= msg %></.error>
     </div>
     """
   end

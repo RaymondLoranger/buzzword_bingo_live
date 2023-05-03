@@ -5,9 +5,7 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
   import GameComponents
 
   @colors get_env(:player_colors)
-  @empty_form User.changeset()
-              |> to_form()
-              |> IO.inspect(label: "EMPTY USER FORM")
+  @empty_form User.changeset() |> to_form()
 
   @spec mount(Socket.t()) :: {:ok, Socket.t()}
   def mount(socket) do
@@ -37,7 +35,7 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
         <.user_fields>
           <.name_field form={@form} color={@color} />
           <.color_field
-            form={@form}
+            field={@form[:color]}
             colors={@colors}
             color={@color}
             click="color-click"

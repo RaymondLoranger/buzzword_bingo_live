@@ -110,6 +110,7 @@ defmodule Buzzword.Bingo.LiveWeb do
         only: [push_patch: 2, put_flash: 3, stream_insert: 3, stream: 4]
 
       import Phoenix.HTML.Form
+      import Enum, only: [map: 2]
     end
   end
 
