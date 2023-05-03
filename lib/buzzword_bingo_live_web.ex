@@ -106,7 +106,9 @@ defmodule Buzzword.Bingo.LiveWeb do
 
   def imports do
     quote do
-      import Phoenix.LiveView, only: [push_patch: 2, put_flash: 3]
+      import Phoenix.LiveView,
+        only: [push_patch: 2, put_flash: 3, stream_insert: 3, stream: 4]
+
       import Phoenix.HTML.Form
     end
   end

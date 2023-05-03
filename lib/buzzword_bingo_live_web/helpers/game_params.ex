@@ -76,7 +76,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameParams do
 
   # /games/:id
   defp apply_action(socket, :show, %{"id" => game_name}) do
-    game_url = ~p"/games/#{game_name}" |> Clipboard.copy()
+    game_url = url(~p"/games/#{game_name}") |> Clipboard.copy()
     player = socket.assigns.player
     topic = "game:" <> game_name
 
@@ -97,14 +97,15 @@ defmodule Buzzword.Bingo.LiveWeb.GameParams do
           {0, []}
       end
 
-    assign(socket,
+    socket
+    |> stream(:squares, squares, dom_id: & &1.phrase)
+    |> assign(
       page_title: "Game #{game_name}",
       topic: topic,
       players: GamePresence.list(topic),
       game_name: game_name,
       game_size: game_size,
       game_url: game_url,
-      squares: squares,
       winner: nil
     )
   end

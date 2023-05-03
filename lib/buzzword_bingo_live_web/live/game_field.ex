@@ -20,17 +20,14 @@ defmodule Buzzword.Bingo.LiveWeb.GameField do
           <.game_url_field value={@game_url} />
           <.copy_url_button target={@myself} click="copy-url-click" />
         </:game_url>
-        <.board
-          :let={square}
-          squares={@squares}
-          game_size={@game_size}
-          update="append"
-        >
+        <.board game_size={@game_size} update="stream">
           <.square
+            :for={{dom_id, square} <- @streams.squares}
+            id={dom_id}
             square={square}
             target={@myself}
             click="square-click"
-            payload={square.phrase}
+            phrase={square.phrase}
           />
         </.board>
 
@@ -39,7 +36,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameField do
         <.chatroom>
           <%= if @game_size > 0 do %>
             <.players_panel players={@players} player={@player} />
-            <.messages_panel messages={@messages} />
+            <.messages_panel streams={@streams} />
             <.live_component
               module={MessageForm}
               id="message-form"
@@ -60,7 +57,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameField do
     {:noreply, push_event(socket, "select-text", %{id: "game-url"})}
   end
 
-  def handle_event("square-click", %{"payload" => phrase}, socket) do
+  def handle_event("square-click", %{"phrase" => phrase}, socket) do
     %{game_name: game_name, topic: topic, player: player} = socket.assigns
 
     case Engine.mark_square(game_name, phrase, player) do

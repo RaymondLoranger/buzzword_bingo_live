@@ -2,10 +2,12 @@ defmodule Buzzword.Bingo.LiveWeb.GameLive do
   use Buzzword.Bingo.LiveWeb, [:live_view, :aliases]
 
   @spec mount(LiveView.unsigned_params(), map, Socket.t()) ::
-          {:ok, Socket.t(), keyword}
+          {:ok, Socket.t()}
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, player: nil, players: %{}),
-     temporary_assigns: [squares: [], messages: []]}
+    {:ok,
+     socket
+     |> assign(player: nil, players: %{})
+     |> stream(:messages, [], dom_id: fn _message -> UUID.generate() end)}
   end
 
   # render assigns: game_name, game_size, messages, player, players, return_to,
@@ -32,10 +34,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameLive do
           game_size={@game_size}
           game_name={@game_name}
           topic={@topic}
-          squares={@squares}
           player={@player}
           players={@players}
-          messages={@messages}
+          streams={@streams}
           winner={@winner}
         />
     <% end %>

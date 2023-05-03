@@ -5,11 +5,11 @@ defmodule Buzzword.Bingo.LiveWeb.GameInfo do
 
   @spec handle_info(msg :: term, Socket.t()) :: {:noreply, Socket.t()}
   def handle_info(%Broadcast{event: "new_square", payload: square}, socket) do
-    {:noreply, update(socket, :squares, &[square | &1])}
+    {:noreply, stream_insert(socket, :squares, square)}
   end
 
   def handle_info(%Broadcast{event: "new_message", payload: message}, socket) do
-    {:noreply, update(socket, :messages, &[message | &1])}
+    {:noreply, stream_insert(socket, :messages, message)}
   end
 
   def handle_info(%Broadcast{event: "winner_alert", payload: winner}, socket) do

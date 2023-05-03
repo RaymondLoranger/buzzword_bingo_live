@@ -192,7 +192,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def message_submit_button(assigns) do
     ~H"""
     <button title="Send message" type="submit" disabled={@disabled}>
-      <.icon name="hero-solid-chat-alt-2" />
+      <.icon name="hero-chat-bubble-left" />
     </button>
     """
   end
@@ -250,21 +250,20 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     </div>
     <ul
       id="messages"
-      phx-update="append"
+      phx-update="stream"
       phx-hook="ScrollToEnd"
       class="flex-auto border-x-2 border-b-2 border-deluge rounded-b-md bg-white overflow-y-auto min-h-[35px]"
     >
-      <%= for message <- @messages do %>
-        <li
-          id={message.id}
-          class="border-b border-gray-200 p-1 tracking-tight"
-        >
-          <span class={"bg-[#{message.sender.color}] pl-1.5 pr-0.5 mr-1 rounded-sm"}>
-            <%= message.sender.name %>
-          </span>
-          <span><%= message.text %></span>
-        </li>
-      <% end %>
+      <li
+        :for={{dom_id, message} <- @streams.messages}
+        id={dom_id}
+        class="border-b border-gray-200 p-1 tracking-tight"
+      >
+        <span class={"bg-[#{message.sender.color}] pl-1.5 pr-0.5 mr-1 rounded-sm"}>
+          <%= message.sender.name %>
+        </span>
+        <span><%= message.text %></span>
+      </li>
     </ul>
     """
   end
@@ -275,10 +274,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       class={
         "#{if @square.marked_by, do: "bg-[#{@square.marked_by.color}]", else: "bg-white"} shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-cool-gray-600 border border-cool-gray-300 hover:scale-95 hover:border-cool-gray-400"
       }
-      id={@square.phrase}
+      id={@id}
       phx-target={@target}
       phx-click={@click}
-      phx-value-payload={@payload}
+      phx-value-phrase={@phrase}
     >
       <%= if @square.marked_by do %>
         <span class="text-xs leading-3 self-start justify-self-start p-0.5 sm:p-1">
@@ -308,9 +307,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       class={"grid grid-cols-#{@game_size} gap-2 sm:w-[70%] w-full"}
       phx-update={@update}
     >
-      <%= for square <- @squares do %>
-        <%= render_slot(@inner_block, square) %>
-      <% end %>
+      <%= render_slot(@inner_block) %>
     </div>
     """
   end
@@ -320,12 +317,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     <article id="game-field">
       <section
         id="game-url-pair"
-        class="border border-red-600 flex justify-around gap-3"
+        class="border border-red-600 flex justify-center"
       >
-        <div class="border border-green-600 text-center">
-          WTF?
-        </div>
-        <span class="field-button-pair mb-4">
+        <span class="field-button-pair mb-4 w-2/3">
           <%= render_slot(@game_url) %>
         </span>
       </section>
@@ -341,21 +335,14 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def game_url_field(assigns) do
     ~H"""
-    <input
-      class="!w-2/3 md:!w-1/2"
-      id="game-url"
-      type="text"
-      title={@value}
-      value={@value}
-      readonly
-    />
+    <input id="game-url" type="text" title={@value} value={@value} readonly />
     """
   end
 
   def copy_url_button(assigns) do
     ~H"""
     <button title="Copy game URL" phx-click={@click} phx-target={@target}>
-      <.icon name="hero-solid-clipboard-copy" />
+      <.icon name="hero-clipboard-document" class="mb-1" />
     </button>
     """
   end
@@ -390,12 +377,6 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       </div>
     <% end %>
     """
-  end
-
-  def login_icon do
-    raw("""
-    <img src="/images/user-login.png" title="login" />
-    """)
   end
 
   ## Private functions
