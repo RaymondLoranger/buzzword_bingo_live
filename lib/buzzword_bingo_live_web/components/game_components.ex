@@ -25,8 +25,11 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       assign(assigns,
         id: field.id,
         name: field.name,
+        value: field.value,
         errors: Enum.map(field.errors, &translate_error/1)
       )
+
+    IO.inspect(field.value, label: "----- field.value ------")
 
     ~H"""
     <div
@@ -43,6 +46,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
             id={"#{@id}_5"}
             name={@name}
             value={5}
+            checked={@value == 5}
             phx-mounted={JS.focus()}
             class="ml-12 mt-2 mb-4"
           />
@@ -55,6 +59,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
             id={"#{@id}_4"}
             name={@name}
             value={4}
+            checked={@value == 4}
             class="ml-12 mt-2 mb-4"
           />
           <.grid_size text="4 x 4" />
@@ -66,6 +71,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
             id={"#{@id}_3"}
             name={@name}
             value={3}
+            checked={@value == 3}
             class="ml-12 mt-2 mb-4"
           />
           <.grid_size text="3 x 3" />
@@ -121,6 +127,14 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def name_field(assigns) do
     ~H"""
     <.input
+      phx-1={@color == "#a4deff"}
+      phx-2={@color == "#f9cedf"}
+      phx-3={@color == "#d3c5f1"}
+      phx-4={@color == "#acc9f5"}
+      phx-5={@color == "#aeeace"}
+      phx-6={@color == "#96d7b9"}
+      phx-7={@color == "#fce8bd"}
+      phx-8={@color == "#fcd8ac"}
       field={@field}
       placeholder="Name"
       phx-mounted={JS.focus()}
@@ -128,8 +142,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       required
       wrapper_class="flex flex-col h-auto mt-4"
       class={[
-        "border-[#{@color}] h-6 px-2 py-3 border-2 rounded-sm",
-        "focus:border-transparent"
+        "h-6 px-2 py-3 border-2 rounded-sm",
+        "phx-1:border-[#a4deff] phx-2:border-[#f9cedf] phx-3:border-[#d3c5f1] phx-4:border-[#acc9f5] phx-5:border-[#aeeace] phx-6:border-[#96d7b9] phx-7:border-[#fce8bd] phx-8:border-[#fcd8ac]",
+        "focus:phx-1:ring-[#a4deff] focus:phx-2:ring-[#f9cedf] focus:phx-3:ring-[#d3c5f1] focus:phx-4:ring-[#acc9f5] focus:phx-5:ring-[#aeeace] focus:phx-6:ring-[#96d7b9] focus:phx-7:ring-[#fce8bd] focus:phx-8:ring-[#fcd8ac]"
       ]}
       error_class="!mt-1 !gap-1"
     />
@@ -149,10 +164,19 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       <ul id="user-colors" class="flex gap-1.5">
         <li :for={color <- @colors} class="relative">
           <label
+            phx-1={color == "#a4deff"}
+            phx-2={color == "#f9cedf"}
+            phx-3={color == "#d3c5f1"}
+            phx-4={color == "#acc9f5"}
+            phx-5={color == "#aeeace"}
+            phx-6={color == "#96d7b9"}
+            phx-7={color == "#fce8bd"}
+            phx-8={color == "#fcd8ac"}
             title={color}
-            class={
-              "bg-[#{color}] flex w-6 m-0.5 aspect-square cursor-pointer border border-gray-500 hover:border-transparent hover:ring-gray-600 hover:ring-1"
-            }
+            class={[
+              "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
+              "flex w-6 m-0.5 aspect-square cursor-pointer border border-gray-500 hover:border-transparent hover:ring-gray-600 hover:ring-1"
+            ]}
           >
             <input
               type="radio"

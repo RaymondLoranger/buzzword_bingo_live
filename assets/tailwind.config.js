@@ -198,6 +198,15 @@ module.exports = {
         '.phx-change-loading &'
       ])
     ),
+    // Generic variants...
+    plugin(({ addVariant }) => addVariant('phx-1', '&[phx-1]')),
+    plugin(({ addVariant }) => addVariant('phx-2', '&[phx-2]')),
+    plugin(({ addVariant }) => addVariant('phx-3', '&[phx-3]')),
+    plugin(({ addVariant }) => addVariant('phx-4', '&[phx-4]')),
+    plugin(({ addVariant }) => addVariant('phx-5', '&[phx-5]')),
+    plugin(({ addVariant }) => addVariant('phx-6', '&[phx-6]')),
+    plugin(({ addVariant }) => addVariant('phx-7', '&[phx-7]')),
+    plugin(({ addVariant }) => addVariant('phx-8', '&[phx-8]')),
 
     // Embeds Hero Icons (https://heroicons.com) into your app.css bundle
     // See your `CoreComponents.icon/1` for more information.

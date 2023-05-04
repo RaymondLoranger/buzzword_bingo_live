@@ -3,11 +3,11 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
 
   import GameComponents
 
-  @empty_form GameSize.changeset() |> to_form()
+  @init_form GameSize.changeset(%{value: 5}) |> to_form()
 
   @spec mount(Socket.t()) :: {:ok, Socket.t()}
   def mount(socket) do
-    {:ok, assign(socket, form: @empty_form)}
+    {:ok, assign(socket, form: @init_form)}
   end
 
   # passed assigns :
