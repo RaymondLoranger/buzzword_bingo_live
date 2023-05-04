@@ -25,7 +25,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
         change="validate"
         submit="start"
       >
-        <.game_size_field form={@form} />
+        <.game_size_field field={@form[:value]} />
         <.submit_button text="Start Game" />
       </.game_size_form>
     </div>
@@ -37,7 +37,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
   def handle_event("validate", %{"game_size" => game_size}, socket) do
     IO.inspect(game_size, label: "*** game_size on validate ***")
     changeset = GameSize.validate(game_size)
-    {:noreply, assign(socket, changeset: changeset)}
+    {:noreply, assign(socket, form: to_form(changeset))}
   end
 
   def handle_event("start", %{"game_size" => game_size}, socket) do
@@ -64,7 +64,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
         end
 
       {:error, changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
+        {:noreply, assign(socket, form: to_form(changeset))}
     end
   end
 end

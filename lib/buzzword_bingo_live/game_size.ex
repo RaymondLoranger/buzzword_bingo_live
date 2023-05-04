@@ -38,11 +38,13 @@ defmodule Buzzword.Bingo.Live.GameSize do
 
   defp out_of_range(min, max) do
     """
-    must be
-    <span class="font-bold">#{min}</span>
-    to
-    <span class="font-bold">#{max}</span>
-    chars
+    <span>
+      must be
+      <span class="font-bold">#{min}</span>
+      to
+      <span class="font-bold">#{max}</span>
+      chars
+    </span>
     """
   end
 end

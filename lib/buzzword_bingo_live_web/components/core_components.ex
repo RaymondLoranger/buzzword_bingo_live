@@ -423,51 +423,6 @@ defmodule Buzzword.Bingo.LiveWeb.CoreComponents do
     """
   end
 
-  attr :field, Phoenix.HTML.FormField, required: true, doc: "e.g. @form[:color]"
-  attr :id, :any
-  attr :name, :any
-  attr :value, :any, required: true
-  attr :checked, :boolean, default: false, doc: "checked flag"
-  attr :class, :string, default: "border-zinc-300 text-zinc-900 focus:ring-0"
-  attr :rest, :global
-
-  def radio_button(%{field: field, value: value} = assigns) do
-    assigns =
-      assign(assigns,
-        id: "#{field.id}_#{value}",
-        name: field.name,
-        errors: Enum.map(field.errors, &translate_error/1)
-      )
-
-    ~H"""
-    <input
-      type="radio"
-      id={@id}
-      name={@name}
-      value={@value}
-      checked={@checked}
-      class={@class}
-      phx-feedback-for={@name}
-      {@rest}
-    />
-    """
-  end
-
-  attr :field, Phoenix.HTML.FormField, required: true, doc: "e.g. @form[:color]"
-  attr :errors, :list, default: []
-  attr :error_class, :string, default: nil
-
-  def errors(%{field: field} = assigns) do
-    assigns =
-      assign(assigns, errors: Enum.map(field.errors, &translate_error/1))
-
-    ~H"""
-    <.error :for={msg <- @errors} error_class={@error_class}>
-      <%= Phoenix.HTML.raw(msg) %>
-    </.error>
-    """
-  end
-
   @doc """
   Renders a label.
   """
