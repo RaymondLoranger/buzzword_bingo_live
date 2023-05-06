@@ -107,7 +107,15 @@ defmodule Buzzword.Bingo.LiveWeb do
   def imports do
     quote do
       import Phoenix.LiveView,
-        only: [push_patch: 2, put_flash: 3, stream_insert: 3, stream: 4]
+        only: [
+          push_patch: 2,
+          put_flash: 3,
+          stream_insert: 3,
+          stream_insert: 4,
+          stream_delete: 3,
+          stream: 3,
+          stream: 4
+        ]
 
       import Phoenix.HTML.Form
       import Enum, only: [map: 2]

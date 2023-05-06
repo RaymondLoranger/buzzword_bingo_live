@@ -35,14 +35,11 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
   @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
           {:noreply, Socket.t()}
   def handle_event("validate", %{"game_size" => game_size}, socket) do
-    IO.inspect(game_size, label: "*** game_size on validate ***")
     changeset = GameSize.validate(game_size)
     {:noreply, assign(socket, form: to_form(changeset))}
   end
 
   def handle_event("start", %{"game_size" => game_size}, socket) do
-    IO.inspect(game_size, label: "*** game_size on start ***")
-
     case GameSize.create(game_size) do
       {:ok, game_size} ->
         game_name = Engine.haiku_name()

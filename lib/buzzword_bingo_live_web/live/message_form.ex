@@ -32,7 +32,7 @@ defmodule Buzzword.Bingo.LiveWeb.MessageForm do
 
   def handle_event("send-msg", %{"text" => text}, socket) do
     player = socket.assigns.player
-    message = %{text: text, sender: player}
+    message = %{id: UUID.generate(), text: text, sender: player}
     Endpoint.broadcast(socket.assigns.topic, "new_message", message)
     {:noreply, assign(socket, text: "")}
   end

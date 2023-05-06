@@ -1,7 +1,9 @@
 defmodule Buzzword.Bingo.LiveWeb.GamePresence do
-  use Buzzword.Bingo.LiveWeb, [:html, :aliases]
+  use Buzzword.Bingo.LiveWeb, [:html, :imports, :aliases]
 
-  @spec list(Phoenix.Presence.topic()) :: %{Player.name() => meta :: map}
+  @type player :: %{name: String.t(), meta: map}
+
+  @spec list(Phoenix.Presence.topic()) :: [player]
   def list(topic), do: Presence.list(topic) |> players()
 
   @spec assign_players(Socket.t(), %{
@@ -21,28 +23,24 @@ defmodule Buzzword.Bingo.LiveWeb.GamePresence do
 
   ## Private functions
 
-  @spec players(Phoenix.Presence.presences()) :: %{Player.name() => meta :: map}
+  @spec players(Phoenix.Presence.presences()) :: [player]
   defp players(presences) do
-    for {name, %{metas: [meta | _]}} <- presences, into: %{} do
-      {name, meta}
-      # => {"Ray", %{color: "#a4deff", marked: 0, phx_ref: "...", score: 0}}
+    for {name, %{metas: [meta | _]}} <- presences do
+      %{name: name, meta: meta}
     end
-
-    # => %{
-    #      "Joe" => %{color: "#f9cedf", marked: 0, phx_ref: "...", score: 0},
-    #      "Ray" => %{color: "#a4deff", marked: 0, phx_ref: "...", score: 0}
-    #    }
   end
 
   @spec remove_players(Socket.t(), Phoenix.Presence.presences()) :: Socket.t()
   defp remove_players(socket, leaves) do
-    players = Map.drop(socket.assigns.players, Map.keys(leaves))
-    assign(socket, :players, players)
+    Enum.reduce(players(leaves), socket, fn player, socket ->
+      stream_delete(socket, :players, player)
+    end)
   end
 
   @spec add_players(Socket.t(), Phoenix.Presence.presences()) :: Socket.t()
   defp add_players(socket, joins) do
-    players = Map.merge(socket.assigns.players, players(joins))
-    assign(socket, :players, players)
+    Enum.reduce(players(joins), socket, fn player, socket ->
+      stream_insert(socket, :players, player)
+    end)
   end
 end

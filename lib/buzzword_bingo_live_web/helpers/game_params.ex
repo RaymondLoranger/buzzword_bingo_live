@@ -99,10 +99,11 @@ defmodule Buzzword.Bingo.LiveWeb.GameParams do
 
     socket
     |> stream(:squares, squares, dom_id: & &1.phrase)
+    |> stream(:players, GamePresence.list(topic), dom_id: & &1.name)
     |> assign(
       page_title: "Game #{game_name}",
       topic: topic,
-      players: GamePresence.list(topic),
+      # players: GamePresence.list(topic),
       game_name: game_name,
       game_size: game_size,
       game_url: game_url,

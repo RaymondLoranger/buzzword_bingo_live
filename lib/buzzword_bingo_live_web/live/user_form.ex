@@ -51,19 +51,16 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
   @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
           {:noreply, Socket.t()}
   def handle_event("color-click", %{"value" => color}, socket) do
-    IO.inspect(color, label: "*** color on color-click ***")
     {:noreply, assign(socket, color: color)}
   end
 
   def handle_event("validate", %{"user" => user}, socket) do
-    IO.inspect(user, label: "*** user on validate ***")
     players = GamePresence.list(socket.assigns.topic)
     changeset = User.validate(user, players)
     {:noreply, assign(socket, form: to_form(changeset))}
   end
 
   def handle_event("play", %{"user" => user}, socket) do
-    IO.inspect(user, label: "*** user on play ***")
     players = GamePresence.list(socket.assigns.topic)
 
     case User.create(user, players) do

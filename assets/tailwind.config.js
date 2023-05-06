@@ -13,32 +13,41 @@ module.exports = {
     '../lib/*/{game_size,user}.ex'
   ],
   safelist: [
-    'gap-2',
-    'gap-1.5',
-    'gap-1',
-    'gap-0.5', // invalid game size
-    'grid-cols-3',
-    'grid-cols-4',
-    'grid-cols-5',
-    'grid-cols-6', // invalid game size
-    'bg-[#a4deff]',
-    'bg-[#f9cedf]',
-    'bg-[#d3c5f1]',
-    'bg-[#acc9f5]',
-    'bg-[#aeeace]',
-    'bg-[#96d7b9]',
-    'bg-[#fce8bd]',
-    'bg-[#fcd8ac]',
-    'bg-[#fefbe7]', // invalid player color
-    'border-[#a4deff]',
-    'border-[#f9cedf]',
-    'border-[#d3c5f1]',
-    'border-[#acc9f5]',
-    'border-[#aeeace]',
-    'border-[#96d7b9]',
-    'border-[#fce8bd]',
-    'border-[#fcd8ac]',
-    'border-[#fefbe7]', // invalid player color
+    // 'gap-2',
+    // 'gap-1.5',
+    // 'gap-1',
+    // 'gap-0.5', // invalid game size
+    // 'grid-cols-3',
+    // 'grid-cols-4',
+    // 'grid-cols-5',
+    // 'grid-cols-6', // invalid game size
+    // 'bg-[#a4deff]',
+    // 'bg-[#f9cedf]',
+    // 'bg-[#d3c5f1]',
+    // 'bg-[#acc9f5]',
+    // 'bg-[#aeeace]',
+    // 'bg-[#96d7b9]',
+    // 'bg-[#fce8bd]',
+    // 'bg-[#fcd8ac]',
+    // 'bg-[#fefbe7]', // invalid player color
+    // 'text-[#a4deff]',
+    // 'text-[#f9cedf]',
+    // 'text-[#d3c5f1]',
+    // 'text-[#acc9f5]',
+    // 'text-[#aeeace]',
+    // 'text-[#96d7b9]',
+    // 'text-[#fce8bd]',
+    // 'text-[#fcd8ac]',
+    // 'text-[#fefbe7]', // invalid player color
+    // 'border-[#a4deff]',
+    // 'border-[#f9cedf]',
+    // 'border-[#d3c5f1]',
+    // 'border-[#acc9f5]',
+    // 'border-[#aeeace]',
+    // 'border-[#96d7b9]',
+    // 'border-[#fce8bd]',
+    // 'border-[#fcd8ac]',
+    // 'border-[#fefbe7]', // invalid player color
     // 'border-rose-700',
     // 'border-pink-600',
 
@@ -199,6 +208,7 @@ module.exports = {
       ])
     ),
     // Generic variants...
+    plugin(({ addVariant }) => addVariant('phx-0', '&[phx-0]')),
     plugin(({ addVariant }) => addVariant('phx-1', '&[phx-1]')),
     plugin(({ addVariant }) => addVariant('phx-2', '&[phx-2]')),
     plugin(({ addVariant }) => addVariant('phx-3', '&[phx-3]')),

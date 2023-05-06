@@ -12,10 +12,16 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def grid_glyph(assigns) do
     ~H"""
-    <div class={"grid grid-cols-#{@size} gap-#{glyph_gap(@size)}"}>
-      <%= for _n <- 1..(@size * @size) do %>
-        <div class="p-1 aspect-square bg-wedgewood" />
-      <% end %>
+    <div
+      phx-5={@size == 5}
+      phx-4={@size == 4}
+      phx-3={@size == 3}
+      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 phx-5:gap-1 phx-4:gap-1.5 phx-3:gap-2"
+    >
+      <div
+        :for={_n <- 1..(@size * @size)}
+        class="p-1 aspect-square bg-wedgewood"
+      />
     </div>
     """
   end
@@ -28,8 +34,6 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
         value: field.value,
         errors: Enum.map(field.errors, &translate_error/1)
       )
-
-    IO.inspect(field.value, label: "----- field.value ------")
 
     ~H"""
     <div
@@ -269,33 +273,45 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     </div>
     <ul
       id="players"
+      phx-update="stream"
       class="border-x-2 border-b-2 border-deluge rounded-b-md mb-0 bg-white"
-      phx-update="replace"
     >
-      <%= for {name, player} <- @players do %>
-        <li class="border-b border-gray-200 p-1 whitespace-nowrap last:border-b-0 tracking-tight flex justify-between items-baseline">
-          <span id="player-signature">
-            <span class={
-              "bg-[#{player.color}] aspect-square px-2 mx-1.5 rounded-sm text-xs"
-            } />
-            <%= if name == @player.name do %>
-              <span class="font-medium tracking-tighter font-mono">
-                <%= name %>
-              </span>
-            <% else %>
-              <span><%= name %></span>
-            <% end %>
+      <li
+        :for={{dom_id, player} <- @streams.players}
+        id={dom_id}
+        class="border-b border-gray-200 p-1 whitespace-nowrap last:border-b-0 tracking-tight flex justify-between items-baseline"
+      >
+        <span>
+          <span
+            phx-1={player.meta.color == "#a4deff"}
+            phx-2={player.meta.color == "#f9cedf"}
+            phx-3={player.meta.color == "#d3c5f1"}
+            phx-4={player.meta.color == "#acc9f5"}
+            phx-5={player.meta.color == "#aeeace"}
+            phx-6={player.meta.color == "#96d7b9"}
+            phx-7={player.meta.color == "#fce8bd"}
+            phx-8={player.meta.color == "#fcd8ac"}
+            class={[
+              "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
+              "aspect-square px-2 mx-1.5 rounded-sm text-xs"
+            ]}
+          />
+          <span
+            phx-1={player.name == @player.name}
+            class="phx-1:underline phx-1:underline-offset-4"
+          >
+            <%= player.name %>
           </span>
+        </span>
 
-          <span id="player-tally" class="tracking-tighter text-sm ml-1.5">
-            <span><%= player.score %> points</span>
-            <span class="inline sm:hidden md:inline">
-              ( <%= player.marked %>
-              <%= ngettext("square", "squares", player.marked) %> )
-            </span>
+        <span class="tracking-tighter text-sm ml-1">
+          <span><%= player.meta.score %> points</span>
+          <span class="inline md:hidden lg:inline">
+            (<%= player.meta.marked %>
+            <%= ngettext("square", "squares", player.meta.marked) %>)
           </span>
-        </li>
-      <% end %>
+        </span>
+      </li>
     </ul>
     """
   end
@@ -316,7 +332,20 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
         id={dom_id}
         class="border-b border-gray-200 p-1 tracking-tight"
       >
-        <span class={"bg-[#{message.sender.color}] pl-1.5 pr-0.5 mr-1 rounded-sm"}>
+        <span
+          phx-1={message.sender.color == "#a4deff"}
+          phx-2={message.sender.color == "#f9cedf"}
+          phx-3={message.sender.color == "#d3c5f1"}
+          phx-4={message.sender.color == "#acc9f5"}
+          phx-5={message.sender.color == "#aeeace"}
+          phx-6={message.sender.color == "#96d7b9"}
+          phx-7={message.sender.color == "#fce8bd"}
+          phx-8={message.sender.color == "#fcd8ac"}
+          class={[
+            "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
+            "pl-1.5 pr-0.5 mr-1 rounded-sm"
+          ]}
+        >
           <%= message.sender.name %>
         </span>
         <span><%= message.text %></span>
@@ -328,9 +357,20 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def square(assigns) do
     ~H"""
     <div
-      class={
-        "#{if @square.marked_by, do: "bg-[#{@square.marked_by.color}]", else: "bg-white"} shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-cool-gray-600 border border-cool-gray-300 hover:scale-95 hover:border-cool-gray-400"
-      }
+      phx-0={is_nil(@square.marked_by)}
+      phx-1={@square.marked_by && @square.marked_by.color == "#a4deff"}
+      phx-2={@square.marked_by && @square.marked_by.color == "#f9cedf"}
+      phx-3={@square.marked_by && @square.marked_by.color == "#d3c5f1"}
+      phx-4={@square.marked_by && @square.marked_by.color == "#acc9f5"}
+      phx-5={@square.marked_by && @square.marked_by.color == "#aeeace"}
+      phx-6={@square.marked_by && @square.marked_by.color == "#96d7b9"}
+      phx-7={@square.marked_by && @square.marked_by.color == "#fce8bd"}
+      phx-8={@square.marked_by && @square.marked_by.color == "#fcd8ac"}
+      class={[
+        "phx-0:bg-white phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
+        "shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-cool-gray-600 border border-cool-gray-300",
+        "hover:scale-95 hover:border-cool-gray-400 active:phx-0:ring-4 active:phx-0:ring-carrot-orange active:phx-0:border-transparent"
+      ]}
       id={@id}
       phx-target={@target}
       phx-click={@click}
@@ -360,8 +400,11 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def board(assigns) do
     ~H"""
     <div
+      phx-5={@game_size == 5}
+      phx-4={@game_size == 4}
+      phx-3={@game_size == 3}
       id="board"
-      class={"grid grid-cols-#{@game_size} gap-2 sm:w-[70%] w-full"}
+      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 gap-2 sm:w-[70%] w-full"
       phx-update={@update}
     >
       <%= render_slot(@inner_block) %>
@@ -453,10 +496,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     end
   end
 
-  defp glyph_gap(3), do: "2"
-  defp glyph_gap(4), do: "1.5"
-  defp glyph_gap(5), do: "1"
-  defp glyph_gap(6), do: "0.5"
+  # defp glyph_gap(3), do: "2"
+  # defp glyph_gap(4), do: "1.5"
+  # defp glyph_gap(5), do: "1"
+  # defp glyph_gap(6), do: "0.5"
 
   defp sad_face(assigns) do
     ~H"""

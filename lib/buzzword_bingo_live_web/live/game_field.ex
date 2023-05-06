@@ -33,17 +33,15 @@ defmodule Buzzword.Bingo.LiveWeb.GameField do
 
         <.game_over? winner={@winner} />
 
-        <.chatroom>
-          <%= if @game_size > 0 do %>
-            <.players_panel players={@players} player={@player} />
-            <.messages_panel streams={@streams} />
-            <.live_component
-              module={MessageForm}
-              id="message-form"
-              topic={@topic}
-              player={@player}
-            />
-          <% end %>
+        <.chatroom :if={@game_size > 0}>
+          <.players_panel streams={@streams} player={@player} />
+          <.messages_panel streams={@streams} />
+          <.live_component
+            module={MessageForm}
+            id="message-form"
+            topic={@topic}
+            player={@player}
+          />
         </.chatroom>
       </.game_field>
     </div>
@@ -68,7 +66,6 @@ defmodule Buzzword.Bingo.LiveWeb.GameField do
         if winner, do: Endpoint.broadcast(topic, "winner_alert", winner)
         GamePresence.update(topic, player.name, scores)
         square = List.flatten(squares) |> Enum.find(&(&1.phrase == phrase))
-        IO.inspect(square, label: "++++++ square just marked ++++++")
         Endpoint.broadcast(topic, "new_square", square)
 
       {:error, _noproc} ->

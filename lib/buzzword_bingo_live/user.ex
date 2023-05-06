@@ -5,6 +5,7 @@ defmodule Buzzword.Bingo.Live.User do
   import Ecto.Changeset
 
   alias __MODULE__
+  alias Buzzword.Bingo.LiveWeb.GamePresence
 
   @colors get_env(:player_colors)
   @max_players get_env(:max_players)
@@ -15,34 +16,38 @@ defmodule Buzzword.Bingo.Live.User do
     field :color, :string
   end
 
-  @spec changeset(map, map) :: Ecto.Changeset.t()
-  def changeset(attrs \\ %{}, players \\ %{}) do
+  @spec changeset(map, [GamePresence.player()]) :: Ecto.Changeset.t()
+  def changeset(attrs \\ %{}, players \\ []) do
     %User{}
     |> cast(attrs, [:name, :color])
     |> validate_length(:name, min: 2, max: 9, message: out_of_range(2, 9))
     |> validate_change(:name, fn :name, name ->
-      if players[name], do: [name: name_taken_msg(name)], else: []
+      if name in Enum.map(players, & &1.name),
+        do: [name: name_taken_msg(name)],
+        else: []
     end)
     |> validate_change(:name, fn :name, _name ->
-      if map_size(players) >= @max_players,
+      if length(players) >= @max_players,
         do: [name: "players limit (#{@max_players}) already reached"],
         else: []
     end)
     |> validate_inclusion(:color, @colors, message: "invalid color")
     |> validate_change(:color, fn :color, color ->
-      colors = players |> Map.values() |> Enum.map(& &1.color)
-      if color in colors, do: [color: color_taken_msg(color)], else: []
+      if color in Enum.map(players, & &1.meta.color),
+        do: [color: color_taken_msg(color)],
+        else: []
     end)
   end
 
-  @spec validate(map, map) :: Ecto.Changeset.t()
+  @spec validate(map, [GamePresence.player()]) :: Ecto.Changeset.t()
   def validate(attrs, players) do
     changeset(attrs, players)
     # Required to see validation errors...
     |> struct(action: :validate)
   end
 
-  @spec create(map, map) :: {:ok, %User{}} | {:error, Ecto.Changeset.t()}
+  @spec create(map, [GamePresence.player()]) ::
+          {:ok, %User{}} | {:error, Ecto.Changeset.t()}
   def create(attrs, players) do
     changeset(attrs, players) |> apply_action(:create)
   end
