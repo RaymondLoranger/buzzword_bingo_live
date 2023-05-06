@@ -1,7 +1,12 @@
 defmodule Buzzword.Bingo.LiveWeb.GamePresence do
   use Buzzword.Bingo.LiveWeb, [:html, :imports, :aliases]
 
-  @type player :: %{name: String.t(), meta: map}
+  @type player :: %{
+          name: Player.name(),
+          color: Player.color(),
+          score: Game.points_sum(),
+          marked: Game.marked_count()
+        }
 
   @spec list(Phoenix.Presence.topic()) :: [player]
   def list(topic), do: Presence.list(topic) |> players()
@@ -11,7 +16,12 @@ defmodule Buzzword.Bingo.LiveWeb.GamePresence do
           leaves: Phoenix.Presence.presences()
         }) :: Socket.t()
   def assign_players(socket, diff) do
-    socket |> remove_players(diff.leaves) |> add_players(diff.joins)
+    IO.inspect(diff.leaves, label: "====== diff.leaves ======")
+    IO.inspect(diff.joins, label: "====== diff.joins ======")
+    # Avoid leaving and joining so players remain in the same location.
+    leaves = Map.drop(diff.leaves, Map.keys(diff.joins))
+    IO.inspect(leaves, label: "====== leaves ======")
+    socket |> remove_players(leaves) |> add_players(diff.joins)
   end
 
   @spec update(Phoenix.Presence.topic(), Player.name(), Summary.scores()) ::
@@ -26,21 +36,17 @@ defmodule Buzzword.Bingo.LiveWeb.GamePresence do
   @spec players(Phoenix.Presence.presences()) :: [player]
   defp players(presences) do
     for {name, %{metas: [meta | _]}} <- presences do
-      %{name: name, meta: meta}
+      %{name: name, color: meta.color, score: meta.score, marked: meta.marked}
     end
   end
 
   @spec remove_players(Socket.t(), Phoenix.Presence.presences()) :: Socket.t()
   defp remove_players(socket, leaves) do
-    Enum.reduce(players(leaves), socket, fn player, socket ->
-      stream_delete(socket, :players, player)
-    end)
+    leaves |> players |> Enum.reduce(socket, &stream_delete(&2, :players, &1))
   end
 
   @spec add_players(Socket.t(), Phoenix.Presence.presences()) :: Socket.t()
   defp add_players(socket, joins) do
-    Enum.reduce(players(joins), socket, fn player, socket ->
-      stream_insert(socket, :players, player)
-    end)
+    joins |> players |> Enum.reduce(socket, &stream_insert(&2, :players, &1))
   end
 end

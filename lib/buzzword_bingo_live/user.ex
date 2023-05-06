@@ -33,7 +33,7 @@ defmodule Buzzword.Bingo.Live.User do
     end)
     |> validate_inclusion(:color, @colors, message: "invalid color")
     |> validate_change(:color, fn :color, color ->
-      if color in Enum.map(players, & &1.meta.color),
+      if color in Enum.map(players, & &1.color),
         do: [color: color_taken_msg(color)],
         else: []
     end)

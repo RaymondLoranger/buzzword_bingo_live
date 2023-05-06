@@ -142,7 +142,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       field={@field}
       placeholder="Name"
       phx-mounted={JS.focus()}
-      phx-debounce="500"
+      phx-debounce="750"
       required
       wrapper_class="flex flex-col h-auto mt-4"
       class={[
@@ -283,14 +283,14 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       >
         <span>
           <span
-            phx-1={player.meta.color == "#a4deff"}
-            phx-2={player.meta.color == "#f9cedf"}
-            phx-3={player.meta.color == "#d3c5f1"}
-            phx-4={player.meta.color == "#acc9f5"}
-            phx-5={player.meta.color == "#aeeace"}
-            phx-6={player.meta.color == "#96d7b9"}
-            phx-7={player.meta.color == "#fce8bd"}
-            phx-8={player.meta.color == "#fcd8ac"}
+            phx-1={player.color == "#a4deff"}
+            phx-2={player.color == "#f9cedf"}
+            phx-3={player.color == "#d3c5f1"}
+            phx-4={player.color == "#acc9f5"}
+            phx-5={player.color == "#aeeace"}
+            phx-6={player.color == "#96d7b9"}
+            phx-7={player.color == "#fce8bd"}
+            phx-8={player.color == "#fcd8ac"}
             class={[
               "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
               "aspect-square px-2 mx-1.5 rounded-sm text-xs"
@@ -305,10 +305,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
         </span>
 
         <span class="tracking-tighter text-sm ml-1">
-          <span><%= player.meta.score %> points</span>
+          <span><%= player.score %> points</span>
           <span class="inline md:hidden lg:inline">
-            (<%= player.meta.marked %>
-            <%= ngettext("square", "squares", player.meta.marked) %>)
+            (<%= player.marked %>
+            <%= ngettext("square", "squares", player.marked) %>)
           </span>
         </span>
       </li>
