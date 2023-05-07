@@ -16,11 +16,8 @@ defmodule Buzzword.Bingo.LiveWeb.GamePresence do
           leaves: Phoenix.Presence.presences()
         }) :: Socket.t()
   def assign_players(socket, diff) do
-    IO.inspect(diff.leaves, label: "====== diff.leaves ======")
-    IO.inspect(diff.joins, label: "====== diff.joins ======")
-    # Avoid leaving and joining so players remain in the same location.
+    # A player both leaving and joining would move to the end of the list.
     leaves = Map.drop(diff.leaves, Map.keys(diff.joins))
-    IO.inspect(leaves, label: "====== leaves ======")
     socket |> remove_players(leaves) |> add_players(diff.joins)
   end
 

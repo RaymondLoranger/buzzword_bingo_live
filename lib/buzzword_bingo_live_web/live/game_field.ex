@@ -14,7 +14,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameField do
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
     ~H"""
-    <div>
+    <article>
       <.game_field>
         <:game_url>
           <.game_url_field value={@game_url} />
@@ -44,7 +44,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameField do
           />
         </.chatroom>
       </.game_field>
-    </div>
+    </article>
     """
   end
 

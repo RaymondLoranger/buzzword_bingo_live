@@ -1,43 +1,80 @@
-<header class="px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
-    <div class="flex items-center gap-4">
-      <a href="/">
-        <img src={~p"/images/logo.svg"} width="36" />
-      </a>
-      <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
-        v<%= Application.spec(:phoenix, :vsn) %>
-      </p>
-    </div>
-    <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-      <a
-        href="https://twitter.com/elixirphoenix"
-        class="hover:text-zinc-700"
-      >
-        @elixirphoenix
-      </a>
-      <a
-        href="https://github.com/phoenixframework/phoenix"
-        class="hover:text-zinc-700"
-      >
-        GitHub
-      </a>
-      <a
-        href="https://hexdocs.pm/phoenix/overview.html"
-        class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
-      >
-        Get Started <span aria-hidden="true">&rarr;</span>
-      </a>
-      <.link href={~p"/dev/dashboard"} target="_blank"> Dashboard </.link>
-      <.link href={~p"/login"} class="hidden md:block">Login</.link>
-      <.link href={~p"/login"} class="block md:hidden mb-1">
-        <img src="/images/user-login.png" title="login" />
-      </.link>
-    </div>
+<header class="w-full bg-[#fdfdfd] border-b border-[#eaeaea] flex justify-center md:justify-evenly items-center px-6 h-20">
+  <a
+    href="https://phoenixframework.org/"
+    class="md:w-24 md:visible w-6 invisible"
+  >
+    <img
+      src={~p"/images/phoenix.png"}
+      alt="Phoenix Framework Logo"
+      class="mx-auto w-auto h-14 block hover:brightness-150"
+    />
+  </a>
+  <div class="flex gap-x-1 mb-1">
+    <span class="letter inverse">B</span>
+    <span class="letter optional">U</span>
+    <span class="letter">Z</span>
+    <span class="letter">Z</span>
+    <span class="letter">W</span>
+    <span class="letter optional">O</span>
+    <span class="letter">R</span>
+    <span class="letter">D</span>
+    <span class="letter inverse">B</span>
+    <span class="letter optional">I</span>
+    <span class="letter">N</span>
+    <span class="letter">G</span>
+    <span class="letter">O</span>
   </div>
+  <nav class="flex flex-row gap-4 md:gap-0 md:flex-col ml-4 text-right">
+    <.link
+      href={~p"/dev/dashboard"}
+      target="_blank"
+      class="hidden md:block"
+    >
+      Dashboard
+    </.link>
+    <.link
+      href={~p"/dev/dashboard"}
+      target="_blank"
+      class="block md:hidden mb-1"
+    >
+      <img src="/images/dashboard.png" class="h-7" title="dashboard" />
+    </.link>
+    <.link href={~p"/login"} class="hidden md:block">Login</.link>
+    <.link href={~p"/login"} class="block md:hidden mb-1">
+      <img src="/images/user-login.png" title="login" />
+    </.link>
+  </nav>
 </header>
-<main class="px-4 py-20 sm:px-6 lg:px-8">
+
+<main class="p-4">
   <div class="mx-auto max-w-4xl">
     <.flash_group flash={@flash} />
     <%= @inner_content %>
   </div>
 </main>
+
+<footer class="mx-auto max-w-xl text-center my-4 p-2 text-cool-gray-400 font-light">
+  built with
+  <a href="http://elixir-lang.org/" target="_blank">
+    Elixir
+  </a>
+  +
+  <a href="http://www.phoenixframework.org/" target="_blank">
+    Phoenix
+  </a>
+  +
+  <a
+    href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html"
+    target="_blank"
+  >
+    LiveView
+  </a>
+  +
+  <a href="https://tailwindcss.com/" target="_blank">
+    Tailwind CSS
+  </a>
+  by
+  <a href="https://github.com/RaymondLoranger" target="_blank">
+    Raymond Loranger
+  </a>
+</footer>

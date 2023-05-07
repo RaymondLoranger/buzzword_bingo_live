@@ -414,11 +414,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def game_field(assigns) do
     ~H"""
-    <article id="game-field">
-      <section
-        id="game-url-pair"
-        class="border border-red-600 flex justify-center"
-      >
+    <div id="game-field">
+      <section id="game-url-pair" class="flex justify-center">
         <span class="field-button-pair mb-4 w-2/3">
           <%= render_slot(@game_url) %>
         </span>
@@ -429,7 +426,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       >
         <%= render_slot(@inner_block) %>
       </section>
-    </article>
+    </div>
     """
   end
 

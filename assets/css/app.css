@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  header nav a {
+  header a {
     @apply block text-blue-800 hover:brightness-150 hover:scale-y-125;
   }
 
