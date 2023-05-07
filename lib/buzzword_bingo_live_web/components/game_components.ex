@@ -260,7 +260,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def chatroom(assigns) do
     ~H"""
-    <div id="chatroom" class="flex flex-col gap-0 sm:w-[27%] w-full">
+    <div id="chatroom" class="flex flex-col gap-0 sm:w-[30%] w-full">
       <%= render_slot(@inner_block) %>
     </div>
     """
@@ -283,14 +283,14 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       >
         <span>
           <span
-            phx-1={player.color == "#a4deff"}
-            phx-2={player.color == "#f9cedf"}
-            phx-3={player.color == "#d3c5f1"}
-            phx-4={player.color == "#acc9f5"}
-            phx-5={player.color == "#aeeace"}
-            phx-6={player.color == "#96d7b9"}
-            phx-7={player.color == "#fce8bd"}
-            phx-8={player.color == "#fcd8ac"}
+            phx-1={player.meta.color == "#a4deff"}
+            phx-2={player.meta.color == "#f9cedf"}
+            phx-3={player.meta.color == "#d3c5f1"}
+            phx-4={player.meta.color == "#acc9f5"}
+            phx-5={player.meta.color == "#aeeace"}
+            phx-6={player.meta.color == "#96d7b9"}
+            phx-7={player.meta.color == "#fce8bd"}
+            phx-8={player.meta.color == "#fcd8ac"}
             class={[
               "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
               "aspect-square px-2 mx-1.5 rounded-sm text-xs"
@@ -298,17 +298,19 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
           />
           <span
             phx-1={player.name == @player.name}
-            class="phx-1:underline phx-1:underline-offset-4"
+            class="tracking-tight phx-1:underline phx-1:underline-offset-4"
           >
             <%= player.name %>
           </span>
         </span>
 
-        <span class="tracking-tighter text-sm ml-1">
-          <span><%= player.score %> points</span>
-          <span class="inline md:hidden lg:inline">
-            (<%= player.marked %>
-            <%= ngettext("square", "squares", player.marked) %>)
+        <span class="tracking-tighter text-sm ml-2">
+          <span class="hidden sm:inline lg:hidden">
+            <%= player.meta.score %> points
+          </span>
+          <span class="inline sm:hidden lg:inline">
+            <%= player.meta.score %> points (<%= player.meta.marked %>
+            <%= ngettext("square", "squares", player.meta.marked) %>)
           </span>
         </span>
       </li>
@@ -376,17 +378,14 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       phx-click={@click}
       phx-value-phrase={@phrase}
     >
-      <%= if @square.marked_by do %>
-        <span class="text-xs leading-3 self-start justify-self-start p-0.5 sm:p-1">
-          <%= @square.marked_by.name %>
-        </span>
-      <% else %>
-        <span>&nbsp;</span>
-      <% end %>
+      <span class="text-xs leading-3 self-start justify-self-start p-0.5 sm:p-1">
+        <%= if @square.marked_by, do: @square.marked_by.name, else: "" %>
+      </span>
 
-      <span class={
-        "#{word_break(@square.phrase)} text-xs leading-3 sm:text-sm sm:leading-3 md:text-base md:leading-4 tracking-tightest sm:tracking-tighter md:tracking-tight font-medium self-center justify-self-center text-center p-0.5 sm:p-1"
-      }>
+      <span class={[
+        "#{word_break(@square.phrase)}",
+        "text-xs leading-3 sm:text-sm sm:leading-3 md:text-base md:leading-4 tracking-tightest sm:tracking-tighter md:tracking-tight font-medium self-center justify-self-center text-center p-0.5 sm:p-1"
+      ]}>
         <%= @square.phrase %>
       </span>
 

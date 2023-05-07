@@ -1,12 +1,7 @@
 defmodule Buzzword.Bingo.LiveWeb.GamePresence do
   use Buzzword.Bingo.LiveWeb, [:html, :imports, :aliases]
 
-  @type player :: %{
-          name: Player.name(),
-          color: Player.color(),
-          score: Game.points_sum(),
-          marked: Game.marked_count()
-        }
+  @type player :: %{name: Player.name(), meta: map}
 
   @spec list(Phoenix.Presence.topic()) :: [player]
   def list(topic), do: Presence.list(topic) |> players()
@@ -33,7 +28,7 @@ defmodule Buzzword.Bingo.LiveWeb.GamePresence do
   @spec players(Phoenix.Presence.presences()) :: [player]
   defp players(presences) do
     for {name, %{metas: [meta | _]}} <- presences do
-      %{name: name, color: meta.color, score: meta.score, marked: meta.marked}
+      %{name: name, meta: meta}
     end
   end
 

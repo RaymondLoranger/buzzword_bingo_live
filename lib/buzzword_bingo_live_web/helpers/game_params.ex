@@ -14,42 +14,36 @@ defmodule Buzzword.Bingo.LiveWeb.GameParams do
   # /login or /login/:to or /login/:to?game_name=...
   defp apply_action(socket, :login, params) do
     # For the host player landing here:
-    #   • path......... "/login"
-    #   • topic........ "game:"
-    #   • return_to.... "/games/new"
+    #   • path....... "/login"
+    #   • topic...... "game:"
+    #   • next_to.... "/games/new"
 
     # For the host player redirected here (`path` includes %2F rather than /):
-    #   • path......... "/login/%2Fgames%2Fnew"
-    #   • topic........ "game:"
-    #   • return_to.... "/games/new"
+    #   • path....... "/login/%2Fgames%2Fnew"
+    #   • topic...... "game:"
+    #   • next_to.... "/games/new"
 
     # For guest players redirected here (`path` includes %2F rather than /):
-    #   • path......... "/login/%2Fgames%2Ficy-fog-123?game_name=icy-fog-123"
-    #   • topic........ "game:icy-fog-123"
-    #   • return_to.... "/games/icy-fog-123"
+    #   • path....... "/login/%2Fgames%2Ficy-fog-123?game_name=icy-fog-123"
+    #   • topic...... "game:icy-fog-123"
+    #   • next_to.... "/games/icy-fog-123"
 
     topic = "game:#{params["game_name"]}"
-    return_to = params["to"] || ~p"/games/new"
-
-    assign(socket,
-      page_title: "User login",
-      # changeset: User.changeset(),
-      topic: topic,
-      return_to: return_to
-    )
+    next_to = params["to"] || ~p"/games/new"
+    assign(socket, page_title: "User login", topic: topic, next_to: next_to)
   end
 
   # /games/new
   defp apply_action(socket, :new, _params) when is_nil(socket.assigns.player) do
     # For the host player (only) landing here (`to` includes %2F rather than /):
-    #   • path......... "/games/new"
-    #   • return_to.... "/games/new"
-    #   • to........... "/login/%2Fgames%2new"
+    #   • path....... "/games/new"
+    #   • next_to.... "/games/new"
+    #   • to......... "/login/%2Fgames%2new"
 
     # So the host player is "redirected" to log in before starting a game.
 
-    return_to = ~p"/games/new"
-    push_patch(socket, to: ~p"/login/#{return_to}")
+    next_to = ~p"/games/new"
+    push_patch(socket, to: ~p"/login/#{next_to}")
   end
 
   # /games/new
@@ -63,14 +57,14 @@ defmodule Buzzword.Bingo.LiveWeb.GameParams do
     # Guards do not raise exceptions, they just fail instead.
 
     # For guest players (only) landing here (`to` includes %2F rather than /):
-    #   • path......... "/games/icy-fog-123"
-    #   • return_to.... "/games/icy-fog-123"
-    #   • to........... "/login/%2Fgames%2Ficy-fog-123?game_name=icy-fog-123"
+    #   • path....... "/games/icy-fog-123"
+    #   • next_to.... "/games/icy-fog-123"
+    #   • to......... "/login/%2Fgames%2Ficy-fog-123?game_name=icy-fog-123"
 
     # So a guest player is "redirected" to log in before joining the game.
 
-    return_to = ~p"/games/#{game_name}"
-    to = ~p"/login/#{return_to}?game_name=#{game_name}"
+    next_to = ~p"/games/#{game_name}"
+    to = ~p"/login/#{next_to}?game_name=#{game_name}"
     push_patch(socket, to: to)
   end
 

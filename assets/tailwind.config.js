@@ -12,51 +12,6 @@ module.exports = {
     '../lib/*_web/**/*.*ex',
     '../lib/*/{game_size,user}.ex'
   ],
-  safelist: [
-    // 'gap-2',
-    // 'gap-1.5',
-    // 'gap-1',
-    // 'gap-0.5', // invalid game size
-    // 'grid-cols-3',
-    // 'grid-cols-4',
-    // 'grid-cols-5',
-    // 'grid-cols-6', // invalid game size
-    'bg-[#a4deff]',
-    'bg-[#f9cedf]',
-    'bg-[#d3c5f1]',
-    'bg-[#acc9f5]',
-    'bg-[#aeeace]',
-    'bg-[#96d7b9]',
-    'bg-[#fce8bd]',
-    'bg-[#fcd8ac]',
-    'bg-[#fefbe7]', // invalid player color
-    // 'text-[#a4deff]',
-    // 'text-[#f9cedf]',
-    // 'text-[#d3c5f1]',
-    // 'text-[#acc9f5]',
-    // 'text-[#aeeace]',
-    // 'text-[#96d7b9]',
-    // 'text-[#fce8bd]',
-    // 'text-[#fcd8ac]',
-    // 'text-[#fefbe7]', // invalid player color
-    // 'border-[#a4deff]',
-    // 'border-[#f9cedf]',
-    // 'border-[#d3c5f1]',
-    // 'border-[#acc9f5]',
-    // 'border-[#aeeace]',
-    // 'border-[#96d7b9]',
-    // 'border-[#fce8bd]',
-    // 'border-[#fcd8ac]',
-    // 'border-[#fefbe7]', // invalid player color
-    // 'border-rose-700',
-    // 'border-pink-600',
-
-    // 'text-rose-700',
-    // 'text-pink-600',
-    {
-      pattern: /(border|text)-(rose|pink)-(6|7)00/
-    }
-  ],
   theme: {
     extend: {
       screens: {
@@ -85,11 +40,6 @@ module.exports = {
           700: '#364152',
           800: '#27303f',
           900: '#1a202e'
-        },
-        papayawhip: {
-          light: '#fef4e4',
-          DEFAULT: '#ffefd5',
-          dark: '#fee5bc'
         },
         deluge: {
           light: '#a48fbc',
@@ -130,51 +80,6 @@ module.exports = {
           light: '#77a3bb',
           DEFAULT: '#4f819c',
           dark: '#335466'
-        },
-        calypso: {
-          light: '#67aacb',
-          DEFAULT: '#31708f',
-          dark: '#214a5f'
-        },
-        'link-water': {
-          light: '#eaf5fb',
-          DEFAULT: '#d9edf7',
-          dark: '#c0e1f2'
-        },
-        'mint-tulip': {
-          light: '#d5f1f6',
-          DEFAULT: '#bce8f1',
-          dark: '#81d4e4'
-        },
-        'potters-clay': {
-          light: '#b38d4d',
-          DEFAULT: '#8a6d3b',
-          dark: '#594726'
-        },
-        'pearl-lusta': {
-          light: '#fdf9e8',
-          DEFAULT: '#fcf8e3',
-          dark: '#f5e8a3'
-        },
-        champagne: {
-          light: '#fdf6e8',
-          DEFAULT: '#faebcc',
-          dark: '#f4d18b'
-        },
-        'apple-blossom': {
-          light: '#c66e6c',
-          DEFAULT: '#a94442',
-          dark: '#813332'
-        },
-        bizarre: {
-          light: '#f8eded',
-          DEFAULT: '#f2dede',
-          dark: '#dba4a4'
-        },
-        'oyster-pink': {
-          light: '#f8edef',
-          DEFAULT: '#ebccd1',
-          dark: '#dba3ad'
         }
       }
     }

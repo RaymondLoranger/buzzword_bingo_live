@@ -33,7 +33,7 @@ defmodule Buzzword.Bingo.Live.User do
     end)
     |> validate_inclusion(:color, @colors, message: "invalid color")
     |> validate_change(:color, fn :color, color ->
-      if color in Enum.map(players, & &1.color),
+      if color in Enum.map(players, & &1.meta.color),
         do: [color: color_taken_msg(color)],
         else: []
     end)
@@ -77,10 +77,29 @@ defmodule Buzzword.Bingo.Live.User do
   end
 
   defp color_taken_msg(color) do
+    phx_1 = if color == "#a4deff", do: "phx-1", else: ""
+    phx_2 = if color == "#f9cedf", do: "phx-2", else: ""
+    phx_3 = if color == "#d3c5f1", do: "phx-3", else: ""
+    phx_4 = if color == "#acc9f5", do: "phx-4", else: ""
+    phx_5 = if color == "#aeeace", do: "phx-5", else: ""
+    phx_6 = if color == "#96d7b9", do: "phx-6", else: ""
+    phx_7 = if color == "#fce8bd", do: "phx-7", else: ""
+    phx_8 = if color == "#fcd8ac", do: "phx-8", else: ""
+
     """
     <span>
       color
-      <span class="font-bold bg-[#{color}]">
+      <span
+        #{phx_1}
+        #{phx_2}
+        #{phx_3}
+        #{phx_4}
+        #{phx_5}
+        #{phx_6}
+        #{phx_7}
+        #{phx_8}
+        class="font-bold phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]"
+      >
         #{color}
       </span>
       already taken

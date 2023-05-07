@@ -36,9 +36,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameInfo do
     {:noreply, put_flash(socket, :error, game_not_started(name, why))}
   end
 
-  def handle_info({:player_created, player, return_to}, socket) do
+  def handle_info({:player_created, player, next_to}, socket) do
     socket = assign(socket, :player, player)
-    {:noreply, push_patch(socket, to: return_to)}
+    {:noreply, push_patch(socket, to: next_to)}
   end
 
   def handle_info(msg, socket) when is_binary(msg) or is_list(msg) do

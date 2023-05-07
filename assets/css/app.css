@@ -40,40 +40,4 @@
   .inverse {
     @apply bg-tundora text-white hover:bg-half-baked;
   }
-
-  form .invalid-feedback {
-    @apply block mt-0.5 -mb-0.5 text-sm font-medium italic text-red-600;
-  }
-
-  .alert {
-    @apply p-4 mb-5 border border-transparent rounded-md empty:hidden;
-  }
-
-  .alert p {
-    @apply mb-0;
-  }
-
-  .alert-info {
-    @apply text-calypso bg-link-water border-mint-tulip;
-  }
-
-  .alert-warning {
-    @apply text-potters-clay bg-pearl-lusta border-champagne;
-  }
-
-  .alert-danger {
-    @apply text-apple-blossom bg-bizarre border-oyster-pink;
-  }
-
-  #hero-body ul {
-    @apply mx-auto max-w-xs list-disc list-inside;
-  }
-
-  #hero-body ul li {
-    @apply mt-3 whitespace-nowrap;
-  }
-
-  #hero-body ul li a {
-    @apply no-underline text-blue-900 hover:brightness-150;
-  }
 }

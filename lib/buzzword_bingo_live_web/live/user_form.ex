@@ -17,9 +17,9 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
      )}
   end
 
-  # passed assigns : return_to, topic
+  # passed assigns : next_to, topic
   # initial assigns: changeset, color, colors
-  # render assigns : changeset, color, colors, return_to, topic
+  # render assigns : changeset, color, colors, next_to, topic
 
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
@@ -66,7 +66,7 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
     case User.create(user, players) do
       {:ok, user} ->
         player = Player.new(user.name, user.color)
-        send(self(), {:player_created, player, socket.assigns.return_to})
+        send(self(), {:player_created, player, socket.assigns.next_to})
         # Parent's handle_info/2 will call push_patch/2...
         {:noreply, socket}
 
