@@ -127,8 +127,8 @@ defmodule Buzzword.Bingo.LiveWeb do
       alias Buzzword.Bingo.LiveWeb.{
         Endpoint,
         GameComponents,
-        GameField,
         GameInfo,
+        GameLayout,
         GameParams,
         GamePresence,
         GameSizeForm,

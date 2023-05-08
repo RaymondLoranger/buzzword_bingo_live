@@ -8,19 +8,19 @@ defmodule Buzzword.Bingo.LiveWeb.MessageForm do
     {:ok, assign(socket, text: "")}
   end
 
-  # passed assigns : player, topic
   # initial assigns: text
+  # passed assigns : player, topic
   # render assigns : player, text, topic
 
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
     ~H"""
-    <div>
+    <article>
       <.message_form submit="send-msg" change="text-change" target={@myself}>
         <.message_input_field name="text" value={@text} />
         <.message_submit_button disabled={@text == ""} />
       </.message_form>
-    </div>
+    </article>
     """
   end
 

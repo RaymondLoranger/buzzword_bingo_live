@@ -17,14 +17,14 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
      )}
   end
 
+  # initial assigns: color, colors, form
   # passed assigns : next_to, topic
-  # initial assigns: changeset, color, colors
-  # render assigns : changeset, color, colors, next_to, topic
+  # render assigns : color, colors, form, next_to, topic
 
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
     ~H"""
-    <div>
+    <article>
       <.user_form
         id="user-form"
         for={@form}
@@ -44,7 +44,7 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
         </.user_fields>
         <.submit_button text="Play Bingo!" />
       </.user_form>
-    </div>
+    </article>
     """
   end
 

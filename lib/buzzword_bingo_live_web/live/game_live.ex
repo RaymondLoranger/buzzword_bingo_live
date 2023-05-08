@@ -7,8 +7,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameLive do
     {:ok, socket |> assign(player: nil) |> stream(:messages, [])}
   end
 
-  # render assigns: game_name, game_size, messages, player, players, next_to,
-  #                 squares, topic, game_url, winner
+  # render assigns: game_name, game_size, game_url, next_to, player, streams,
+  #                 topic, winner
 
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
@@ -25,8 +25,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameLive do
         <.live_component module={GameSizeForm} id="game-size-form" />
       <% :show -> %>
         <.live_component
-          module={GameField}
-          id="game-field"
+          module={GameLayout}
+          id="game-layout"
           game_url={@game_url}
           game_size={@game_size}
           game_name={@game_name}

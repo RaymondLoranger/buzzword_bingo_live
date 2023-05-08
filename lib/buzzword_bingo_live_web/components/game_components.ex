@@ -260,7 +260,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def chatroom(assigns) do
     ~H"""
-    <div id="chatroom" class="flex flex-col gap-0 sm:w-[30%] w-full">
+    <div id="chatroom" class="flex flex-col gap-0 sm:w-[27%] w-full">
       <%= render_slot(@inner_block) %>
     </div>
     """
@@ -411,9 +411,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     """
   end
 
-  def game_field(assigns) do
+  def game_layout(assigns) do
     ~H"""
-    <div id="game-field">
+    <div id="game-layout">
       <section id="game-url-pair" class="flex justify-center">
         <span class="field-button-pair mb-4 w-2/3">
           <%= render_slot(@game_url) %>

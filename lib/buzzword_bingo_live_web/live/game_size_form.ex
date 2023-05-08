@@ -10,14 +10,14 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
     {:ok, assign(socket, form: @init_form)}
   end
 
+  # initial assigns: form
   # passed assigns :
-  # initial assigns: changeset
-  # render assigns : changeset
+  # render assigns : form
 
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
     ~H"""
-    <div>
+    <article>
       <.game_size_form
         id="game-size-form"
         for={@form}
@@ -28,7 +28,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
         <.game_size_field field={@form[:value]} />
         <.submit_button text="Start Game" />
       </.game_size_form>
-    </div>
+    </article>
     """
   end
 

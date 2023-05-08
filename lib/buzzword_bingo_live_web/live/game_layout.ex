@@ -1,21 +1,21 @@
-defmodule Buzzword.Bingo.LiveWeb.GameField do
+defmodule Buzzword.Bingo.LiveWeb.GameLayout do
   use Buzzword.Bingo.LiveWeb, [:live_component, :aliases]
 
   import GameComponents
 
   @no_winner Player.new("X", "#FBD433")
 
-  # passed assigns : game_name, game_size, messages, player, players, squares,
-  #                  topic, game_url, winner
   # initial assigns:
-  # render assigns : game_name, game_size, messages, player, players, squares,
-  #                  topic, game_url, winner
+  # passed assigns : game_name, game_size, game_url, player, streams, topic,
+  #                  winner
+  # render assigns : game_name, game_size, game_url, player, streams, topic,
+  #                  winner
 
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
     ~H"""
     <article>
-      <.game_field>
+      <.game_layout>
         <:game_url>
           <.game_url_field value={@game_url} />
           <.copy_url_button target={@myself} click="copy-url-click" />
@@ -43,7 +43,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameField do
             player={@player}
           />
         </.chatroom>
-      </.game_field>
+      </.game_layout>
     </article>
     """
   end
