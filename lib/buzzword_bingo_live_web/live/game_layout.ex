@@ -3,6 +3,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameLayout do
 
   import GameComponents
 
+  # Color #FBD433 is bright sun...
   @no_winner Player.new("X", "#FBD433")
 
   # initial assigns:

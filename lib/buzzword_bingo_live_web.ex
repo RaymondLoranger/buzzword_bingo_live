@@ -139,7 +139,7 @@ defmodule Buzzword.Bingo.LiveWeb do
       }
 
       alias Buzzword.Bingo.Live.{User, GameSize}
-      alias Buzzword.Bingo.{Engine, Game, Player, Summary}
+      alias Buzzword.Bingo.{Engine, Game, Player, Square, Summary}
       alias Ecto.UUID
       alias Phoenix.{HTML, LiveView}
       alias Phoenix.LiveView.{Rendered, Socket}

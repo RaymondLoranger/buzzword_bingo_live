@@ -1,30 +1,179 @@
 defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   use Buzzword.Bingo.LiveWeb, [:html, :imports, :aliases]
 
-  @spec grid_size(Socket.assigns()) :: Rendered.t()
-  def grid_size(assigns) do
+  attr :id, :string, required: true
+  attr :for, Phoenix.HTML.Form, required: true
+  attr :change, :string, required: true
+  attr :submit, :string, required: true
+  attr :target, Phoenix.LiveComponent.CID, required: true
+  slot :inner_block, required: true
+
+  @spec user_form(Socket.assigns()) :: Rendered.t()
+  def user_form(assigns) do
     ~H"""
-    <span class="leading-4 tracking-tighter float-right mx-2 mt-2">
-      <%= @text %>
-    </span>
+    <article class="mx-auto flex flex-col items-center">
+      <h1 class="mt-8 mb-2 text-4xl text-cool-gray-900">Welcome!</h1>
+      <h4 class="m-2 text-xl font-thin text-cool-gray-900 text-center">
+        First up, we need your name and favorite color:
+      </h4>
+      <.form
+        id={@id}
+        for={@for}
+        phx-change={@change}
+        phx-submit={@submit}
+        phx-target={@target}
+        class="flex flex-col items-center gap-4"
+      >
+        <%= render_slot(@inner_block) %>
+      </.form>
+    </article>
     """
   end
 
-  def grid_glyph(assigns) do
+  slot :inner_block, required: true
+
+  def user_fields(assigns) do
     ~H"""
-    <div
-      phx-5={@size == 5}
-      phx-4={@size == 4}
-      phx-3={@size == 3}
-      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 phx-5:gap-1 phx-4:gap-1.5 phx-3:gap-2"
-    >
-      <div
-        :for={_n <- 1..(@size * @size)}
-        class="p-1 aspect-square bg-wedgewood"
-      />
+    <div class="flex flex-wrap place-content-center gap-x-5 mt-2 mx-2">
+      <%= render_slot(@inner_block) %>
     </div>
     """
   end
+
+  attr :color, :string, required: true
+  attr :field, Phoenix.HTML.FormField, doc: "form field struct from the form"
+
+  def name_field(assigns) do
+    ~H"""
+    <.input
+      phx-1={@color == "#a4deff"}
+      phx-2={@color == "#f9cedf"}
+      phx-3={@color == "#d3c5f1"}
+      phx-4={@color == "#acc9f5"}
+      phx-5={@color == "#aeeace"}
+      phx-6={@color == "#96d7b9"}
+      phx-7={@color == "#fce8bd"}
+      phx-8={@color == "#fcd8ac"}
+      field={@field}
+      placeholder="Name"
+      phx-mounted={JS.focus()}
+      phx-debounce="750"
+      required
+      wrapper_class="flex flex-col h-auto mt-4"
+      class={[
+        "h-6 px-2 py-3 border-2 rounded-sm",
+        "phx-1:border-[#a4deff] phx-2:border-[#f9cedf] phx-3:border-[#d3c5f1] phx-4:border-[#acc9f5] phx-5:border-[#aeeace] phx-6:border-[#96d7b9] phx-7:border-[#fce8bd] phx-8:border-[#fcd8ac]",
+        "focus:phx-1:ring-[#a4deff] focus:phx-2:ring-[#f9cedf] focus:phx-3:ring-[#d3c5f1] focus:phx-4:ring-[#acc9f5] focus:phx-5:ring-[#aeeace] focus:phx-6:ring-[#96d7b9] focus:phx-7:ring-[#fce8bd] focus:phx-8:ring-[#fcd8ac]"
+      ]}
+      error_class="!mt-1 !gap-1"
+    />
+    """
+  end
+
+  attr :field, Phoenix.HTML.FormField, doc: "form field struct from the form"
+  attr :id, :string
+  attr :name, :atom
+  attr :errors, :list
+  attr :colors, :list, required: true
+  attr :color, :string, required: true
+  attr :target, Phoenix.LiveComponent.CID, required: true
+  attr :click, :string, required: true
+
+  def color_field(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
+    assigns =
+      assign(assigns,
+        id: field.id,
+        name: field.name,
+        errors: Enum.map(field.errors, &translate_error/1)
+      )
+
+    ~H"""
+    <div class="flex flex-col h-auto mt-4" phx-feedback-for={@name}>
+      <ul id="user-colors" class="flex gap-1.5">
+        <li :for={color <- @colors} class="relative">
+          <label
+            phx-1={color == "#a4deff"}
+            phx-2={color == "#f9cedf"}
+            phx-3={color == "#d3c5f1"}
+            phx-4={color == "#acc9f5"}
+            phx-5={color == "#aeeace"}
+            phx-6={color == "#96d7b9"}
+            phx-7={color == "#fce8bd"}
+            phx-8={color == "#fcd8ac"}
+            title={color}
+            class={[
+              "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
+              "flex w-6 m-0.5 aspect-square cursor-pointer border border-gray-500 hover:border-transparent hover:ring-gray-600 hover:ring-1"
+            ]}
+          >
+            <input
+              type="radio"
+              id={"#{@id}_#{color}"}
+              name={@name}
+              value={color}
+              checked={color == @color}
+              phx-target={@target}
+              phx-click={@click}
+              class="sr-only peer"
+            />
+            <span class="absolute hidden peer-checked:block top-0.5 left-2">
+              ✓
+            </span>
+          </label>
+        </li>
+      </ul>
+      <.error :for={msg <- @errors} error_class="!mt-1 !gap-1">
+        <%= Phoenix.HTML.raw(msg) %>
+      </.error>
+    </div>
+    """
+  end
+
+  attr :text, :string, required: true
+
+  def submit_button(assigns) do
+    ~H"""
+    <.button class={[
+      "my-4 p-1 bg-carrot-orange w-28 rounded-md",
+      "text-white hover:opacity-70"
+    ]}>
+      <%= @text %>
+    </.button>
+    """
+  end
+
+  attr :id, :string, required: true
+  attr :for, Phoenix.HTML.Form, required: true
+  attr :change, :string, required: true
+  attr :submit, :string, required: true
+  attr :target, Phoenix.LiveComponent.CID, required: true
+  slot :inner_block, required: true
+
+  def game_size_form(assigns) do
+    ~H"""
+    <article>
+      <h4 class="text-xl text-center mb-6">
+        Select the game size:
+      </h4>
+      <.form
+        id={@id}
+        for={@for}
+        phx-change={@change}
+        phx-submit={@submit}
+        phx-target={@target}
+        class="mx-14 md:w-3/4 md:mx-auto flex flex-col items-center gap-2"
+      >
+        <%= render_slot(@inner_block) %>
+      </.form>
+    </article>
+    """
+  end
+
+  attr :field, Phoenix.HTML.FormField, doc: "form field struct from the form"
+  attr :id, :string
+  attr :name, :atom
+  attr :value, :integer
+  attr :errors, :list
 
   def game_size_field(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
     assigns =
@@ -89,174 +238,145 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     """
   end
 
-  def submit_button(assigns) do
-    ~H"""
-    <.button class={[
-      "my-4 p-1 bg-carrot-orange w-28 rounded-md",
-      "text-white hover:opacity-70"
-    ]}>
-      <%= @text %>
-    </.button>
-    """
-  end
+  slot :game_url, required: true
+  slot :inner_block, required: true
 
-  def game_size_form(assigns) do
+  def game_layout(assigns) do
     ~H"""
-    <article>
-      <h4 class="text-xl text-center mb-6">
-        Select the game size:
-      </h4>
-      <.form
-        id={@id}
-        for={@for}
-        phx-change={@change}
-        phx-submit={@submit}
-        phx-target={@target}
-        class="mx-14 md:w-3/4 md:mx-auto flex flex-col items-center gap-2"
+    <div id="game-layout">
+      <section id="game-url-pair" class="flex justify-center">
+        <span class="field-button-pair mb-4 w-2/3">
+          <%= render_slot(@game_url) %>
+        </span>
+      </section>
+      <section
+        id="playground"
+        class="flex flex-col sm:flex-row justify-center gap-3 h-full mx-2"
       >
         <%= render_slot(@inner_block) %>
-      </.form>
-    </article>
+      </section>
+    </div>
     """
   end
 
-  def user_fields(assigns) do
+  attr :value, :string, required: true
+
+  def game_url_field(assigns) do
     ~H"""
-    <div class="flex flex-wrap place-content-center gap-x-5 mt-2 mx-2">
+    <input id="game-url" type="text" title={@value} value={@value} readonly />
+    """
+  end
+
+  attr :click, :string, required: true
+  attr :target, Phoenix.LiveComponent.CID, required: true
+
+  def copy_url_button(assigns) do
+    ~H"""
+    <button title="Copy game URL" phx-click={@click} phx-target={@target}>
+      <.icon name="hero-clipboard-document" class="mb-1" />
+    </button>
+    """
+  end
+
+  attr :game_size, :integer, required: true
+  attr :update, :string, required: true
+  slot :inner_block, required: true
+
+  def board(assigns) do
+    ~H"""
+    <div
+      phx-5={@game_size == 5}
+      phx-4={@game_size == 4}
+      phx-3={@game_size == 3}
+      id="board"
+      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 gap-2 sm:w-[70%] w-full"
+      phx-update={@update}
+    >
       <%= render_slot(@inner_block) %>
     </div>
     """
   end
 
-  def name_field(assigns) do
+  attr :square, Square, required: true
+  attr :id, :string, required: true
+  attr :target, Phoenix.LiveComponent.CID, required: true
+  attr :click, :string, required: true
+  attr :phrase, :string, required: true
+
+  def square(assigns) do
     ~H"""
-    <.input
-      phx-1={@color == "#a4deff"}
-      phx-2={@color == "#f9cedf"}
-      phx-3={@color == "#d3c5f1"}
-      phx-4={@color == "#acc9f5"}
-      phx-5={@color == "#aeeace"}
-      phx-6={@color == "#96d7b9"}
-      phx-7={@color == "#fce8bd"}
-      phx-8={@color == "#fcd8ac"}
-      field={@field}
-      placeholder="Name"
-      phx-mounted={JS.focus()}
-      phx-debounce="750"
-      required
-      wrapper_class="flex flex-col h-auto mt-4"
+    <div
+      phx-0={is_nil(@square.marked_by)}
+      phx-1={@square.marked_by && @square.marked_by.color == "#a4deff"}
+      phx-2={@square.marked_by && @square.marked_by.color == "#f9cedf"}
+      phx-3={@square.marked_by && @square.marked_by.color == "#d3c5f1"}
+      phx-4={@square.marked_by && @square.marked_by.color == "#acc9f5"}
+      phx-5={@square.marked_by && @square.marked_by.color == "#aeeace"}
+      phx-6={@square.marked_by && @square.marked_by.color == "#96d7b9"}
+      phx-7={@square.marked_by && @square.marked_by.color == "#fce8bd"}
+      phx-8={@square.marked_by && @square.marked_by.color == "#fcd8ac"}
       class={[
-        "h-6 px-2 py-3 border-2 rounded-sm",
-        "phx-1:border-[#a4deff] phx-2:border-[#f9cedf] phx-3:border-[#d3c5f1] phx-4:border-[#acc9f5] phx-5:border-[#aeeace] phx-6:border-[#96d7b9] phx-7:border-[#fce8bd] phx-8:border-[#fcd8ac]",
-        "focus:phx-1:ring-[#a4deff] focus:phx-2:ring-[#f9cedf] focus:phx-3:ring-[#d3c5f1] focus:phx-4:ring-[#acc9f5] focus:phx-5:ring-[#aeeace] focus:phx-6:ring-[#96d7b9] focus:phx-7:ring-[#fce8bd] focus:phx-8:ring-[#fcd8ac]"
+        "phx-0:bg-white phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
+        "shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-cool-gray-600 border border-cool-gray-300",
+        "hover:scale-95 hover:border-cool-gray-400 active:phx-0:ring-4 active:phx-0:ring-carrot-orange active:phx-0:border-transparent"
       ]}
-      error_class="!mt-1 !gap-1"
-    />
-    """
-  end
+      id={@id}
+      phx-target={@target}
+      phx-click={@click}
+      phx-value-phrase={@phrase}
+    >
+      <span class="text-xs leading-3 self-start justify-self-start p-0.5 sm:p-1">
+        <%= if @square.marked_by, do: @square.marked_by.name, else: "" %>
+      </span>
 
-  def color_field(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
-    assigns =
-      assign(assigns,
-        id: field.id,
-        name: field.name,
-        errors: Enum.map(field.errors, &translate_error/1)
-      )
+      <span class={[
+        "#{word_break(@square.phrase)}",
+        "text-xs leading-3 sm:text-sm sm:leading-3 md:text-base md:leading-4 tracking-tightest sm:tracking-tighter md:tracking-tight font-medium self-center justify-self-center text-center p-0.5 sm:p-1"
+      ]}>
+        <%= @square.phrase %>
+      </span>
 
-    ~H"""
-    <div class="flex flex-col h-auto mt-4" phx-feedback-for={@name}>
-      <ul id="user-colors" class="flex gap-1.5">
-        <li :for={color <- @colors} class="relative">
-          <label
-            phx-1={color == "#a4deff"}
-            phx-2={color == "#f9cedf"}
-            phx-3={color == "#d3c5f1"}
-            phx-4={color == "#acc9f5"}
-            phx-5={color == "#aeeace"}
-            phx-6={color == "#96d7b9"}
-            phx-7={color == "#fce8bd"}
-            phx-8={color == "#fcd8ac"}
-            title={color}
-            class={[
-              "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
-              "flex w-6 m-0.5 aspect-square cursor-pointer border border-gray-500 hover:border-transparent hover:ring-gray-600 hover:ring-1"
-            ]}
-          >
-            <input
-              type="radio"
-              id={"#{@id}_#{color}"}
-              name={@name}
-              value={color}
-              checked={color == @color}
-              phx-target={@target}
-              phx-click={@click}
-              class="sr-only peer"
-            />
-            <span class="absolute hidden peer-checked:block top-0.5 left-2">
-              ✓
-            </span>
-          </label>
-        </li>
-      </ul>
-      <.error :for={msg <- @errors} error_class="!mt-1 !gap-1">
-        <%= Phoenix.HTML.raw(msg) %>
-      </.error>
+      <span class="text-xs leading-3 self-end justify-self-end p-0.5 sm:p-1">
+        <%= @square.points %>
+      </span>
     </div>
     """
   end
 
-  def user_form(assigns) do
+  # type is Player or nil...
+  attr :winner, :any, required: true
+
+  def game_over?(assigns) do
     ~H"""
-    <article class="mx-auto flex flex-col items-center">
-      <h1 class="mt-8 mb-2 text-4xl text-cool-gray-900">Welcome!</h1>
-      <h4 class="m-2 text-xl font-thin text-cool-gray-900 text-center">
-        First up, we need your name and favorite color:
-      </h4>
-      <.form
-        id={@id}
-        for={@for}
-        phx-change={@change}
-        phx-submit={@submit}
-        phx-target={@target}
-        class="flex flex-col items-center gap-4"
-      >
-        <%= render_slot(@inner_block) %>
-      </.form>
-    </article>
+    <div
+      :if={@winner}
+      class="absolute left-0 w-full sm:top-1/2 sm:text-5xl text-center animate-ping top-1/3 text-4xl"
+    >
+      <span :if={@winner.name == "X"}>No winner!</span>
+      <br /><br />
+      <span>
+        <.sad_face
+          color={@winner.color}
+          width="100px"
+          height="100px"
+          class="inline"
+        />
+      </span>
+      <span :if={@winner.name != "X"}><%= @winner.name %> won!</span>
+      <br /><br />
+      <span>
+        <.smiling_face_with_sunglasses
+          color={@winner.color}
+          width="100px"
+          height="100px"
+          class="inline"
+        />
+      </span>
+    </div>
     """
   end
 
-  def message_form(assigns) do
-    ~H"""
-    <article id="message-form" class="mt-2">
-      <form phx-submit={@submit} phx-target={@target} phx-change={@change}>
-        <span class="field-button-pair">
-          <%= render_slot(@inner_block) %>
-        </span>
-      </form>
-    </article>
-    """
-  end
-
-  def message_input_field(assigns) do
-    ~H"""
-    <input
-      type="text"
-      name={@name}
-      value={@value}
-      placeholder="Enter your message..."
-      class="truncate"
-    />
-    """
-  end
-
-  def message_submit_button(assigns) do
-    ~H"""
-    <button title="Send message" type="submit" disabled={@disabled}>
-      <.icon name="hero-chat-bubble-left" />
-    </button>
-    """
-  end
+  slot :inner_block, required: true
 
   def chatroom(assigns) do
     ~H"""
@@ -265,6 +385,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     </div>
     """
   end
+
+  attr :streams, :map, required: true
+  attr :player, Player, required: true
 
   def players_panel(assigns) do
     ~H"""
@@ -318,6 +441,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     """
   end
 
+  attr :streams, :map, required: true
+
   def messages_panel(assigns) do
     ~H"""
     <div class="text-white bg-deluge p-2 rounded-t-md mt-2">
@@ -356,127 +481,51 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     """
   end
 
-  def square(assigns) do
+  attr :change, :string, required: true
+  attr :submit, :string, required: true
+  attr :target, Phoenix.LiveComponent.CID, required: true
+  slot :inner_block, required: true
+
+  def message_form(assigns) do
     ~H"""
-    <div
-      phx-0={is_nil(@square.marked_by)}
-      phx-1={@square.marked_by && @square.marked_by.color == "#a4deff"}
-      phx-2={@square.marked_by && @square.marked_by.color == "#f9cedf"}
-      phx-3={@square.marked_by && @square.marked_by.color == "#d3c5f1"}
-      phx-4={@square.marked_by && @square.marked_by.color == "#acc9f5"}
-      phx-5={@square.marked_by && @square.marked_by.color == "#aeeace"}
-      phx-6={@square.marked_by && @square.marked_by.color == "#96d7b9"}
-      phx-7={@square.marked_by && @square.marked_by.color == "#fce8bd"}
-      phx-8={@square.marked_by && @square.marked_by.color == "#fcd8ac"}
-      class={[
-        "phx-0:bg-white phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
-        "shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-cool-gray-600 border border-cool-gray-300",
-        "hover:scale-95 hover:border-cool-gray-400 active:phx-0:ring-4 active:phx-0:ring-carrot-orange active:phx-0:border-transparent"
-      ]}
-      id={@id}
-      phx-target={@target}
-      phx-click={@click}
-      phx-value-phrase={@phrase}
-    >
-      <span class="text-xs leading-3 self-start justify-self-start p-0.5 sm:p-1">
-        <%= if @square.marked_by, do: @square.marked_by.name, else: "" %>
-      </span>
-
-      <span class={[
-        "#{word_break(@square.phrase)}",
-        "text-xs leading-3 sm:text-sm sm:leading-3 md:text-base md:leading-4 tracking-tightest sm:tracking-tighter md:tracking-tight font-medium self-center justify-self-center text-center p-0.5 sm:p-1"
-      ]}>
-        <%= @square.phrase %>
-      </span>
-
-      <span class="text-xs leading-3 self-end justify-self-end p-0.5 sm:p-1">
-        <%= @square.points %>
-      </span>
-    </div>
-    """
-  end
-
-  def board(assigns) do
-    ~H"""
-    <div
-      phx-5={@game_size == 5}
-      phx-4={@game_size == 4}
-      phx-3={@game_size == 3}
-      id="board"
-      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 gap-2 sm:w-[70%] w-full"
-      phx-update={@update}
-    >
-      <%= render_slot(@inner_block) %>
-    </div>
-    """
-  end
-
-  def game_layout(assigns) do
-    ~H"""
-    <div id="game-layout">
-      <section id="game-url-pair" class="flex justify-center">
-        <span class="field-button-pair mb-4 w-2/3">
-          <%= render_slot(@game_url) %>
+    <article id="message-form" class="mt-2">
+      <form phx-change={@change} phx-submit={@submit} phx-target={@target}>
+        <span class="field-button-pair">
+          <%= render_slot(@inner_block) %>
         </span>
-      </section>
-      <section
-        id="playground"
-        class="flex flex-col sm:flex-row justify-center gap-3 h-full mx-2"
-      >
-        <%= render_slot(@inner_block) %>
-      </section>
-    </div>
+      </form>
+    </article>
     """
   end
 
-  def game_url_field(assigns) do
+  attr :name, :string, required: true
+  attr :value, :string, required: true
+
+  def message_input_field(assigns) do
     ~H"""
-    <input id="game-url" type="text" title={@value} value={@value} readonly />
+    <input
+      type="text"
+      name={@name}
+      value={@value}
+      placeholder="Enter your message..."
+      class="truncate"
+    />
     """
   end
 
-  def copy_url_button(assigns) do
+  attr :disabled, :boolean, required: true
+
+  def message_submit_button(assigns) do
     ~H"""
-    <button title="Copy game URL" phx-click={@click} phx-target={@target}>
-      <.icon name="hero-clipboard-document" class="mb-1" />
+    <button title="Send message" type="submit" disabled={@disabled}>
+      <.icon name="hero-chat-bubble-left" />
     </button>
-    """
-  end
-
-  def game_over?(assigns) do
-    ~H"""
-    <%= if @winner do %>
-      <div class="absolute left-0 w-full sm:top-1/2 sm:text-5xl text-center animate-ping top-1/3 text-4xl">
-        <%= if @winner.name == "X" do %>
-          <span>No winner!</span>
-          <br /><br />
-          <span>
-            <.sad_face
-              color={@winner.color}
-              width="100px"
-              height="100px"
-              class="inline"
-            />
-          </span>
-        <% else %>
-          <span><%= @winner.name %> won!</span>
-          <br /><br />
-          <span>
-            <.smiling_face_with_sunglasses
-              color={@winner.color}
-              width="100px"
-              height="100px"
-              class="inline"
-            />
-          </span>
-        <% end %>
-      </div>
-    <% end %>
     """
   end
 
   ## Private functions
 
+  @spec word_break(String.t()) :: String.t()
   defp word_break(phrase) do
     # Empowerment -> 11 letters
     # Microservice -> 12 letters
@@ -492,10 +541,39 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     end
   end
 
-  # defp glyph_gap(3), do: "2"
-  # defp glyph_gap(4), do: "1.5"
-  # defp glyph_gap(5), do: "1"
-  # defp glyph_gap(6), do: "0.5"
+  attr :text, :string, required: true
+
+  @spec grid_size(Socket.assigns()) :: Rendered.t()
+  defp grid_size(assigns) do
+    ~H"""
+    <span class="leading-4 tracking-tighter float-right mx-2 mt-2">
+      <%= @text %>
+    </span>
+    """
+  end
+
+  attr :size, :integer, required: true
+
+  defp grid_glyph(assigns) do
+    ~H"""
+    <div
+      phx-5={@size == 5}
+      phx-4={@size == 4}
+      phx-3={@size == 3}
+      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 phx-5:gap-1 phx-4:gap-1.5 phx-3:gap-2"
+    >
+      <div
+        :for={_n <- 1..(@size * @size)}
+        class="p-1 aspect-square bg-wedgewood"
+      />
+    </div>
+    """
+  end
+
+  attr :width, :string, required: true
+  attr :height, :string, required: true
+  attr :class, :string, required: true
+  attr :color, :string, required: true
 
   defp sad_face(assigns) do
     ~H"""
@@ -528,6 +606,11 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     </svg>
     """
   end
+
+  attr :width, :string, required: true
+  attr :height, :string, required: true
+  attr :class, :string, required: true
+  attr :color, :string, required: true
 
   defp smiling_face_with_sunglasses(assigns) do
     ~H"""
