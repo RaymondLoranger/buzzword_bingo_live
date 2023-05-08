@@ -11,7 +11,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   @spec user_form(Socket.assigns()) :: Rendered.t()
   def user_form(assigns) do
     ~H"""
-    <article class="mx-auto flex flex-col items-center">
+    <div class="mx-auto flex flex-col items-center">
       <h1 class="mt-8 mb-2 text-4xl text-cool-gray-900">Welcome!</h1>
       <h4 class="m-2 text-xl font-thin text-cool-gray-900 text-center">
         First up, we need your name and favorite color:
@@ -26,7 +26,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       >
         <%= render_slot(@inner_block) %>
       </.form>
-    </article>
+    </div>
     """
   end
 
@@ -151,7 +151,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def game_size_form(assigns) do
     ~H"""
-    <article>
+    <div>
       <h4 class="text-xl text-center mb-6">
         Select the game size:
       </h4>
@@ -165,7 +165,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       >
         <%= render_slot(@inner_block) %>
       </.form>
-    </article>
+    </div>
     """
   end
 
@@ -263,7 +263,14 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def game_url_field(assigns) do
     ~H"""
-    <input id="game-url" type="text" title={@value} value={@value} readonly />
+    <input
+      id="game-url"
+      type="text"
+      title={@value}
+      value={@value}
+      readonly
+      class="truncate"
+    />
     """
   end
 
@@ -488,13 +495,13 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def message_form(assigns) do
     ~H"""
-    <article id="message-form" class="mt-2">
+    <div id="message-form" class="mt-2">
       <form phx-change={@change} phx-submit={@submit} phx-target={@target}>
-        <span class="field-button-pair">
+        <span class="field-button-pair w-full">
           <%= render_slot(@inner_block) %>
         </span>
       </form>
-    </article>
+    </div>
     """
   end
 

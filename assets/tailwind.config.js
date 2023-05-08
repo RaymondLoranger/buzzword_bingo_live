@@ -15,7 +15,10 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        xs: '320px'
+        xs: '320px',
+        tall: { raw: '(max-aspect-ratio: 3/5)' },
+        boxy: { raw: '(min-aspect-ratio: 3/5) and (max-aspect-ratio: 10/5)' },
+        wide: { raw: '(min-aspect-ratio: 10/5)' }
       },
       letterSpacing: {
         tightest: '-.075em'
