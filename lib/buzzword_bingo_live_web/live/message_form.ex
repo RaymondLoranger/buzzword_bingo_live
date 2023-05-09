@@ -16,7 +16,7 @@ defmodule Buzzword.Bingo.LiveWeb.MessageForm do
   def render(assigns) do
     ~H"""
     <article>
-      <.message_form submit="send-msg" change="text-change" target={@myself}>
+      <.message_form submit="send-msg" change="update-text" target={@myself}>
         <.message_input_field name="text" value={@text} />
         <.message_submit_button disabled={@text == ""} />
       </.message_form>
@@ -26,7 +26,7 @@ defmodule Buzzword.Bingo.LiveWeb.MessageForm do
 
   @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
           {:noreply, Socket.t()}
-  def handle_event("text-change", %{"text" => text}, socket) do
+  def handle_event("update-text", %{"text" => text}, socket) do
     {:noreply, assign(socket, text: text)}
   end
 
