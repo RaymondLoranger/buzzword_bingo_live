@@ -22,7 +22,7 @@
   }
 
   .field-button-pair > button {
-    @apply aspect-square p-2 bg-carrot-orange border border-slate-400 border-l-0 rounded-r-md transition ease-in-out duration-150 outline-none hover:bg-carrot-orange-light hover:disabled:bg-slate-400 disabled:bg-slate-300 focus:ring-carrot-orange focus:border-transparent focus:ring-1 focus:scale-y-95;
+    @apply aspect-square p-2 bg-carrot-orange border border-slate-400 border-l-0 rounded-r-md transition ease-in-out duration-150 outline-none hover:bg-carrot-orange-light hover:disabled:bg-slate-400 disabled:bg-slate-300 focus:ring-carrot-orange focus:border-transparent focus:ring-1 focus:scale-y-95 focus:text-white;
   }
 
   .field-button-pair > button > svg {

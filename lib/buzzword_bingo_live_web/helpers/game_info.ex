@@ -4,15 +4,15 @@ defmodule Buzzword.Bingo.LiveWeb.GameInfo do
   require Logger
 
   @spec handle_info(msg :: term, Socket.t()) :: {:noreply, Socket.t()}
-  def handle_info(%Broadcast{event: "new_square", payload: square}, socket) do
+  def handle_info(%Broadcast{event: "square", payload: square}, socket) do
     {:noreply, stream_insert(socket, :squares, square)}
   end
 
-  def handle_info(%Broadcast{event: "new_message", payload: message}, socket) do
+  def handle_info(%Broadcast{event: "message", payload: message}, socket) do
     {:noreply, stream_insert(socket, :messages, message)}
   end
 
-  def handle_info(%Broadcast{event: "winner_alert", payload: winner}, socket) do
+  def handle_info(%Broadcast{event: "winner", payload: winner}, socket) do
     {:noreply, assign(socket, :winner, winner)}
   end
 
@@ -20,12 +20,12 @@ defmodule Buzzword.Bingo.LiveWeb.GameInfo do
     {:noreply, GamePresence.assign_players(socket, diff)}
   end
 
-  def handle_info(%Broadcast{event: "game_not_found", payload: name}, socket) do
-    {:noreply, put_flash(socket, :error, game_not_found(name))}
+  def handle_info(%Broadcast{event: "game_unfound", payload: name}, socket) do
+    {:noreply, put_flash(socket, :error, game_unfound(name))}
   end
 
-  def handle_info({:game_not_found, name}, socket) do
-    {:noreply, put_flash(socket, :error, game_not_found(name))}
+  def handle_info({:game_unfound, name}, socket) do
+    {:noreply, put_flash(socket, :error, game_unfound(name))}
   end
 
   def handle_info({:game_already_started, name}, socket) do
@@ -42,7 +42,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameInfo do
   end
 
   def handle_info(msg, socket) when is_binary(msg) or is_list(msg) do
-    {:noreply, put_flash(socket, :info, raw(msg))}
+    {:noreply, put_flash(socket, :info, msg)}
   end
 
   def handle_info(msg, socket) do
@@ -56,31 +56,31 @@ defmodule Buzzword.Bingo.LiveWeb.GameInfo do
 
   ## Private functions
 
-  @spec game_not_found(Game.name()) :: HTML.safe()
-  defp game_not_found(game_name) do
-    raw("""
+  @spec game_unfound(Game.name()) :: String.t()
+  defp game_unfound(game_name) do
+    """
     Game
     <span class="font-semibold">
       #{game_name}
     </span>
-    not found!
-    """)
+    unfound!
+    """
   end
 
-  @spec game_already_started(Game.name()) :: HTML.safe()
+  @spec game_already_started(Game.name()) :: String.t()
   defp game_already_started(game_name) do
-    raw("""
+    """
     Game
     <span class="font-semibold">
       #{game_name}
     </span>
     already started!!
-    """)
+    """
   end
 
-  @spec game_not_started(Game.name(), term) :: HTML.safe()
+  @spec game_not_started(Game.name(), term) :: String.t()
   defp game_not_started(game_name, reason) do
-    raw("""
+    """
     Unable to start game
     <span class="font-semibold">
       #{game_name}
@@ -89,6 +89,6 @@ defmodule Buzzword.Bingo.LiveWeb.GameInfo do
     <span class="font-semibold">
       #{inspect(reason)}
     </span>
-    """)
+    """
   end
 end

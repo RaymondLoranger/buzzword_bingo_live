@@ -244,11 +244,12 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def game_layout(assigns) do
     ~H"""
     <div id="game-layout">
-      <section id="game-url-pair" class="flex justify-center">
+      <section id="game-url" class="flex justify-center">
         <span class="field-button-pair mb-4 w-2/3">
           <%= render_slot(@game_url) %>
         </span>
       </section>
+
       <section
         id="playground"
         class="flex flex-col sm:flex-row justify-center gap-3 h-full mx-2"
@@ -269,7 +270,6 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       title={@value}
       value={@value}
       readonly
-      phx-mounted={JS.focus()}
       class="truncate"
     />
     """
@@ -297,8 +297,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       phx-4={@game_size == 4}
       phx-3={@game_size == 3}
       id="board"
-      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 gap-2 sm:w-[70%] w-full"
       phx-update={@update}
+      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 gap-2 sm:w-[70%] w-full"
     >
       <%= render_slot(@inner_block) %>
     </div>
@@ -310,6 +310,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   attr :target, Phoenix.LiveComponent.CID, required: true
   attr :click, :string, required: true
   attr :phrase, :string, required: true
+  attr :keyup, :string, required: true
+  attr :key, :string, required: true
 
   # Use tabindex to make squares focusable...
   def square(assigns) do
@@ -329,13 +331,15 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
         "phx-0:bg-white phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
         "shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-slate-600 border border-slate-300",
         "hover:scale-95 hover:border-slate-400",
-        "focus:outline-none focus:border-transparent focus:ring-1 focus:ring-carrot-orange",
+        "focus:outline-none focus:border-transparent focus:ring focus:ring-carrot-orange",
         "active:phx-0:ring-4 active:phx-0:ring-carrot-orange active:phx-0:border-transparent"
       ]}
       id={@id}
       phx-target={@target}
       phx-click={@click}
       phx-value-phrase={@phrase}
+      phx-keyup={@keyup}
+      phx-key={@key}
     >
       <span class="text-xs leading-3 self-start justify-self-start p-0.5 sm:p-1">
         <%= if @square.marked_by, do: @square.marked_by.name, else: "" %>
