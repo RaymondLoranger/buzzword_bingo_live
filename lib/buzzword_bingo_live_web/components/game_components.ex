@@ -244,7 +244,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def game_layout(assigns) do
     ~H"""
     <div id="game-layout">
-      <section id="game-url" class="flex justify-center">
+      <section id="game-url-pair" class="flex justify-center">
         <span class="field-button-pair mb-4 w-2/3">
           <%= render_slot(@game_url) %>
         </span>
@@ -270,6 +270,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       title={@value}
       value={@value}
       readonly
+      phx-mounted={JS.focus()}
       class="truncate"
     />
     """
