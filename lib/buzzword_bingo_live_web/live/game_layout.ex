@@ -16,35 +16,37 @@ defmodule Buzzword.Bingo.LiveWeb.GameLayout do
   def render(assigns) do
     ~H"""
     <article>
-      <.game_layout>
-        <:game_url>
-          <.game_url_field value={@game_url} />
-          <.copy_url_button target={@myself} click="copy-url-click" />
-        </:game_url>
-        <.board game_size={@game_size} update="stream">
-          <.square
-            :for={{dom_id, square} <- @streams.squares}
-            id={dom_id}
-            square={square}
-            target={@myself}
-            click="square-click"
-            phrase={square.phrase}
-          />
-        </.board>
+      <.focus_wrap id="game-layout-wrap">
+        <.game_layout>
+          <:game_url>
+            <.game_url_field value={@game_url} />
+            <.copy_url_button target={@myself} click="copy-url-click" />
+          </:game_url>
+          <.board game_size={@game_size} update="stream">
+            <.square
+              :for={{dom_id, square} <- @streams.squares}
+              id={dom_id}
+              square={square}
+              target={@myself}
+              click="square-click"
+              phrase={square.phrase}
+            />
+          </.board>
 
-        <.game_over? winner={@winner} />
+          <.game_over? winner={@winner} />
 
-        <.chatroom :if={@game_size > 0}>
-          <.players_panel streams={@streams} player={@player} />
-          <.messages_panel streams={@streams} />
-          <.live_component
-            module={MessageForm}
-            id="message-form"
-            topic={@topic}
-            player={@player}
-          />
-        </.chatroom>
-      </.game_layout>
+          <.chatroom :if={@game_size > 0}>
+            <.players_panel streams={@streams} player={@player} />
+            <.messages_panel streams={@streams} />
+            <.live_component
+              module={MessageForm}
+              id="message-form"
+              topic={@topic}
+              player={@player}
+            />
+          </.chatroom>
+        </.game_layout>
+      </.focus_wrap>
     </article>
     """
   end

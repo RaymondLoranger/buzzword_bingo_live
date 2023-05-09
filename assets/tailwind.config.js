@@ -16,9 +16,9 @@ module.exports = {
     extend: {
       screens: {
         xs: '320px',
-        tall: { raw: '(max-aspect-ratio: 3/5)' },
-        boxy: { raw: '(min-aspect-ratio: 3/5) and (max-aspect-ratio: 10/5)' },
-        wide: { raw: '(min-aspect-ratio: 10/5)' }
+        tall: { raw: '(max-aspect-ratio: 4/5)' },
+        boxy: { raw: '(min-aspect-ratio: 4/5) and (max-aspect-ratio: 8/5)' },
+        wide: { raw: '(min-aspect-ratio: 8/5)' }
       },
       letterSpacing: {
         tightest: '-.075em'
@@ -32,18 +32,6 @@ module.exports = {
       },
       colors: {
         brand: '#FD4F00',
-        'cool-gray': {
-          50: '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cfd8e3',
-          400: '#97a6ba',
-          500: '#64748b',
-          600: '#475569',
-          700: '#364152',
-          800: '#27303f',
-          900: '#1a202e'
-        },
         deluge: {
           light: '#a48fbc',
           DEFAULT: '#8064A2',

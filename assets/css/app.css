@@ -18,11 +18,11 @@
   }
 
   .field-button-pair > input[type='text'] {
-    @apply w-full border border-cool-gray-400 rounded-l-md rounded-r-none bg-white px-5 text-base focus:outline-none focus:border-indigo-500 focus:ring-0 hover:border-indigo-500 hover:ring-0;
+    @apply w-full border border-slate-400 rounded-l-md rounded-r-none bg-white px-5 text-base focus:outline-none focus:ring-carrot-orange focus:border-transparent focus:ring-1 focus:scale-y-95 hover:ring-carrot-orange hover:border-transparent hover:ring-1 hover:outline-none hover:scale-y-95;
   }
 
   .field-button-pair > button {
-    @apply aspect-square p-2 bg-carrot-orange border border-cool-gray-400 border-l-0 rounded-r-md transition ease-in-out duration-150 outline-none hover:bg-carrot-orange-light hover:disabled:bg-slate-400 disabled:bg-slate-300;
+    @apply aspect-square p-2 bg-carrot-orange border border-slate-400 border-l-0 rounded-r-md transition ease-in-out duration-150 outline-none hover:bg-carrot-orange-light hover:disabled:bg-slate-400 disabled:bg-slate-300 focus:ring-carrot-orange focus:border-transparent focus:ring-1 focus:scale-y-95;
   }
 
   .field-button-pair > button > svg {

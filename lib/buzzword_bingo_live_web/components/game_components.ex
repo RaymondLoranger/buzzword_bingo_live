@@ -12,8 +12,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def user_form(assigns) do
     ~H"""
     <div class="mx-auto flex flex-col items-center">
-      <h1 class="mt-8 mb-2 text-4xl text-cool-gray-900">Welcome!</h1>
-      <h4 class="m-2 text-xl font-thin text-cool-gray-900 text-center">
+      <h1 class="mt-8 mb-2 text-4xl text-slate-900">Welcome!</h1>
+      <h4 class="m-2 text-xl font-thin text-slate-900 text-center">
         First up, we need your name and favorite color:
       </h4>
       <.form
@@ -269,6 +269,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       title={@value}
       value={@value}
       readonly
+      phx-mounted={JS.focus()}
       class="truncate"
     />
     """
@@ -310,9 +311,11 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   attr :click, :string, required: true
   attr :phrase, :string, required: true
 
+  # Use tabindex to make squares focusable...
   def square(assigns) do
     ~H"""
     <div
+      tabindex="0"
       phx-0={is_nil(@square.marked_by)}
       phx-1={@square.marked_by && @square.marked_by.color == "#a4deff"}
       phx-2={@square.marked_by && @square.marked_by.color == "#f9cedf"}
@@ -324,8 +327,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       phx-8={@square.marked_by && @square.marked_by.color == "#fcd8ac"}
       class={[
         "phx-0:bg-white phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
-        "shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-cool-gray-600 border border-cool-gray-300",
-        "hover:scale-95 hover:border-cool-gray-400 active:phx-0:ring-4 active:phx-0:ring-carrot-orange active:phx-0:border-transparent"
+        "shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-slate-600 border border-slate-300",
+        "hover:scale-95 hover:border-slate-400",
+        "focus:outline-none focus:border-transparent focus:ring-1 focus:ring-carrot-orange",
+        "active:phx-0:ring-4 active:phx-0:ring-carrot-orange active:phx-0:border-transparent"
       ]}
       id={@id}
       phx-target={@target}
