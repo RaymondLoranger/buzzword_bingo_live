@@ -85,9 +85,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameParams do
         {:error, _noproc} ->
           # Game server may have timed out...
           # Notify this player...
-          send(self(), {:game_not_found, game_name})
+          send(self(), {:game_unfound, game_name})
           # And the other ones...
-          Endpoint.broadcast(topic, "game_not_found", game_name)
+          Endpoint.broadcast(topic, "game_unfound", game_name)
           {0, []}
       end
 
