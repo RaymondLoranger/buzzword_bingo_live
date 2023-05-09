@@ -260,17 +260,17 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     """
   end
 
+  attr :id, :string, required: true
   attr :value, :string, required: true
 
   def game_url_field(assigns) do
     ~H"""
     <input
-      id="game-url"
+      id={@id}
       type="text"
       title={@value}
       value={@value}
       readonly
-      phx-mounted={JS.focus()}
       class="truncate"
     />
     """
@@ -332,7 +332,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
         "phx-0:bg-white phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
         "shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-slate-600 border border-slate-300",
         "hover:scale-95 hover:border-slate-400",
-        "focus:outline-none focus:border-transparent focus:ring focus:ring-carrot-orange",
+        "focus:outline-none focus:border-transparent focus:ring-1 focus:ring-carrot-orange",
         "active:phx-0:ring-4 active:phx-0:ring-carrot-orange active:phx-0:border-transparent"
       ]}
       id={@id}
@@ -524,6 +524,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       type="text"
       name={@name}
       value={@value}
+      phx-mounted={JS.focus()}
       placeholder="Enter your message..."
       class="truncate"
     />
@@ -535,7 +536,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def message_submit_button(assigns) do
     ~H"""
     <button title="Send message" type="submit" disabled={@disabled}>
-      <.icon name="hero-chat-bubble-left" />
+      <.icon name="hero-chat-bubble-left" class="mb-1" />
     </button>
     """
   end

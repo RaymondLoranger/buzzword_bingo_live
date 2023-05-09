@@ -20,12 +20,12 @@ defmodule Buzzword.Bingo.LiveWeb.GameInfo do
     {:noreply, GamePresence.assign_players(socket, diff)}
   end
 
-  def handle_info(%Broadcast{event: "game_unfound", payload: name}, socket) do
-    {:noreply, put_flash(socket, :error, game_unfound(name))}
+  def handle_info(%Broadcast{event: "game_not_found", payload: name}, socket) do
+    {:noreply, put_flash(socket, :error, game_not_found(name))}
   end
 
-  def handle_info({:game_unfound, name}, socket) do
-    {:noreply, put_flash(socket, :error, game_unfound(name))}
+  def handle_info({:game_not_found, name}, socket) do
+    {:noreply, put_flash(socket, :error, game_not_found(name))}
   end
 
   def handle_info({:game_already_started, name}, socket) do
@@ -56,8 +56,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameInfo do
 
   ## Private functions
 
-  @spec game_unfound(Game.name()) :: String.t()
-  defp game_unfound(game_name) do
+  @spec game_not_found(Game.name()) :: String.t()
+  defp game_not_found(game_name) do
     """
     Game
     <span class="font-semibold">

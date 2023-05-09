@@ -19,8 +19,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameLayout do
       <.focus_wrap id="game-layout-wrap">
         <.game_layout>
           <:game_url>
-            <.game_url_field value={@game_url} />
-            <.copy_url_button target={@myself} click="clipboard-copy" />
+            <.game_url_field id="game-url" value={@game_url} />
+            <.copy_url_button target={@myself} click="copy-url" />
           </:game_url>
           <.board game_size={@game_size} update="stream">
             <.square
@@ -55,7 +55,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameLayout do
 
   @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
           {:noreply, Socket.t()}
-  def handle_event("clipboard-copy", _payload, socket) do
+  def handle_event("copy-url", _payload, socket) do
     Clipboard.copy(socket.assigns.game_url)
     {:noreply, push_event(socket, "select-text", %{id: "game-url"})}
   end
@@ -76,7 +76,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameLayout do
       {:error, _noproc} ->
         # Game server may have timed out...
         # Notify this player and the other ones...
-        Endpoint.broadcast(topic, "game_unfound", game_name)
+        Endpoint.broadcast(topic, "game_not_found", game_name)
     end
 
     {:noreply, socket}
