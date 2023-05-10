@@ -103,7 +103,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
             title={color}
             class={[
               "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
-              "flex w-6 m-0.5 aspect-square cursor-pointer border border-gray-500 hover:border-transparent hover:ring-gray-600 hover:ring-1"
+              "flex w-6 m-0.5 aspect-square cursor-pointer border border-gray-500",
+              "hover:border-transparent hover:ring-gray-600 hover:ring-1"
             ]}
           >
             <input
@@ -134,8 +135,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def submit_button(assigns) do
     ~H"""
     <.button class={[
-      "my-4 p-1 bg-carrot-orange w-28 rounded-md",
-      "text-white hover:opacity-70"
+      "my-5 p-1 text-white bg-carrot-orange w-28 rounded-md",
+      "hover:bg-carrot-orange-light active:ring-4",
+      "focus:outline-none focus:border-transparent focus:ring-2 focus:ring-amber-600"
     ]}>
       <%= @text %>
     </.button>
@@ -152,7 +154,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def game_size_form(assigns) do
     ~H"""
     <div>
-      <h4 class="text-xl text-center mb-6">
+      <h4 class="text-xl text-center mt-12 mb-5">
         Select the game size:
       </h4>
       <.form
@@ -245,7 +247,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     ~H"""
     <div id="game-layout">
       <section id="game-url-pair" class="flex justify-center">
-        <span class="field-button-pair mb-4 w-2/3">
+        <span class="field-button-pair my-6 w-2/3">
           <%= render_slot(@game_url) %>
         </span>
       </section>
@@ -369,25 +371,30 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       :if={@winner}
       class="absolute left-0 w-full sm:top-1/2 sm:text-5xl text-center animate-ping top-1/3 text-4xl"
     >
-      <span :if={@winner.name == "X"}>No winner!</span>
-      <br /><br />
-      <span>
-        <.sad_face
-          color={@winner.color}
-          width="100px"
-          height="100px"
-          class="inline"
-        />
+      <span :if={@winner.name == "X"}>
+        <span>No winner!</span>
+        <br /><br />
+        <span>
+          <.sad_face
+            color={@winner.color}
+            width="90px"
+            height="90px"
+            class="inline"
+          />
+        </span>
       </span>
-      <span :if={@winner.name != "X"}><%= @winner.name %> won!</span>
-      <br /><br />
-      <span>
-        <.smiling_face_with_sunglasses
-          color={@winner.color}
-          width="100px"
-          height="100px"
-          class="inline"
-        />
+
+      <span :if={@winner.name != "X"}>
+        <span><%= @winner.name %> won!</span>
+        <br /><br />
+        <span>
+          <.smiling_face_with_sunglasses
+            color={@winner.color}
+            width="100px"
+            height="100px"
+            class="inline"
+          />
+        </span>
       </span>
     </div>
     """

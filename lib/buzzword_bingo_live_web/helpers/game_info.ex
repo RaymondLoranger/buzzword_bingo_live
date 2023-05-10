@@ -63,7 +63,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameInfo do
     <span class="font-semibold">
       #{game_name}
     </span>
-    unfound!
+    not found!
     """
   end
 

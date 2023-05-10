@@ -25,25 +25,27 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
   def render(assigns) do
     ~H"""
     <article>
-      <.user_form
-        id="user-form"
-        for={@form}
-        target={@myself}
-        change="validate"
-        submit="play"
-      >
-        <.user_fields>
-          <.name_field field={@form[:name]} color={@color} />
-          <.color_field
-            field={@form[:color]}
-            colors={@colors}
-            color={@color}
-            click="color-click"
-            target={@myself}
-          />
-        </.user_fields>
-        <.submit_button text="Play Bingo!" />
-      </.user_form>
+      <.focus_wrap id="user-form-wrap">
+        <.user_form
+          id="user-form"
+          for={@form}
+          target={@myself}
+          change="validate"
+          submit="play"
+        >
+          <.user_fields>
+            <.name_field field={@form[:name]} color={@color} />
+            <.color_field
+              field={@form[:color]}
+              colors={@colors}
+              color={@color}
+              click="color-click"
+              target={@myself}
+            />
+          </.user_fields>
+          <.submit_button text="Play Bingo!" />
+        </.user_form>
+      </.focus_wrap>
     </article>
     """
   end

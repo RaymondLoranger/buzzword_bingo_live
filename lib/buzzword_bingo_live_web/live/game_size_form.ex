@@ -18,16 +18,18 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
   def render(assigns) do
     ~H"""
     <article>
-      <.game_size_form
-        id="game-size-form"
-        for={@form}
-        target={@myself}
-        change="validate"
-        submit="start"
-      >
-        <.game_size_field field={@form[:value]} />
-        <.submit_button text="Start Game" />
-      </.game_size_form>
+      <.focus_wrap id="game-size-form-wrap">
+        <.game_size_form
+          id="game-size-form"
+          for={@form}
+          target={@myself}
+          change="validate"
+          submit="start"
+        >
+          <.game_size_field field={@form[:value]} />
+          <.submit_button text="Start Game" />
+        </.game_size_form>
+      </.focus_wrap>
     </article>
     """
   end
