@@ -189,10 +189,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       )
 
     ~H"""
-    <div
-      class="w-full flex flex-col items-center"
-      phx-feedback-for={@name}
-    >
+    <div class="w-full flex flex-col items-center" phx-feedback-for={@name}>
       <div
         id="game-sizes"
         class="w-full md:w-5/6 flex justify-evenly items-start flex-wrap place-content-center gap-6"

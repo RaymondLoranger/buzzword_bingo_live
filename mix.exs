@@ -4,7 +4,7 @@ defmodule Buzzword.Bingo.Live.MixProject do
   def project do
     [
       app: :buzzword_bingo_live,
-      version: "0.1.21",
+      version: "0.1.22",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
