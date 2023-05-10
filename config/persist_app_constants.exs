@@ -2,6 +2,7 @@ import Config
 
 config :buzzword_bingo_live,
   player_colors: [
+    "#38caf6", # picton blue
     "#a4deff", # anakiwa
     "#f9cedf", # azalea
     "#d3c5f1", # moon-raker

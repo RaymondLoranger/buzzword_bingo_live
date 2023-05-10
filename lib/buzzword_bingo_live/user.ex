@@ -77,14 +77,15 @@ defmodule Buzzword.Bingo.Live.User do
   end
 
   defp color_taken_msg(color) do
-    phx_1 = if color == "#a4deff", do: "phx-1", else: ""
-    phx_2 = if color == "#f9cedf", do: "phx-2", else: ""
-    phx_3 = if color == "#d3c5f1", do: "phx-3", else: ""
-    phx_4 = if color == "#acc9f5", do: "phx-4", else: ""
-    phx_5 = if color == "#aeeace", do: "phx-5", else: ""
-    phx_6 = if color == "#96d7b9", do: "phx-6", else: ""
-    phx_7 = if color == "#fce8bd", do: "phx-7", else: ""
-    phx_8 = if color == "#fcd8ac", do: "phx-8", else: ""
+    phx_1 = if color == "#38caf6", do: "phx-1", else: ""
+    phx_2 = if color == "#a4deff", do: "phx-2", else: ""
+    phx_3 = if color == "#f9cedf", do: "phx-3", else: ""
+    phx_4 = if color == "#d3c5f1", do: "phx-4", else: ""
+    phx_5 = if color == "#acc9f5", do: "phx-5", else: ""
+    phx_6 = if color == "#aeeace", do: "phx-6", else: ""
+    phx_7 = if color == "#96d7b9", do: "phx-7", else: ""
+    phx_8 = if color == "#fce8bd", do: "phx-8", else: ""
+    phx_9 = if color == "#fcd8ac", do: "phx-9", else: ""
 
     """
     <span>
@@ -98,7 +99,8 @@ defmodule Buzzword.Bingo.Live.User do
         #{phx_6}
         #{phx_7}
         #{phx_8}
-        class="font-bold phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]"
+        #{phx_9}
+        class="font-bold phx-1:bg-[#38caf6] phx-2:bg-[#a4deff] phx-3:bg-[#f9cedf] phx-4:bg-[#d3c5f1] phx-5:bg-[#acc9f5] phx-6:bg-[#aeeace] phx-7:bg-[#96d7b9] phx-8:bg-[#fce8bd] phx-9:bg-[#fcd8ac]"
       >
         #{color}
       </span>

@@ -46,14 +46,15 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def name_field(assigns) do
     ~H"""
     <.input
-      phx-1={@color == "#a4deff"}
-      phx-2={@color == "#f9cedf"}
-      phx-3={@color == "#d3c5f1"}
-      phx-4={@color == "#acc9f5"}
-      phx-5={@color == "#aeeace"}
-      phx-6={@color == "#96d7b9"}
-      phx-7={@color == "#fce8bd"}
-      phx-8={@color == "#fcd8ac"}
+      phx-1={@color == "#38caf6"}
+      phx-2={@color == "#a4deff"}
+      phx-3={@color == "#f9cedf"}
+      phx-4={@color == "#d3c5f1"}
+      phx-5={@color == "#acc9f5"}
+      phx-6={@color == "#aeeace"}
+      phx-7={@color == "#96d7b9"}
+      phx-8={@color == "#fce8bd"}
+      phx-9={@color == "#fcd8ac"}
       field={@field}
       placeholder="Name"
       phx-mounted={JS.focus()}
@@ -61,9 +62,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       required
       wrapper_class="flex flex-col h-auto mt-4"
       class={[
-        "h-6 px-2 py-3 border-2 rounded-sm",
-        "phx-1:border-[#a4deff] phx-2:border-[#f9cedf] phx-3:border-[#d3c5f1] phx-4:border-[#acc9f5] phx-5:border-[#aeeace] phx-6:border-[#96d7b9] phx-7:border-[#fce8bd] phx-8:border-[#fcd8ac]",
-        "focus:phx-1:ring-[#a4deff] focus:phx-2:ring-[#f9cedf] focus:phx-3:ring-[#d3c5f1] focus:phx-4:ring-[#acc9f5] focus:phx-5:ring-[#aeeace] focus:phx-6:ring-[#96d7b9] focus:phx-7:ring-[#fce8bd] focus:phx-8:ring-[#fcd8ac]"
+        "h-8 px-2 pb-3 border-2 rounded-md placeholder-slate-400",
+        "phx-1:border-[#38caf6] phx-2:border-[#a4deff] phx-3:border-[#f9cedf] phx-4:border-[#d3c5f1] phx-5:border-[#acc9f5] phx-6:border-[#aeeace] phx-7:border-[#96d7b9] phx-8:border-[#fce8bd] phx-9:border-[#fcd8ac]",
+        "focus:phx-1:ring-[#38caf6] focus:phx-2:ring-[#a4deff] focus:phx-3:ring-[#f9cedf] focus:phx-4:ring-[#d3c5f1] focus:phx-5:ring-[#acc9f5] focus:phx-6:ring-[#aeeace] focus:phx-7:ring-[#96d7b9] focus:phx-8:ring-[#fce8bd] focus:phx-9:ring-[#fcd8ac]"
       ]}
       error_class="!mt-1 !gap-1"
     />
@@ -92,18 +93,19 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       <ul id="user-colors" class="flex gap-1.5">
         <li :for={color <- @colors} class="relative">
           <label
-            phx-1={color == "#a4deff"}
-            phx-2={color == "#f9cedf"}
-            phx-3={color == "#d3c5f1"}
-            phx-4={color == "#acc9f5"}
-            phx-5={color == "#aeeace"}
-            phx-6={color == "#96d7b9"}
-            phx-7={color == "#fce8bd"}
-            phx-8={color == "#fcd8ac"}
+            phx-1={color == "#38caf6"}
+            phx-2={color == "#a4deff"}
+            phx-3={color == "#f9cedf"}
+            phx-4={color == "#d3c5f1"}
+            phx-5={color == "#acc9f5"}
+            phx-6={color == "#aeeace"}
+            phx-7={color == "#96d7b9"}
+            phx-8={color == "#fce8bd"}
+            phx-9={color == "#fcd8ac"}
             title={color}
             class={[
-              "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
-              "flex w-6 m-0.5 aspect-square cursor-pointer border border-gray-500",
+              "phx-1:bg-[#38caf6] phx-2:bg-[#a4deff] phx-3:bg-[#f9cedf] phx-4:bg-[#d3c5f1] phx-5:bg-[#acc9f5] phx-6:bg-[#aeeace] phx-7:bg-[#96d7b9] phx-8:bg-[#fce8bd] phx-9:bg-[#fcd8ac]",
+              "flex w-7 m-0.5 aspect-square cursor-pointer border border-gray-500",
               "hover:border-transparent hover:ring-gray-600 hover:ring-1"
             ]}
           >
@@ -117,7 +119,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
               phx-click={@click}
               class="sr-only peer"
             />
-            <span class="absolute hidden peer-checked:block top-0.5 left-2">
+            <span class="absolute hidden peer-checked:block top-1 left-2.5">
               ✓
             </span>
           </label>
@@ -301,7 +303,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       phx-3={@game_size == 3}
       id="board"
       phx-update={@update}
-      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 gap-2 sm:w-[70%] w-full"
+      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 gap-2 sm:w-[69%] w-full"
     >
       <%= render_slot(@inner_block) %>
     </div>
@@ -321,21 +323,21 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     ~H"""
     <div
       tabindex="0"
-      phx-0={is_nil(@square.marked_by)}
-      phx-1={@square.marked_by && @square.marked_by.color == "#a4deff"}
-      phx-2={@square.marked_by && @square.marked_by.color == "#f9cedf"}
-      phx-3={@square.marked_by && @square.marked_by.color == "#d3c5f1"}
-      phx-4={@square.marked_by && @square.marked_by.color == "#acc9f5"}
-      phx-5={@square.marked_by && @square.marked_by.color == "#aeeace"}
-      phx-6={@square.marked_by && @square.marked_by.color == "#96d7b9"}
-      phx-7={@square.marked_by && @square.marked_by.color == "#fce8bd"}
-      phx-8={@square.marked_by && @square.marked_by.color == "#fcd8ac"}
+      phx-1={@square.marked_by && @square.marked_by.color == "#38caf6"}
+      phx-2={@square.marked_by && @square.marked_by.color == "#a4deff"}
+      phx-3={@square.marked_by && @square.marked_by.color == "#f9cedf"}
+      phx-4={@square.marked_by && @square.marked_by.color == "#d3c5f1"}
+      phx-5={@square.marked_by && @square.marked_by.color == "#acc9f5"}
+      phx-6={@square.marked_by && @square.marked_by.color == "#aeeace"}
+      phx-7={@square.marked_by && @square.marked_by.color == "#96d7b9"}
+      phx-8={@square.marked_by && @square.marked_by.color == "#fce8bd"}
+      phx-9={@square.marked_by && @square.marked_by.color == "#fcd8ac"}
       class={[
-        "phx-0:bg-white phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
+        "bg-white phx-1:bg-[#38caf6] phx-2:bg-[#a4deff] phx-3:bg-[#f9cedf] phx-4:bg-[#d3c5f1] phx-5:bg-[#acc9f5] phx-6:bg-[#aeeace] phx-7:bg-[#96d7b9] phx-8:bg-[#fce8bd] phx-9:bg-[#fcd8ac]",
         "shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-slate-600 border border-slate-300",
-        "hover:scale-95 hover:border-slate-400",
-        "focus:outline-none focus:border-transparent focus:ring-1 focus:ring-carrot-orange",
-        "active:phx-0:ring-4 active:phx-0:ring-carrot-orange active:phx-0:border-transparent"
+        "hover:scale-95 hover:border-slate-400 hover:bg-wheatfield hover:cursor-pointer",
+        "focus:outline-none focus:border-carrot-orange focus:ring-1 focus:ring-carrot-orange",
+        "active:ring-4 active:ring-carrot-orange active:border-transparent"
       ]}
       id={@id}
       phx-target={@target}
@@ -404,7 +406,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def chatroom(assigns) do
     ~H"""
-    <div id="chatroom" class="flex flex-col gap-0 sm:w-[27%] w-full">
+    <div id="chatroom" class="flex flex-col gap-0 sm:w-[28%] w-full">
       <%= render_slot(@inner_block) %>
     </div>
     """
@@ -430,16 +432,17 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       >
         <span>
           <span
-            phx-1={player.meta.color == "#a4deff"}
-            phx-2={player.meta.color == "#f9cedf"}
-            phx-3={player.meta.color == "#d3c5f1"}
-            phx-4={player.meta.color == "#acc9f5"}
-            phx-5={player.meta.color == "#aeeace"}
-            phx-6={player.meta.color == "#96d7b9"}
-            phx-7={player.meta.color == "#fce8bd"}
-            phx-8={player.meta.color == "#fcd8ac"}
+            phx-1={player.meta.color == "#38caf6"}
+            phx-2={player.meta.color == "#a4deff"}
+            phx-3={player.meta.color == "#f9cedf"}
+            phx-4={player.meta.color == "#d3c5f1"}
+            phx-5={player.meta.color == "#acc9f5"}
+            phx-6={player.meta.color == "#aeeace"}
+            phx-7={player.meta.color == "#96d7b9"}
+            phx-8={player.meta.color == "#fce8bd"}
+            phx-9={player.meta.color == "#fcd8ac"}
             class={[
-              "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
+              "phx-1:bg-[#38caf6] phx-2:bg-[#a4deff] phx-3:bg-[#f9cedf] phx-4:bg-[#d3c5f1] phx-5:bg-[#acc9f5] phx-6:bg-[#aeeace] phx-7:bg-[#96d7b9] phx-8:bg-[#fce8bd] phx-9:bg-[#fcd8ac]",
               "aspect-square px-2 mx-1.5 rounded-sm text-xs"
             ]}
           />
@@ -484,16 +487,17 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
         class="border-b border-gray-200 p-1 tracking-tight"
       >
         <span
-          phx-1={message.sender.color == "#a4deff"}
-          phx-2={message.sender.color == "#f9cedf"}
-          phx-3={message.sender.color == "#d3c5f1"}
-          phx-4={message.sender.color == "#acc9f5"}
-          phx-5={message.sender.color == "#aeeace"}
-          phx-6={message.sender.color == "#96d7b9"}
-          phx-7={message.sender.color == "#fce8bd"}
-          phx-8={message.sender.color == "#fcd8ac"}
+          phx-1={message.sender.color == "#38caf6"}
+          phx-2={message.sender.color == "#a4deff"}
+          phx-3={message.sender.color == "#f9cedf"}
+          phx-4={message.sender.color == "#d3c5f1"}
+          phx-5={message.sender.color == "#acc9f5"}
+          phx-6={message.sender.color == "#aeeace"}
+          phx-7={message.sender.color == "#96d7b9"}
+          phx-8={message.sender.color == "#fce8bd"}
+          phx-9={message.sender.color == "#fcd8ac"}
           class={[
-            "phx-1:bg-[#a4deff] phx-2:bg-[#f9cedf] phx-3:bg-[#d3c5f1] phx-4:bg-[#acc9f5] phx-5:bg-[#aeeace] phx-6:bg-[#96d7b9] phx-7:bg-[#fce8bd] phx-8:bg-[#fcd8ac]",
+            "phx-1:bg-[#38caf6] phx-2:bg-[#a4deff] phx-3:bg-[#f9cedf] phx-4:bg-[#d3c5f1] phx-5:bg-[#acc9f5] phx-6:bg-[#aeeace] phx-7:bg-[#96d7b9] phx-8:bg-[#fce8bd] phx-9:bg-[#fcd8ac]",
             "pl-1.5 pr-0.5 mr-1 rounded-sm"
           ]}
         >

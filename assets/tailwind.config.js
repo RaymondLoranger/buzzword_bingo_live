@@ -32,6 +32,21 @@ module.exports = {
       },
       colors: {
         brand: '#FD4F00',
+        edward: {
+          light: '#bfc0c0',
+          DEFAULT: '#9fa1a1',
+          dark: '#8b8d8d'
+        },
+        astral: {
+          light: '#609dd2',
+          DEFAULT: '#337ab7',
+          dark: '#2d6a9f'
+        },
+        wheatfield: {
+          light: '#F9FAEB',
+          DEFAULT: '#F3F4D4',
+          dark: '#E2E59A'
+        },
         deluge: {
           light: '#a48fbc',
           DEFAULT: '#8064A2',
@@ -104,7 +119,6 @@ module.exports = {
       ])
     ),
     // Generic variants...
-    plugin(({ addVariant }) => addVariant('phx-0', '&[phx-0]')),
     plugin(({ addVariant }) => addVariant('phx-1', '&[phx-1]')),
     plugin(({ addVariant }) => addVariant('phx-2', '&[phx-2]')),
     plugin(({ addVariant }) => addVariant('phx-3', '&[phx-3]')),
@@ -113,6 +127,7 @@ module.exports = {
     plugin(({ addVariant }) => addVariant('phx-6', '&[phx-6]')),
     plugin(({ addVariant }) => addVariant('phx-7', '&[phx-7]')),
     plugin(({ addVariant }) => addVariant('phx-8', '&[phx-8]')),
+    plugin(({ addVariant }) => addVariant('phx-9', '&[phx-9]')),
 
     // Embeds Hero Icons (https://heroicons.com) into your app.css bundle
     // See your `CoreComponents.icon/1` for more information.
