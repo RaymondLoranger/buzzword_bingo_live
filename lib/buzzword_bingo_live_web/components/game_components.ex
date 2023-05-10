@@ -190,7 +190,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
     ~H"""
     <div
-      class="w-full flex flex-col items-center h-full"
+      class="w-full flex flex-col items-center"
       phx-feedback-for={@name}
     >
       <div
@@ -575,7 +575,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   @spec grid_size(Socket.assigns()) :: Rendered.t()
   defp grid_size(assigns) do
     ~H"""
-    <span class="leading-4 tracking-tighter float-right mx-2 mt-2">
+    <span class="leading-4 tracking-tighter float-right mr-10 mt-2">
       <%= @text %>
     </span>
     """
@@ -589,7 +589,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       phx-5={@size == 5}
       phx-4={@size == 4}
       phx-3={@size == 3}
-      class="grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 phx-5:gap-1 phx-4:gap-1.5 phx-3:gap-2"
+      class="w-36 aspect-square grid phx-5:grid-cols-5 phx-4:grid-cols-4 phx-3:grid-cols-3 phx-5:gap-1 phx-4:gap-1.5 phx-3:gap-2"
     >
       <div
         :for={_n <- 1..(@size * @size)}

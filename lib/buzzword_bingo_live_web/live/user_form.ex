@@ -39,7 +39,7 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
               field={@form[:color]}
               colors={@colors}
               color={@color}
-              click="color-click"
+              click="update-color"
               target={@myself}
             />
           </.user_fields>
@@ -52,7 +52,7 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
 
   @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
           {:noreply, Socket.t()}
-  def handle_event("color-click", %{"value" => color}, socket) do
+  def handle_event("update-color", %{"value" => color}, socket) do
     {:noreply, assign(socket, color: color)}
   end
 

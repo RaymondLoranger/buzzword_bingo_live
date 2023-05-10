@@ -6,6 +6,7 @@
     <img
       src={~p"/images/phoenix.png"}
       alt="Phoenix Framework Logo"
+      title="Phoenix Framework"
       class="mx-auto w-auto h-14 block hover:brightness-150"
     />
   </a>
@@ -24,24 +25,16 @@
     <span class="letter">G</span>
     <span class="letter">O</span>
   </div>
-  <nav class="flex flex-row gap-4 md:gap-0 md:flex-col ml-4 text-right">
+  <nav class="flex gap-4 ml-4">
     <.link
       href={~p"/dev/dashboard"}
       target="_blank"
-      class="hidden md:block"
+      class="mb-1"
     >
-      Dashboard
+      <img src="/images/dashboard.png" class="h-7" title="Dashboard" />
     </.link>
-    <.link
-      href={~p"/dev/dashboard"}
-      target="_blank"
-      class="block md:hidden mb-1"
-    >
-      <img src="/images/dashboard.png" class="h-7" title="dashboard" />
-    </.link>
-    <.link href={~p"/login"} class="hidden md:block">Login</.link>
-    <.link href={~p"/login"} class="block md:hidden mb-1">
-      <img src="/images/user-login.png" title="login" />
+    <.link href={~p"/login"} class="mb-1">
+      <img src="/images/user-login.png" title="Login" />
     </.link>
   </nav>
 </header>
