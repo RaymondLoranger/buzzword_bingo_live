@@ -54,6 +54,7 @@ defmodule Buzzword.Bingo.Live.User do
 
   ## Private functions
 
+  @spec out_of_range(pos_integer, pos_integer) :: String.t()
   defp out_of_range(min, max) do
     """
     <span>
@@ -66,6 +67,7 @@ defmodule Buzzword.Bingo.Live.User do
     """
   end
 
+  @spec name_taken_msg(String.t()) :: String.t()
   defp name_taken_msg(name) do
     """
     <span>
@@ -76,6 +78,7 @@ defmodule Buzzword.Bingo.Live.User do
     """
   end
 
+  @spec color_taken_msg(String.t()) :: String.t()
   defp color_taken_msg(color) do
     phx_1 = if color == "#38caf6", do: "phx-1", else: ""
     phx_2 = if color == "#a4deff", do: "phx-2", else: ""

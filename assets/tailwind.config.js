@@ -16,9 +16,6 @@ module.exports = {
     extend: {
       screens: {
         xs: '320px',
-        tall: { raw: '(max-aspect-ratio: 4/5)' },
-        boxy: { raw: '(min-aspect-ratio: 4/5) and (max-aspect-ratio: 8/5)' },
-        wide: { raw: '(min-aspect-ratio: 8/5)' }
       },
       letterSpacing: {
         tightest: '-.075em'
@@ -31,32 +28,27 @@ module.exports = {
         tapestry: "url('/images/tapestry.svg')"
       },
       colors: {
+        // Orange color used on the home landing page...
         brand: '#FD4F00',
-        edward: {
-          light: '#bfc0c0',
-          DEFAULT: '#9fa1a1',
-          dark: '#8b8d8d'
-        },
-        astral: {
-          light: '#609dd2',
-          DEFAULT: '#337ab7',
-          dark: '#2d6a9f'
-        },
+        // Color of unmarked squares when hovered over...
         wheatfield: {
           light: '#F9FAEB',
           DEFAULT: '#F3F4D4',
           dark: '#E2E59A'
         },
+        // Panel color...
         deluge: {
           light: '#a48fbc',
           DEFAULT: '#8064A2',
           dark: '#634d80'
         },
+        // Button color and more...
         'carrot-orange': {
           light: '#f3b359',
           DEFAULT: '#ee961b',
           dark: '#d58310'
         },
+        // Colors for 'Buzzword Bingo' letters...
         'mine-shaft': {
           light: '#808080',
           DEFAULT: '#292929',
@@ -82,6 +74,7 @@ module.exports = {
           DEFAULT: '#7fb1ce',
           dark: '#3f81a6'
         },
+        // Color of grid glyphs...
         wedgewood: {
           light: '#77a3bb',
           DEFAULT: '#4f819c',

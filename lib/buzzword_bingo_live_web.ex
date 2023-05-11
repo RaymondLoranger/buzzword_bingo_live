@@ -110,15 +110,10 @@ defmodule Buzzword.Bingo.LiveWeb do
         only: [
           push_patch: 2,
           put_flash: 3,
-          stream_insert: 3,
-          stream_insert: 4,
+          stream: 4,
           stream_delete: 3,
-          stream: 3,
-          stream: 4
+          stream_insert: 3
         ]
-
-      import Phoenix.HTML.Form
-      import Enum, only: [map: 2]
     end
   end
 
@@ -138,10 +133,10 @@ defmodule Buzzword.Bingo.LiveWeb do
         UserForm
       }
 
-      alias Buzzword.Bingo.Live.{User, GameSize}
+      alias Buzzword.Bingo.Live.{GameSize, User}
       alias Buzzword.Bingo.{Engine, Game, Player, Square, Summary}
       alias Ecto.UUID
-      alias Phoenix.{HTML, LiveView}
+      alias Phoenix.LiveView
       alias Phoenix.LiveView.{Rendered, Socket}
       alias Phoenix.Socket.Broadcast
     end

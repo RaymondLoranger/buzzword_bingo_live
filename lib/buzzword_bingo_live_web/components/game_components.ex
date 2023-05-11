@@ -1,5 +1,5 @@
 defmodule Buzzword.Bingo.LiveWeb.GameComponents do
-  use Buzzword.Bingo.LiveWeb, [:html, :imports, :aliases]
+  use Buzzword.Bingo.LiveWeb, [:html, :aliases]
 
   attr :id, :string, required: true
   attr :for, Phoenix.HTML.Form, required: true
@@ -13,7 +13,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     ~H"""
     <div class="mx-auto flex flex-col items-center">
       <h1 class="mt-8 mb-2 text-4xl text-slate-900">Welcome!</h1>
-      <h4 class="m-2 text-xl font-thin text-slate-900 text-center">
+      <h4 class="m-2 text-xl text-slate-900 text-center">
         First up, we need your name and favorite color:
       </h4>
       <.form

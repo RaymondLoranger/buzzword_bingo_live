@@ -36,6 +36,7 @@ defmodule Buzzword.Bingo.Live.GameSize do
 
   ## Private functions
 
+  @spec out_of_range(pos_integer, pos_integer) :: String.t()
   defp out_of_range(min, max) do
     """
     <span>
@@ -43,7 +44,6 @@ defmodule Buzzword.Bingo.Live.GameSize do
       <span class="font-bold">#{min}</span>
       to
       <span class="font-bold">#{max}</span>
-      chars
     </span>
     """
   end
