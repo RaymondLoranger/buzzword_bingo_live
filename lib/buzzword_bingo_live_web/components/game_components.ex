@@ -194,7 +194,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
         id="game-sizes"
         class="w-full md:w-5/6 flex justify-evenly items-start flex-wrap place-content-center gap-6"
       >
-        <label>
+        <label class="cursor-pointer">
           <input
             type="radio"
             id={"#{@id}_5"}
@@ -207,7 +207,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
           <.grid_size text="5 x 5" />
           <.grid_glyph size={5} />
         </label>
-        <label>
+        <label class="cursor-pointer">
           <input
             type="radio"
             id={"#{@id}_4"}
@@ -219,7 +219,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
           <.grid_size text="4 x 4" />
           <.grid_glyph size={4} />
         </label>
-        <label>
+        <label class="cursor-pointer">
           <input
             type="radio"
             id={"#{@id}_3"}
