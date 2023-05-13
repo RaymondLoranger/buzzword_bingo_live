@@ -1,38 +1,79 @@
-<header class="w-full bg-slate-50 border-b border-slate-300 flex justify-center md:justify-evenly items-center px-6 h-20">
-  <a
-    href="https://phoenixframework.org/"
-    class="md:w-24 md:visible w-6 invisible"
+<header class="w-full bg-slate-500 border-b border-slate-300 flex justify-center md:justify-evenly items-center px-6 h-20">
+  <section class="mx-auto flex max-w-4xl items-center justify-between p-4">
+    <.link
+      href="https://twitter.com/elixirphoenix"
+      class="md:w-24 md:visible w-6 invisible"
+    >
+      <img
+        src={~p"/images/twitter.png"}
+        title="@elixirphoenix"
+        class="mx-auto w-auto h-14 block hover:brightness-150"
+      />
+    </.link>
+    <div class="flex gap-x-1 mb-1">
+      <span class="letter inverse">B</span>
+      <span class="letter optional">U</span>
+      <span class="letter">Z</span>
+      <span class="letter">Z</span>
+      <span class="letter">W</span>
+      <span class="letter optional">O</span>
+      <span class="letter">R</span>
+      <span class="letter">D</span>
+      <span class="letter inverse">B</span>
+      <span class="letter optional">I</span>
+      <span class="letter">N</span>
+      <span class="letter">G</span>
+      <span class="letter">O</span>
+    </div>
+    <nav class="flex gap-4 ml-4">
+      <.link href={~p"/dev/dashboard"} target="_blank" class="mb-1">
+        <img src="/images/dashboard.png" class="h-7" title="Dashboard" />
+      </.link>
+      <.link href={~p"/login"} class="mb-1">
+        <img src="/images/user-login.png" title="Login" />
+      </.link>
+    </nav>
+    <button
+      phx-hook="MobileMenu"
+      id="hamburger-button"
+      class="relative h-8 w-8 cursor-pointer text-3xl md:hidden"
+    >
+      <%!-- Animated hamburger icon - see class toggle-btn in app.css --%>
+      <div class="absolute top-4 -mt-0.5 h-1 w-8 rounded bg-white transition-all duration-500 before:absolute before:h-1 before:w-8 before:-translate-x-4 before:-translate-y-3 before:rounded before:bg-white before:transition-all before:duration-500 before:content-[''] after:absolute after:h-1 after:w-8 after:-translate-x-4 after:translate-y-3 after:rounded after:bg-white after:transition-all after:duration-500 after:content-['']">
+      </div>
+    </button>
+  </section>
+  <section
+    id="mobile-menu"
+    class="top-72 justify-content-center absolute hidden w-full origin-top animate-open-menu flex-col bg-black text-5xl text-white"
   >
-    <img
-      src={~p"/images/phoenix.png"}
-      alt="Phoenix Framework Logo"
-      title="Phoenix Framework"
-      class="mx-auto w-auto h-14 block hover:brightness-150"
-    />
-  </a>
-  <div class="flex gap-x-1 mb-1">
-    <span class="letter inverse">B</span>
-    <span class="letter optional">U</span>
-    <span class="letter">Z</span>
-    <span class="letter">Z</span>
-    <span class="letter">W</span>
-    <span class="letter optional">O</span>
-    <span class="letter">R</span>
-    <span class="letter">D</span>
-    <span class="letter inverse">B</span>
-    <span class="letter optional">I</span>
-    <span class="letter">N</span>
-    <span class="letter">G</span>
-    <span class="letter">O</span>
-  </div>
-  <nav class="flex gap-4 ml-4">
-    <.link href={~p"/dev/dashboard"} target="_blank" class="mb-1">
-      <img src="/images/dashboard.png" class="h-7" title="Dashboard" />
-    </.link>
-    <.link href={~p"/login"} class="mb-1">
-      <img src="/images/user-login.png" title="Login" />
-    </.link>
-  </nav>
+    <nav
+      class="flex min-h-screen flex-col items-center py-8 text-white"
+      aria-label="mobile"
+    >
+      <.link
+        href={~p"/login"}
+        class="w-full py-6 text-center hover:opacity-70"
+      >
+        <img src="/images/user-login.png" class="invert inline" /> Login
+      </.link>
+      <.link
+        href={~p"/dev/dashboard"}
+        target="_blank"
+        class="w-full py-6 text-center hover:opacity-70"
+      >
+        <img src="/images/dashboard.png" class="h-7 invert inline" />
+        Dashboard
+      </.link>
+      <.link
+        href="https://twitter.com/elixirphoenix"
+        class="w-full py-6 text-center hover:opacity-70"
+      >
+        <img src={~p"/images/twitter.png"} class="h-7 inline rounded-md" />
+        @elixirphoenix
+      </.link>
+    </nav>
+  </section>
 </header>
 
 <main class="py-2">
