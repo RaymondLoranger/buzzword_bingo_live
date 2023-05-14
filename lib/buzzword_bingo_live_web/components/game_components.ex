@@ -366,10 +366,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def game_over?(assigns) do
     ~H"""
-    <div
-      :if={@winner}
-      class="absolute left-1/2 sm:top-1/2 sm:text-5xl text-center animate-ping top-1/3 text-4xl"
-    >
+    <div :if={@winner} class="absolute top-1/3 animate-ping">
       <span :if={@winner.name == "X"}>
         <span>No winner!</span>
         <br /><br />
