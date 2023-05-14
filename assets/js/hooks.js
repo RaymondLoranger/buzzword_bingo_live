@@ -38,6 +38,7 @@ Hooks.MobileMenu = {
     const toggleMenu = () => {
       mobileMenu.classList.toggle('hidden')
       mobileMenu.classList.toggle('flex')
+      // Turns clockwise adding the class and counterclockwise removing it.
       hamburgerBtn.classList.toggle('toggle-btn')
     }
 

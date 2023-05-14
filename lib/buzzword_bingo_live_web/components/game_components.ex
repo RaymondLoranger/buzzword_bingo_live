@@ -90,7 +90,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
     ~H"""
     <div class="flex flex-col h-auto mt-4" phx-feedback-for={@name}>
-      <ul id="user-colors" class="flex gap-1.5">
+      <ul id="user-colors" class="flex flex-wrap place-content-center gap-1.5">
         <li :for={color <- @colors} class="relative">
           <label
             phx-1={color == "#38caf6"}

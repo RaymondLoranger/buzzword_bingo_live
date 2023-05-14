@@ -4,7 +4,7 @@
 
 @layer base {
   header a {
-    @apply hover:scale-125;
+    @apply hover:scale-110 hover:ring-2 hover:ring-carrot-orange hover:outline-none hover:rounded;
   }
 
   footer a {
@@ -16,7 +16,7 @@
   .toggle-btn {
     @apply [&>div::before]:translate-y-0 [&>div::before]:rotate-45 [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 [&>div]:bg-transparent [&>div]:rotate-[720deg]
   }
-  
+
   .field-button-pair {
     @apply inline-flex h-10;
   }
@@ -34,7 +34,7 @@
   }
 
   .letter   {
-    @apply text-3xs sm:text-sm md:text-3xl py-1.5 pl-1.5 pr-2 font-extrabold text-mine-shaft bg-white -mr-2 last:mr-0 border border-solid border-silver hover:text-white hover:bg-denim;
+    @apply text-3xs sm:text-3xl py-1.5 pl-1.5 pr-2 font-extrabold text-mine-shaft bg-white -mr-2 last:mr-0 border border-solid border-silver hover:text-white hover:bg-denim;
   }
 
   .letter.optional {
