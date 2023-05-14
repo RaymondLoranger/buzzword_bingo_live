@@ -368,7 +368,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     ~H"""
     <div
       :if={@winner}
-      class="absolute left-0 w-full sm:top-1/2 sm:text-5xl text-center animate-ping top-1/3 text-4xl"
+      class="absolute left-1/2 sm:top-1/2 sm:text-5xl text-center animate-ping top-1/3 text-4xl"
     >
       <span :if={@winner.name == "X"}>
         <span>No winner!</span>

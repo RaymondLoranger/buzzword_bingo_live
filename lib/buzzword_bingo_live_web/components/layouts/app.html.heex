@@ -1,4 +1,4 @@
-<header class="bg-slate-500 border-b-2 border-slate-900 flex items-center px-2 sm:px-10 h-20">
+<header class="bg-slate-50 border-b border-slate-300 flex items-center pl-0 pr-2 md:px-10 h-20">
   <section class="w-full flex justify-between items-center py-2 relative">
     <nav
       class="hidden md:flex md:flex-col text-left"
@@ -33,8 +33,8 @@
       class="hidden md:flex md:flex-col text-right"
       aria-label="header right"
     >
-      <.link href={~p"/dev/dashboard"} target="_blank"> Dashboard </.link>
-      <.link href={~p"/login"}> Login </.link>
+      <.link href={~p"/dev/dashboard"} target="_blank">Dashboard</.link>
+      <.link href={~p"/login"}>Login</.link>
     </nav>
     <div class="absolute right-0">
       <button
@@ -45,39 +45,45 @@
         <%!-- Animated hamburger icon - see class toggle-btn in app.css --%>
         <div
           id="animated-icon"
-          class="absolute top-4 -mt-0.5 h-1 w-8 rounded bg-white transition-all duration-500 before:absolute before:h-1 before:w-8 before:-translate-x-4 before:-translate-y-3 before:rounded before:bg-white before:transition-all before:duration-500 before:content-[''] after:absolute after:h-1 after:w-8 after:-translate-x-4 after:translate-y-3 after:rounded after:bg-white after:transition-all after:duration-500 after:content-['']"
+          class="absolute top-4 -mt-0.5 h-1 w-8 rounded bg-black transition-all duration-500 before:absolute before:h-1 before:w-8 before:-translate-x-4 before:-translate-y-3 before:rounded before:bg-black before:transition-all before:duration-500 before:content-[''] after:absolute after:h-1 after:w-8 after:-translate-x-4 after:translate-y-3 after:rounded after:bg-black after:transition-all after:duration-500 after:content-['']"
         />
       </button>
     </div>
   </section>
   <section
     id="mobile-menu"
-    class="top-20 justify-content-center absolute hidden w-full origin-top animate-open-menu flex-col bg-black text-5xl text-white z-10"
+    class="top-20 justify-content-center absolute hidden w-full origin-top animate-open-menu flex-col bg-slate-50 text-5xl text-black z-10"
   >
     <nav
-      class="flex min-h-screen flex-col items-center py-8 text-white"
+      class="overflow-hidden flex h-[30rem] flex-col items-center py-8 border-b border-slate-300"
       aria-label="mobile"
     >
       <.link
         href={~p"/login"}
         class="w-full py-6 text-center hover:opacity-70"
       >
-        <img src="/images/user-login.png" class="invert inline" /> Login
+        Login
       </.link>
       <.link
         href={~p"/dev/dashboard"}
         target="_blank"
         class="w-full py-6 text-center hover:opacity-70"
       >
-        <img src="/images/dashboard.png" class="h-7 invert inline" />
         Dashboard
       </.link>
       <.link
         href="https://twitter.com/elixirphoenix"
+        target="_blank"
         class="w-full py-6 text-center hover:opacity-70"
       >
-        <img src={~p"/images/twitter.png"} class="h-7 inline rounded-md" />
         @elixirphoenix
+      </.link>
+      <.link
+        href="https://hexdocs.pm/phoenix/overview.html"
+        target="_blank"
+        class="w-full py-6 text-center hover:opacity-70"
+      >
+        Guides
       </.link>
     </nav>
   </section>
