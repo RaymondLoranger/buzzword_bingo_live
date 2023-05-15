@@ -4,7 +4,7 @@
 
 @layer base {
   header a {
-    @apply hover:scale-110 hover:ring-2 hover:ring-carrot-orange hover:outline-none hover:rounded hover:bg-carrot-orange hover:text-white p-px;
+    @apply hover:scale-110 hover:ring-2 hover:ring-carrot-orange hover:outline-none hover:rounded hover:bg-carrot-orange hover:text-white px-2;
   }
 
   footer a {

@@ -67,7 +67,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
         "dark:phx-1:bg-[#38caf6] dark:phx-2:bg-[#a4deff] dark:phx-3:bg-[#f9cedf] dark:phx-4:bg-[#d3c5f1] dark:phx-5:bg-[#acc9f5] dark:phx-6:bg-[#aeeace] dark:phx-7:bg-[#96d7b9] dark:phx-8:bg-[#fce8bd] dark:phx-9:bg-[#fcd8ac]",
         "focus:phx-1:ring-[#38caf6] focus:phx-2:ring-[#a4deff] focus:phx-3:ring-[#f9cedf] focus:phx-4:ring-[#d3c5f1] focus:phx-5:ring-[#acc9f5] focus:phx-6:ring-[#aeeace] focus:phx-7:ring-[#96d7b9] focus:phx-8:ring-[#fce8bd] focus:phx-9:ring-[#fcd8ac]"
       ]}
-      error_class="!mt-1 !gap-1"
+      error_class="!mt-1 !gap-1 dark:!text-rose-300"
     />
     """
   end
@@ -126,7 +126,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
           </label>
         </li>
       </ul>
-      <.error :for={msg <- @errors} error_class="!mt-1 !gap-1">
+      <.error
+        :for={msg <- @errors}
+        error_class="!mt-1 !gap-1 dark:!text-rose-300"
+      >
         <%= Phoenix.HTML.raw(msg) %>
       </.error>
     </div>
@@ -233,7 +236,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
           <.grid_glyph size={3} />
         </label>
       </div>
-      <.error :for={msg <- @errors} error_class="!mt-1 !gap-1">
+      <.error
+        :for={msg <- @errors}
+        error_class="!mt-1 !gap-1 dark:!text-rose-300"
+      >
         <%= Phoenix.HTML.raw(msg) %>
       </.error>
     </div>
