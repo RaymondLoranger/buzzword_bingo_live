@@ -4,12 +4,35 @@ defmodule Buzzword.Bingo.Live.MixProject do
   def project do
     [
       app: :buzzword_bingo_live,
-      version: "0.1.26",
+      version: "0.1.1",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
+      name: "Buzzword Bingo Live",
+      source_url: source_url(),
+      description: description(),
+      package: package(),
       aliases: aliases(),
       deps: deps()
+    ]
+  end
+
+  defp source_url do
+    "https://github.com/RaymondLoranger/buzzword_bingo_live"
+  end
+
+  defp description do
+    """
+    Multi-Player Buzzword Bingo game built with LiveView.
+    """
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README*", "config/persist*.exs"],
+      maintainers: ["Raymond Loranger"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => source_url()}
     ]
   end
 
@@ -46,10 +69,10 @@ defmodule Buzzword.Bingo.Live.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       # Added dependencies...
-      {:buzzword_bingo_engine, github: "RaymondLoranger/buzzword_bingo_engine"},
+      {:buzzword_bingo_engine, "~> 0.1"},
       {:phoenix_ecto, "~> 4.4"},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false},
-      # {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:logger_file_backend, "~> 0.0.11"},
       {:log_reset, "~> 0.1"},
       {:persist_config, "~> 0.4", runtime: false},

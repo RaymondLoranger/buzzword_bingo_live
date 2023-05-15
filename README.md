@@ -1,4 +1,14 @@
-# Buzzword.Bingo.Live
+# Buzzword Bingo Live
+
+_Multi-Player Buzzword Bingo_ game built with LiveView.
+
+Inspired by the following courses:
+
+* [Multi-Player Bingo](https://pragmaticstudio.com/courses/unpacked-bingo) by Mike and Nicole Clark
+
+* [Phoenix LiveView](https://pragmaticstudio.com/phoenix-liveview) by Mike and Nicole Clark
+
+* [Tailwind CSS Full Course for Beginners](https://www.youtube.com/watch?v=lCxcTsOHrjo) by David Gray
 
 To start your Phoenix server:
 
