@@ -11,9 +11,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   @spec user_form(Socket.assigns()) :: Rendered.t()
   def user_form(assigns) do
     ~H"""
-    <div class="mx-auto flex flex-col items-center">
-      <h1 class="mt-8 mb-2 text-4xl text-slate-900">Welcome!</h1>
-      <h4 class="m-2 text-xl text-slate-900 text-center">
+    <div class="mx-auto flex flex-col items-center text-slate-900 dark:text-slate-50">
+      <h1 class="mt-8 mb-2 text-4xl">Welcome!</h1>
+      <h4 class="m-2 text-xl text-center">
         First up, we need your name and favorite color:
       </h4>
       <.form
@@ -62,8 +62,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       required
       wrapper_class="flex flex-col h-auto mt-4"
       class={[
-        "h-8 px-2 pb-3 border-2 rounded-md placeholder-slate-400",
+        "h-8 px-2 pb-3 border-2 rounded-md text-black placeholder-slate-400 dark:placeholder-black",
         "phx-1:border-[#38caf6] phx-2:border-[#a4deff] phx-3:border-[#f9cedf] phx-4:border-[#d3c5f1] phx-5:border-[#acc9f5] phx-6:border-[#aeeace] phx-7:border-[#96d7b9] phx-8:border-[#fce8bd] phx-9:border-[#fcd8ac]",
+        "dark:phx-1:bg-[#38caf6] dark:phx-2:bg-[#a4deff] dark:phx-3:bg-[#f9cedf] dark:phx-4:bg-[#d3c5f1] dark:phx-5:bg-[#acc9f5] dark:phx-6:bg-[#aeeace] dark:phx-7:bg-[#96d7b9] dark:phx-8:bg-[#fce8bd] dark:phx-9:bg-[#fcd8ac]",
         "focus:phx-1:ring-[#38caf6] focus:phx-2:ring-[#a4deff] focus:phx-3:ring-[#f9cedf] focus:phx-4:ring-[#d3c5f1] focus:phx-5:ring-[#acc9f5] focus:phx-6:ring-[#aeeace] focus:phx-7:ring-[#96d7b9] focus:phx-8:ring-[#fce8bd] focus:phx-9:ring-[#fcd8ac]"
       ]}
       error_class="!mt-1 !gap-1"
@@ -119,7 +120,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
               phx-click={@click}
               class="sr-only peer"
             />
-            <span class="absolute hidden peer-checked:block top-1 left-2.5">
+            <span class="absolute hidden peer-checked:block top-1 left-2.5 text-black">
               ✓
             </span>
           </label>
@@ -156,7 +157,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   def game_size_form(assigns) do
     ~H"""
     <div>
-      <h4 class="text-xl text-center mt-12 mb-5">
+      <h4 class="text-xl text-center mt-12 mb-5 text-black dark:text-white">
         Select the game size:
       </h4>
       <.form
@@ -192,7 +193,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     <div class="w-full flex flex-col items-center" phx-feedback-for={@name}>
       <div
         id="game-sizes"
-        class="w-full md:w-5/6 flex justify-evenly items-start flex-wrap place-content-center gap-6"
+        class="w-full md:w-5/6 flex justify-evenly items-start flex-wrap place-content-center gap-6 text-black dark:text-white"
       >
         <label class="cursor-pointer">
           <input
