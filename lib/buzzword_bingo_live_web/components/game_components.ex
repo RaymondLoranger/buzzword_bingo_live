@@ -62,10 +62,9 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       required
       wrapper_class="flex flex-col h-auto mt-4"
       class={[
-        "h-8 px-2 pb-3 border-2 rounded-md text-black placeholder-slate-400 dark:placeholder-black",
+        "h-8 px-2 pb-3 border-2 rounded-md text-black dark:text-white dark:bg-slate-500 placeholder-slate-400",
         "phx-1:border-[#38caf6] phx-2:border-[#a4deff] phx-3:border-[#f9cedf] phx-4:border-[#d3c5f1] phx-5:border-[#acc9f5] phx-6:border-[#aeeace] phx-7:border-[#96d7b9] phx-8:border-[#fce8bd] phx-9:border-[#fcd8ac]",
-        "dark:phx-1:bg-[#38caf6] dark:phx-2:bg-[#a4deff] dark:phx-3:bg-[#f9cedf] dark:phx-4:bg-[#d3c5f1] dark:phx-5:bg-[#acc9f5] dark:phx-6:bg-[#aeeace] dark:phx-7:bg-[#96d7b9] dark:phx-8:bg-[#fce8bd] dark:phx-9:bg-[#fcd8ac]",
-        "focus:phx-1:ring-[#38caf6] focus:phx-2:ring-[#a4deff] focus:phx-3:ring-[#f9cedf] focus:phx-4:ring-[#d3c5f1] focus:phx-5:ring-[#acc9f5] focus:phx-6:ring-[#aeeace] focus:phx-7:ring-[#96d7b9] focus:phx-8:ring-[#fce8bd] focus:phx-9:ring-[#fcd8ac]"
+        "focus:phx-1:ring-[#38caf6] focus:phx-2:ring-[#a4deff] focus:phx-3:ring-[#f9cedf] focus:phx-4:ring-[#d3c5f1] focus:phx-5:ring-[#acc9f5] focus:phx-6:ring-[#aeeace] focus:phx-7:ring-[#96d7b9] focus:phx-8:ring-[#fce8bd] focus:phx-9:ring-[#fcd8ac] focus:shadow-lg dark:focus:shadow-cyan-500/50 dark:focus:brightness-110"
       ]}
       error_class="!mt-1 !gap-1 dark:!text-rose-300"
     />
@@ -338,10 +337,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       phx-9={@square.marked_by && @square.marked_by.color == "#fcd8ac"}
       class={[
         "bg-white phx-1:bg-[#38caf6] phx-2:bg-[#a4deff] phx-3:bg-[#f9cedf] phx-4:bg-[#d3c5f1] phx-5:bg-[#acc9f5] phx-6:bg-[#aeeace] phx-7:bg-[#96d7b9] phx-8:bg-[#fce8bd] phx-9:bg-[#fcd8ac]",
-        "shadow aspect-square grid gap-2 grid-rows-3 rounded-md text-slate-600 border border-slate-300",
-        "hover:scale-95 hover:border-slate-400 hover:bg-wheatfield hover:cursor-pointer",
-        "focus:outline-none focus:border-carrot-orange focus:ring-1 focus:ring-carrot-orange",
-        "active:ring-4 active:ring-carrot-orange active:border-transparent"
+        "shadow-xl aspect-square grid gap-2 grid-rows-3 rounded-md text-slate-700 border border-slate-300",
+        "hover:scale-95 hover:border-slate-600 hover:bg-wheatfield hover:cursor-pointer",
+        "focus:outline-none focus:border-carrot-orange dark:focus:border-purple-400 focus:ring-1 dark:focus:ring-2 dark:focus:shadow-cyan-500/50 focus:ring-carrot-orange dark:focus:ring-purple-400",
+        "active:ring-4 dark:active:ring-4 active:ring-carrot-orange dark:active:ring-purple-400 active:border-transparent"
       ]}
       id={@id}
       phx-target={@target}

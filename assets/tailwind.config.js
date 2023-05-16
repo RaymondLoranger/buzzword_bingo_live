@@ -15,7 +15,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        xs: '320px',
+        xs: '320px'
       },
       keyframes: {
         'open-menu': {
@@ -42,9 +42,9 @@ module.exports = {
         brand: '#FD4F00',
         // Color of unmarked squares when hovered over...
         wheatfield: {
-          light: '#F9FAEB',
-          DEFAULT: '#F3F4D4',
-          dark: '#E2E59A'
+          light: '#f9faeb',
+          DEFAULT: '#f3f4d4',
+          dark: '#e2e59a'
         },
         // Panel color...
         deluge: {
