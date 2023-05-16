@@ -22,7 +22,7 @@
   }
 
   .field-button-pair > input[type='text'] {
-    @apply w-full border border-slate-400 dark:border-none rounded-l-md rounded-r-none bg-white px-5 text-base focus:outline-none focus:ring-carrot-orange focus:border-carrot-orange focus:ring-1 dark:focus:ring-0 focus:scale-y-95 dark:focus:scale-y-100 dark:focus:bg-carrot-orange-light hover:ring-carrot-orange hover:border-carrot-orange hover:ring-1 dark:hover:ring-0 hover:outline-none hover:scale-y-95 dark:hover:scale-y-100 dark:hover:bg-carrot-orange-light;
+    @apply w-full border border-slate-400 dark:border-none rounded-l-md rounded-r-none bg-white px-5 text-base focus:outline-none focus:ring-carrot-orange focus:border-carrot-orange focus:ring-1 dark:focus:ring-0 focus:scale-y-95 dark:focus:scale-y-100 dark:focus:bg-wheatfield hover:ring-carrot-orange hover:border-carrot-orange hover:ring-1 dark:hover:ring-0 hover:outline-none hover:scale-y-95 dark:hover:scale-y-100 dark:hover:bg-wheatfield;
   }
 
   .field-button-pair > button {

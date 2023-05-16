@@ -336,11 +336,11 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
       phx-8={@square.marked_by && @square.marked_by.color == "#fce8bd"}
       phx-9={@square.marked_by && @square.marked_by.color == "#fcd8ac"}
       class={[
-        "bg-white phx-1:bg-[#38caf6] phx-2:bg-[#a4deff] phx-3:bg-[#f9cedf] phx-4:bg-[#d3c5f1] phx-5:bg-[#acc9f5] phx-6:bg-[#aeeace] phx-7:bg-[#96d7b9] phx-8:bg-[#fce8bd] phx-9:bg-[#fcd8ac]",
+        "bg-white phx-1:!bg-[#38caf6] phx-2:!bg-[#a4deff] phx-3:!bg-[#f9cedf] phx-4:!bg-[#d3c5f1] phx-5:!bg-[#acc9f5] phx-6:!bg-[#aeeace] phx-7:!bg-[#96d7b9] phx-8:!bg-[#fce8bd] phx-9:!bg-[#fcd8ac]",
         "shadow-xl aspect-square grid gap-2 grid-rows-3 rounded-md text-slate-700 border border-slate-300",
         "hover:scale-95 hover:border-slate-600 hover:bg-wheatfield hover:cursor-pointer",
-        "focus:outline-none focus:border-carrot-orange dark:focus:border-purple-400 focus:ring-1 dark:focus:ring-2 dark:focus:shadow-cyan-500/50 focus:ring-carrot-orange dark:focus:ring-purple-400",
-        "active:ring-4 dark:active:ring-4 active:ring-carrot-orange dark:active:ring-purple-400 active:border-transparent"
+        "focus:outline-none focus:border-carrot-orange dark:focus:bg-wheatfield focus:ring-1 dark:focus:ring-2 focus:ring-carrot-orange",
+        "active:ring-4 dark:active:ring-4 active:ring-carrot-orange active:border-transparent"
       ]}
       id={@id}
       phx-target={@target}
