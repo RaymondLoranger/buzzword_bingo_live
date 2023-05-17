@@ -17,8 +17,9 @@ defmodule Buzzword.Bingo.LiveWeb.Router do
   scope "/", Buzzword.Bingo.LiveWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/home", PageController, :home
 
+    live "/", GameLive, :login
     live "/login", GameLive, :login
     live "/login/:to", GameLive, :login
     live "/games/new", GameLive, :new
