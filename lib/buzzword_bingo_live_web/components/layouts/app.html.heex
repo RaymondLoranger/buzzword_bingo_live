@@ -7,42 +7,17 @@
       <.link
         href="https://hexdocs.pm/phoenix/overview.html"
         target="_blank"
-        class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-400 dark:hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-100"
+        class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-300 dark:hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-100"
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          aria-hidden="true"
-          class="h-4 w-4"
-        >
-          <path
-            d="m12 4 10-2v18l-10 2V4Z"
-            fill="#18181B"
-            fill-opacity=".15"
-          />
-          <path
-            d="M12 4 2 2v18l10 2m0-18v18m0-18 10-2v18l-10 2"
-            stroke="#18181B"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-        Guides &amp; Docs
+        <.guides_and_docs_svg class="h-4 w-4" />Guides &amp; Docs
       </.link>
+
       <.link
         href="https://twitter.com/elixirphoenix"
         target="_blank"
-        class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-400 dark:hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-100"
+        class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-300 dark:hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-100"
       >
-        <svg
-          viewBox="0 0 16 16"
-          aria-hidden="true"
-          class="h-4 w-4 fill-zinc-400 group-hover:fill-zinc-600"
-        >
-          <path d="M5.403 14c5.283 0 8.172-4.617 8.172-8.62 0-.131 0-.262-.008-.391A6.033 6.033 0 0 0 15 3.419a5.503 5.503 0 0 1-1.65.477 3.018 3.018 0 0 0 1.263-1.676 5.579 5.579 0 0 1-1.824.736 2.832 2.832 0 0 0-1.63-.916 2.746 2.746 0 0 0-1.821.319A2.973 2.973 0 0 0 8.076 3.78a3.185 3.185 0 0 0-.182 1.938 7.826 7.826 0 0 1-3.279-.918 8.253 8.253 0 0 1-2.64-2.247 3.176 3.176 0 0 0-.315 2.208 3.037 3.037 0 0 0 1.203 1.836A2.739 2.739 0 0 1 1.56 6.22v.038c0 .7.23 1.377.65 1.919.42.54 1.004.912 1.654 1.05-.423.122-.866.14-1.297.052.184.602.541 1.129 1.022 1.506a2.78 2.78 0 0 0 1.662.598 5.656 5.656 0 0 1-2.007 1.074A5.475 5.475 0 0 1 1 12.64a7.827 7.827 0 0 0 4.403 1.358" />
-        </svg>
-        Follow on Twitter
+        <.follow_on_twitter_svg />Follow on Twitter
       </.link>
     </nav>
     <div class="mx-auto flex gap-x-1">
@@ -67,24 +42,23 @@
       <.link
         href={~p"/dev/dashboard"}
         target="_blank"
-        class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-400 dark:hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-100"
+        class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-300 dark:hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-100"
       >
         Dashboard
         <img
           src="/images/dashboard.png"
-          alt="login"
-          class="h-4 w-4 fill-zinc-400 group-hover:fill-zinc-600 invert-0 group-hover:invert-0 dark:invert dark:group-hover:invert-0"
+          class="h-4 w-4 invert-0 group-hover:invert-0 dark:invert dark:group-hover:invert-0"
         />
       </.link>
+
       <.link
         href={~p"/login"}
-        class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-400 dark:hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-100"
+        class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-300 dark:hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-100"
       >
         Login
         <img
           src="/images/user-login.png"
-          alt="login"
-          class="h-4 w-4 fill-zinc-400 group-hover:fill-zinc-600 invert-0 group-hover:invert-0 dark:invert dark:group-hover:invert-0"
+          class="h-4 w-4 invert-0 group-hover:invert-0 dark:invert dark:group-hover:invert-0"
         />
       </.link>
     </nav>
@@ -92,12 +66,12 @@
       <button
         phx-hook="MobileMenu"
         id="hamburger-button"
-        class="relative h-8 w-8 cursor-pointer md:hidden"
+        class="relative h-8 w-8 mb-0.5 cursor-pointer md:hidden"
       >
         <%!-- Animated hamburger icon - see class toggle-btn in app.css --%>
         <div
           id="animated-icon"
-          class="absolute top-4 -mt-0.5 h-1 w-8 rounded bg-black transition-all duration-500 before:absolute before:h-1 before:w-8 before:-translate-x-4 before:-translate-y-3 before:rounded before:bg-black before:transition-all before:duration-500 before:content-[''] after:absolute after:h-1 after:w-8 after:-translate-x-4 after:translate-y-3 after:rounded after:bg-black after:transition-all after:duration-500 after:content-['']"
+          class="absolute top-4 -mt-0.5 h-1 w-8 rounded bg-zinc-800 dark:bg-zinc-50 transition-all duration-500 before:absolute before:h-1 before:w-8 before:-translate-x-4 before:-translate-y-3 before:rounded before:bg-zinc-800 dark:before:bg-zinc-50 before:transition-all before:duration-500 before:content-[''] after:absolute after:h-1 after:w-8 after:-translate-x-4 after:translate-y-3 after:rounded after:bg-zinc-800 dark:after:bg-zinc-50 after:transition-all after:duration-500 after:content-['']"
         />
       </button>
     </div>
@@ -112,29 +86,40 @@
     >
       <.link
         href={~p"/login"}
-        class="w-full py-6 text-center hover:opacity-70"
+        class="group w-full py-6 text-center hover:opacity-70"
       >
-        Login
+        <img
+          src="/images/user-login.png"
+          class="inline h-8 w-8 mr-3 mb-2 invert group-hover:invert dark:invert-0 dark:group-hover:invert"
+        /> Login
       </.link>
+
       <.link
         href={~p"/dev/dashboard"}
         target="_blank"
-        class="w-full py-6 text-center hover:opacity-70"
+        class="group w-full py-6 text-center hover:opacity-70"
       >
-        Dashboard
+        <img
+          src="/images/dashboard.png"
+          class="inline h-8 w-8 mr-3 mb-2 invert group-hover:invert dark:invert-0 dark:group-hover:invert"
+        /> Dashboard
       </.link>
+
       <.link
         href="https://twitter.com/elixirphoenix"
         target="_blank"
-        class="w-full py-6 text-center hover:opacity-70"
+        class="group w-full py-6 text-center hover:opacity-70"
       >
+        <.follow_on_twitter_svg class="inline h-8 w-8 mr-3 mb-2 fill-zinc-600 group-hover:fill-zinc-100" />
         Follow on Twitter
       </.link>
+
       <.link
         href="https://hexdocs.pm/phoenix/overview.html"
         target="_blank"
-        class="w-full py-6 text-center hover:opacity-70"
+        class="group w-full py-6 text-center hover:opacity-70"
       >
+        <.guides_and_docs_svg class="inline h-8 w-8 mr-3 mb-2 group-hover:fill-zinc-100" />
         Guides &amp; Docs
       </.link>
     </nav>
