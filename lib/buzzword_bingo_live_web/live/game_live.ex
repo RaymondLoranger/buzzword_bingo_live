@@ -13,29 +13,32 @@ defmodule Buzzword.Bingo.LiveWeb.GameLive do
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
     ~H"""
-    <%= case @live_action do %>
-      <% :login -> %>
-        <.live_component
-          module={UserForm}
-          id="user-form"
-          topic={@topic}
-          next_to={@next_to}
-        />
-      <% :new -> %>
-        <.live_component module={GameSizeForm} id="game-size-form" />
-      <% :show -> %>
-        <.live_component
-          module={GameLayout}
-          id="game-layout"
-          game_url={@game_url}
-          game_size={@game_size}
-          game_name={@game_name}
-          topic={@topic}
-          player={@player}
-          streams={@streams}
-          winner={@winner}
-        />
-    <% end %>
+    <.live_component
+      :if={@live_action == :login}
+      module={UserForm}
+      id="user-form"
+      topic={@topic}
+      next_to={@next_to}
+    />
+
+    <.live_component
+      :if={@live_action == :new}
+      module={GameSizeForm}
+      id="game-size-form"
+    />
+
+    <.live_component
+      :if={@live_action == :show}
+      module={GameLayout}
+      id="game-layout"
+      game_url={@game_url}
+      game_size={@game_size}
+      game_name={@game_name}
+      topic={@topic}
+      player={@player}
+      streams={@streams}
+      winner={@winner}
+    />
     """
   end
 
