@@ -27,8 +27,18 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
 
-## Game in Progress in Dark Mode
-![Game in Progress in Dark Mode](/images/2-player-game-in-dark-mode.png)
+## Games in Progress in Dark Mode
 
-## Game in Progress in Light Mode
-![Game in Progress in Light Mode](/images/2-player-game-in-light-mode.png)
+![4-player-game-in-dark-mode](/images/4-player-game-in-dark-mode.jpg)
+
+![3-player-game-in-dark-mode](/images/3-player-game-in-dark-mode.png)
+
+![2-player-game-in-dark-mode](/images/2-player-game-in-dark-mode.png)
+
+## Games in Progress in Light Mode
+
+![4-player-game-in-light-mode](/images/4-player-game-in-light-mode.jpg)
+
+![3-player-game-in-light-mode](/images/3-player-game-in-light-mode.png)
+
+![2-player-game-in-light-mode](/images/2-player-game-in-light-mode.png)
