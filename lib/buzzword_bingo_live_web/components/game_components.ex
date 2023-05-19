@@ -106,7 +106,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
             class={[
               "phx-1:bg-[#38caf6] phx-2:bg-[#a4deff] phx-3:bg-[#f9cedf] phx-4:bg-[#d3c5f1] phx-5:bg-[#acc9f5] phx-6:bg-[#aeeace] phx-7:bg-[#96d7b9] phx-8:bg-[#fce8bd] phx-9:bg-[#fcd8ac]",
               "flex w-7 m-0.5 aspect-square cursor-pointer border border-gray-500",
-              "hover:border-transparent hover:ring-zinc-600 hover:ring-1 dark:hover:ring-white dark:hover:ring-2"
+              "hover:border-transparent hover:ring-zinc-600 hover:ring-1 dark:hover:ring-2",
+              "dark:hover:phx-1:ring-[#38caf6] dark:hover:phx-2:ring-[#a4deff] dark:hover:phx-3:ring-[#f9cedf] dark:hover:phx-4:ring-[#d3c5f1] dark:hover:phx-5:ring-[#acc9f5] dark:hover:phx-6:ring-[#aeeace] dark:hover:phx-7:ring-[#96d7b9] dark:hover:phx-8:ring-[#fce8bd] dark:hover:phx-9:ring-[#fcd8ac]"
             ]}
           >
             <input
