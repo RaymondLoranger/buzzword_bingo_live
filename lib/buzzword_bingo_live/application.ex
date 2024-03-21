@@ -9,7 +9,10 @@ defmodule Buzzword.Bingo.Live.Application do
   def start(_type, _args) do
     children = [
       Buzzword.Bingo.LiveWeb.Telemetry,
-      {DNSCluster, query: Application.get_env(:buzzword_bingo_live, :dns_cluster_query) || :ignore},
+      {DNSCluster,
+       query:
+         Application.get_env(:buzzword_bingo_live, :dns_cluster_query) ||
+           :ignore},
       {Phoenix.PubSub, name: Buzzword.Bingo.Live.PubSub},
       # Start a worker by calling: Buzzword.Bingo.Live.Worker.start_link(arg)
       # {Buzzword.Bingo.Live.Worker, arg},

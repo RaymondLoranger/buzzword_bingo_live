@@ -40,13 +40,13 @@ defmodule Buzzword.Bingo.Live.MixProject do
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
-      {:heroicons,
-       github: "tailwindlabs/heroicons",
-       tag: "v2.1.1",
-       sparse: "optimized",
-       app: false,
-       compile: false,
-       depth: 1},
+      # {:heroicons,
+      #  github: "tailwindlabs/heroicons",
+      #  tag: "v2.1.1",
+      #  sparse: "optimized",
+      #  app: false,
+      #  compile: false,
+      #  depth: 1},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
@@ -75,8 +75,14 @@ defmodule Buzzword.Bingo.Live.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "assets.setup", "assets.build"],
-      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind buzzword_bingo_live", "esbuild buzzword_bingo_live"],
+      "assets.setup": [
+        "tailwind.install --if-missing",
+        "esbuild.install --if-missing"
+      ],
+      "assets.build": [
+        "tailwind buzzword_bingo_live",
+        "esbuild buzzword_bingo_live"
+      ],
       "assets.deploy": [
         "tailwind buzzword_bingo_live --minify",
         "esbuild buzzword_bingo_live --minify",
