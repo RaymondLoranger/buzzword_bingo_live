@@ -1,4 +1,14 @@
-# Buzzword.Bingo.Live
+# Buzzword Bingo Live
+
+_Multi-Player Buzzword Bingo_ game built with LiveView.
+
+Inspired by the following courses:
+
+* [Multi-Player Bingo](https://pragmaticstudio.com/courses/unpacked-bingo) by Mike and Nicole Clark
+
+* [Phoenix LiveView](https://pragmaticstudio.com/phoenix-liveview) by Mike and Nicole Clark
+
+* [Tailwind CSS Full Course for Beginners](https://www.youtube.com/watch?v=lCxcTsOHrjo) by David Gray
 
 To start your Phoenix server:
 
@@ -16,3 +26,19 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+## Games in Progress in Dark Mode
+
+![4-player-game-in-dark-mode](/images/4-player-game-in-dark-mode.jpg)
+
+![3-player-game-in-dark-mode](/images/3-player-game-in-dark-mode.png)
+
+![2-player-game-in-dark-mode](/images/2-player-game-in-dark-mode.png)
+
+## Games in Progress in Light Mode
+
+![4-player-game-in-light-mode](/images/4-player-game-in-light-mode.jpg)
+
+![3-player-game-in-light-mode](/images/3-player-game-in-light-mode.png)
+
+![2-player-game-in-light-mode](/images/2-player-game-in-light-mode.png)

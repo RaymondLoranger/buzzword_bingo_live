@@ -8,6 +8,9 @@ config :buzzword_bingo_live, Buzzword.Bingo.LiveWeb.Endpoint,
     "WFt05LXbacV2UuqYAF7ofPkYova7RCd+7J23cNwBTa1aqxXuTbqyh4RwMAiv7mYe",
   server: false
 
+# Enable dev routes for dashboard and mailbox
+config :buzzword_bingo_live, dev_routes: true
+
 # Print only warnings and errors during test
 config :logger, level: :warning
 

@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  header #mobile-menu a {
+    @apply hover:scale-110 hover:ring-2 hover:ring-carrot-orange hover:outline-none hover:rounded hover:bg-carrot-orange hover:text-white my-3 pt-2 pb-4;
+  }
+
+  footer a {
+    @apply no-underline text-blue-500 hover:brightness-125 whitespace-nowrap;
+  }
+}
+
+@layer utilities {
+  .toggle-btn {
+    @apply [&>div::before]:translate-y-0 [&>div::before]:rotate-45 [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 [&>div]:bg-transparent [&>div]:rotate-[720deg];
+  }
+
+  .field-button-pair {
+    @apply inline-flex h-10;
+  }
+
+  .field-button-pair > input[type='text'] {
+    @apply w-full border border-slate-400 dark:border-none rounded-l-md rounded-r-none bg-white px-5 text-base focus:outline-none focus:ring-carrot-orange focus:border-carrot-orange focus:ring-1 dark:focus:ring-0 focus:scale-y-95 dark:focus:scale-y-100 dark:focus:bg-wheatfield hover:ring-carrot-orange hover:border-carrot-orange hover:ring-1 dark:hover:ring-0 hover:outline-none hover:scale-y-95 dark:hover:scale-y-100 dark:hover:bg-wheatfield;
+  }
+
+  .field-button-pair > button {
+    @apply aspect-square p-2 bg-carrot-orange border dark:border-none border-slate-400 border-l-0 rounded-r-md transition ease-in-out duration-150 outline-none hover:bg-carrot-orange-light hover:disabled:bg-slate-400 disabled:bg-slate-300 focus:text-slate-900 text-white;
+  }
+
+  .field-button-pair > button > svg {
+    @apply invert;
+  }
+
+  .letter {
+    @apply text-3xs sm:text-3xl py-1.5 pl-1.5 pr-2 font-extrabold text-mine-shaft bg-white -mr-2 last:mr-0 border border-solid border-silver hover:text-white hover:bg-denim;
+  }
+
+  .letter.optional {
+    @apply hidden xs:block;
+  }
+
+  .letter.inverse {
+    @apply bg-tundora text-white hover:bg-half-baked;
+  }
+}

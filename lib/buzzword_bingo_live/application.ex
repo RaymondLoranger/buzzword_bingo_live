@@ -17,7 +17,8 @@ defmodule Buzzword.Bingo.Live.Application do
       # Start a worker by calling: Buzzword.Bingo.Live.Worker.start_link(arg)
       # {Buzzword.Bingo.Live.Worker, arg},
       # Start to serve requests, typically the last entry
-      Buzzword.Bingo.LiveWeb.Endpoint
+      Buzzword.Bingo.LiveWeb.Endpoint,
+      Buzzword.Bingo.LiveWeb.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -4,12 +4,35 @@ defmodule Buzzword.Bingo.Live.MixProject do
   def project do
     [
       app: :buzzword_bingo_live,
-      version: "0.1.0",
+      version: "0.1.19",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
+      name: "Buzzword Bingo Live",
+      source_url: source_url(),
+      description: description(),
+      package: package(),
       aliases: aliases(),
       deps: deps()
+    ]
+  end
+
+  defp source_url do
+    "https://github.com/RaymondLoranger/buzzword_bingo_live"
+  end
+
+  defp description do
+    """
+    Multi-Player Buzzword Bingo game built with LiveView.
+    """
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README*", "config/persist*.exs"],
+      maintainers: ["Raymond Loranger"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => source_url()}
     ]
   end
 
