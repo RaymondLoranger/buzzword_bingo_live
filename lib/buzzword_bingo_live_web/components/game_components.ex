@@ -373,7 +373,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def game_over?(assigns) do
     ~H"""
-    <div :if={@winner} class="absolute top-1/3 animate-ping">
+    <div
+      :if={@winner}
+      class="top-[40%] absolute animate-ping text-center text-lg font-bold"
+    >
       <span :if={@winner.name == "X"}>
         <span>No winner!</span>
         <br /><br />
@@ -382,7 +385,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
             color={@winner.color}
             width="90px"
             height="90px"
-            class="inline"
+            class="inline border border-black rounded-xl"
           />
         </span>
       </span>
@@ -395,7 +398,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
             color={@winner.color}
             width="100px"
             height="100px"
-            class="inline"
+            class="inline border border-black rounded-xl"
           />
         </span>
       </span>
