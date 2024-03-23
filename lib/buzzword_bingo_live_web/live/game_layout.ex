@@ -53,7 +53,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameLayout do
     """
   end
 
-  @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
+  @spec handle_event(event :: binary, LV.unsigned_params(), Socket.t()) ::
           {:noreply, Socket.t()}
   def handle_event("copy-url", _payload, socket) do
     Clipboard.copy(socket.assigns.game_url)

@@ -1,7 +1,8 @@
 defmodule Buzzword.Bingo.LiveWeb.GameParams do
-  use Buzzword.Bingo.LiveWeb, [:html, :imports, :aliases]
+  use Buzzword.Bingo.LiveWeb, [:live_view, :html, :imports, :aliases]
 
-  @spec handle_params(LiveView.unsigned_params(), String.t(), Socket.t()) ::
+  @impl LV
+  @spec handle_params(LV.unsigned_params(), String.t(), Socket.t()) ::
           {:noreply, Socket.t()}
   def handle_params(params, _uri, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
@@ -9,7 +10,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameParams do
 
   ## Private functions
 
-  @spec apply_action(Socket.t(), action :: atom, LiveView.unsigned_params()) ::
+  @spec apply_action(Socket.t(), action :: atom, LV.unsigned_params()) ::
           Socket.t()
   # /login or /login/:to or /login/:to?game_name=...
   defp apply_action(socket, :login, params) do
@@ -92,8 +93,8 @@ defmodule Buzzword.Bingo.LiveWeb.GameParams do
       end
 
     socket
-    |> stream(:squares, squares, dom_id: & &1.phrase)
-    |> stream(:players, GamePresence.list(topic), dom_id: & &1.name)
+    |> stream(:squares, squares)
+    |> stream(:players, GamePresence.list(topic))
     |> assign(
       page_title: "Game #{game_name}",
       topic: topic,

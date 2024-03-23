@@ -50,7 +50,7 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
     """
   end
 
-  @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
+  @spec handle_event(event :: binary, LV.unsigned_params(), Socket.t()) ::
           {:noreply, Socket.t()}
   def handle_event("update-color", %{"value" => color}, socket) do
     {:noreply, assign(socket, color: color)}

@@ -24,7 +24,7 @@ defmodule Buzzword.Bingo.LiveWeb.MessageForm do
     """
   end
 
-  @spec handle_event(event :: binary, LiveView.unsigned_params(), Socket.t()) ::
+  @spec handle_event(event :: binary, LV.unsigned_params(), Socket.t()) ::
           {:noreply, Socket.t()}
   def handle_event("update-text", %{"text" => text}, socket) do
     {:noreply, assign(socket, text: text)}

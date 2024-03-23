@@ -1,8 +1,9 @@
 defmodule Buzzword.Bingo.LiveWeb.GameInfo do
-  use Buzzword.Bingo.LiveWeb, [:html, :imports, :aliases]
+  use Buzzword.Bingo.LiveWeb, [:live_view, :html, :imports, :aliases]
 
   require Logger
 
+  @impl LV
   @spec handle_info(msg :: term, Socket.t()) :: {:noreply, Socket.t()}
   def handle_info(%Broadcast{event: "square", payload: square}, socket) do
     {:noreply, stream_insert(socket, :squares, square)}

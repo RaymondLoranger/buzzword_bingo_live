@@ -1,8 +1,9 @@
 defmodule Buzzword.Bingo.LiveWeb.GameTerminate do
-  use Buzzword.Bingo.LiveWeb, [:html, :aliases]
+  use Buzzword.Bingo.LiveWeb, [:live_view, :html, :aliases]
 
   require Logger
 
+  @impl LV
   @spec terminate(:normal | :shutdown, Socket.t()) :: term
   def terminate(reason, socket) do
     # Player may not have logged in or game may not have started yet...
