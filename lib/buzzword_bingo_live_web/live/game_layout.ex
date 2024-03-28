@@ -7,17 +7,17 @@ defmodule Buzzword.Bingo.LiveWeb.GameLayout do
   @no_winner Player.new("X", "#FBD433")
 
   # initial assigns:
-  # passed assigns : game_name, game_size, game_url, player, streams, topic,
+  # passed assigns : id, game_name, game_size, game_url, player, streams, topic,
   #                  winner
-  # render assigns : game_name, game_size, game_url, player, streams, topic,
+  # render assigns : id, game_name, game_size, game_url, player, streams, topic,
   #                  winner
 
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
     ~H"""
-    <article>
-      <.focus_wrap id="game-layout-wrap">
-        <.game_layout>
+    <article id={"#{@id}-component"}>
+      <.focus_wrap id={"#{@id}-focus-wrap"}>
+        <.game_layout id={@id}>
           <:game_url>
             <.game_url_field id="game-url" value={@game_url} />
             <.copy_url_button target={@myself} click="copy-url" />

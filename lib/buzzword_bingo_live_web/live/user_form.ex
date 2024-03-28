@@ -18,22 +18,22 @@ defmodule Buzzword.Bingo.LiveWeb.UserForm do
   end
 
   # initial assigns: color, colors, form
-  # passed assigns : next_to, topic
-  # render assigns : color, colors, form, next_to, topic
+  # passed assigns : id, next_to, topic
+  # render assigns : color, colors, form, id, next_to, topic
 
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
     ~H"""
-    <article>
-      <.focus_wrap id="user-form-wrap">
+    <article id={"#{@id}-component"}>
+      <.focus_wrap id={"#{@id}-focus-wrap"}>
         <.user_form
-          id="user-form"
+          id={@id}
           for={@form}
           target={@myself}
           change="validate"
           submit="play"
         >
-          <.user_fields>
+          <.user_fields id={"#{@id}-fields"}>
             <.name_field field={@form[:name]} color={@color} />
             <.color_field
               field={@form[:color]}

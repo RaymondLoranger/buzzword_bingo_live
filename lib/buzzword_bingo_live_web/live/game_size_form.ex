@@ -11,16 +11,16 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
   end
 
   # initial assigns: form
-  # passed assigns :
-  # render assigns : form
+  # passed assigns : id
+  # render assigns : form, id
 
   @spec render(Socket.assigns()) :: Rendered.t()
   def render(assigns) do
     ~H"""
-    <article>
-      <.focus_wrap id="game-size-form-wrap">
+    <article id={"#{@id}-component"}>
+      <.focus_wrap id={"#{@id}-focus-wrap"}>
         <.game_size_form
-          id="game-size-form"
+          id={@id}
           for={@form}
           target={@myself}
           change="validate"
@@ -46,7 +46,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameSizeForm do
       {:ok, game_size} ->
         game_name = Engine.haiku_name()
 
-        case Buzzword.Bingo.Engine.new_game(game_name, game_size.value) do
+        case Engine.new_game(game_name, game_size.value) do
           {:ok, _game_pid} ->
             game_path = ~p"/games/#{game_name}"
             {:noreply, push_patch(socket, to: game_path)}

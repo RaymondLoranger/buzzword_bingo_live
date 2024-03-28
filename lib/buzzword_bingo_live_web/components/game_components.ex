@@ -11,7 +11,10 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
   @spec user_form(Socket.assigns()) :: Rendered.t()
   def user_form(assigns) do
     ~H"""
-    <div class="mx-auto flex flex-col items-center text-slate-900 dark:text-slate-50">
+    <div
+      id={"#{@id}-wrap"}
+      class="mx-auto flex flex-col items-center text-slate-900 dark:text-slate-50"
+    >
       <h1 class="mt-8 mb-2 text-4xl">Welcome!</h1>
       <h4 class="m-2 text-center text-xl">
         First up, we need your name and favorite color:
@@ -30,11 +33,15 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     """
   end
 
+  attr :id, :string, required: true
   slot :inner_block, required: true
 
   def user_fields(assigns) do
     ~H"""
-    <div class="mx-2 mt-2 flex flex-wrap place-content-center gap-x-5">
+    <div
+      id={@id}
+      class="mx-2 mt-2 flex flex-wrap place-content-center gap-x-5"
+    >
       <%= render_slot(@inner_block) %>
     </div>
     """
@@ -90,7 +97,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
     ~H"""
     <div class="mt-4 flex h-auto flex-col" phx-feedback-for={@name}>
-      <ul id="user-colors" class="flex flex-wrap place-content-center gap-1.5">
+      <ul id={"#{@id}s"} class="flex flex-wrap place-content-center gap-1.5">
         <li :for={color <- @colors} class="relative">
           <label
             phx-1={color == "#38caf6"}
@@ -159,7 +166,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def game_size_form(assigns) do
     ~H"""
-    <div>
+    <div id={"#{@id}-wrap"}>
       <h4 class="mt-12 mb-5 text-center text-xl text-black dark:text-white">
         Select the game size:
       </h4>
@@ -246,12 +253,13 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     """
   end
 
+  attr :id, :string, required: true
   slot :game_url, required: true
   slot :inner_block, required: true
 
   def game_layout(assigns) do
     ~H"""
-    <div id="game-layout">
+    <div id={@id}>
       <section id="game-url-pair" class="flex justify-center">
         <span class="field-button-pair my-6 w-2/3">
           <%= render_slot(@game_url) %>
@@ -513,6 +521,7 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
     """
   end
 
+  attr :id, :string, required: true
   attr :change, :string, required: true
   attr :submit, :string, required: true
   attr :target, Phoenix.LiveComponent.CID, required: true
@@ -520,8 +529,13 @@ defmodule Buzzword.Bingo.LiveWeb.GameComponents do
 
   def message_form(assigns) do
     ~H"""
-    <div id="message-form" class="mt-2">
-      <form phx-change={@change} phx-submit={@submit} phx-target={@target}>
+    <div id={"#{@id}-wrap"} class="mt-2">
+      <form
+        id={@id}
+        phx-change={@change}
+        phx-submit={@submit}
+        phx-target={@target}
+      >
         <span class="field-button-pair w-full">
           <%= render_slot(@inner_block) %>
         </span>
